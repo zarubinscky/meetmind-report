@@ -499,4 +499,6 @@ body {
   .transcript-content.hidden { display: block !important; }
   .transcript-toggle span:last-child { display: none; }
   .footer-signature { break-inside: avoid; }
+  .transcript-section { display: none !important; }
+  
 }
