@@ -446,19 +446,8 @@ function renderTasksAndOwners(report) {
     `).join('');
 
     $('ownersSection').classList.remove('hidden');
-  }
 }
 
-  if (hasOwners) {
-    $('ownersContent').innerHTML = report.owners.map(parseOwner).map((owner) => `
-      <div class="owner-card">
-        <div class="owner-avatar">${escapeHtml(initials(owner.name))}</div>
-        <div><div class="owner-name">${escapeHtml(owner.name)}</div>${owner.role ? `<div class="owner-role">${escapeHtml(owner.role)}</div>` : ''}</div>
-      </div>
-    `).join('');
-    $('ownersSection').classList.remove('hidden');
-  }
-}
 
 function renderTranscript(transcript) {
   if (isEmptyValue(transcript)) return;
