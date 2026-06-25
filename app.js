@@ -119,29 +119,42 @@ function isEmptyValue(value) {
 
 function normalizeReport(report = {}) {
   return {
-    summary: report.summary,
-    architecture: report.architecture,
-    insights: toList(report.insights),
+       headline: report.headline || '',
+
+    title: report.title || report.meeting_title || '',
+    subtitle: report.subtitle || report.meeting_subtitle || '',
+    objective: report.objective || report.meeting_objective || '',
+    meeting_type: report.meeting_type || '',
+    importance: report.importance || report.meeting_importance || '',
+    importance_reason: report.importance_reason || '',
+
+    summary: report.executive_brief || report.summary || '',
+    architecture: toList(report.architecture),
+    insights: toList(report.key_takeaways || report.insights),
     decisions: toList(report.decisions),
+    metrics: toList(report.metrics),
+    risks: toList(report.risks),
+    dependencies: toList(report.dependencies),
     tasks: toList(report.tasks),
     owners: toList(report.owners || report.responsibles),
-    risks: toList(report.risks),
     participants: Array.isArray(report.participants) ? report.participants : [],
     stats: report.stats || {}
   };
 }
 
 function toList(value) {
-  if (Array.isArray(value)) return value.filter((v) => !isEmptyValue(v));
-  if (isEmptyValue(value)) return [];
+  if (Array.isArray(value)) {
+    return value.filter((v) => !isEmptyValue(v));
+  }
 
+  if (isEmptyValue(value)) return [];
   return String(value)
     .split(/\n+/)
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => line.replace(/^[-•]\s*/, '').trim())
     .filter((line) => !isEmptyValue(line));
-}
+ }
 
 function parseTask(line) {
   const parts = String(line).split(/\s+—\s+|\s+-\s+/).map((p) => p.trim()).filter(Boolean);
