@@ -67,8 +67,8 @@ body {
 }
 
 .brand-logo {
-  width: 56px;
-  height: 56px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
   flex-shrink: 0;
 }
