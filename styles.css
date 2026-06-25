@@ -66,6 +66,19 @@ body {
   line-height: 24px;
 }
 
+.brand-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-mark-logo {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
 .brand-icon,
 .brand-mark {
   width: 22px;
