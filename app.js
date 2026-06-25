@@ -222,7 +222,6 @@ function renderTextBlock(text) {
       }
       html.push(`<p>${escapeHtml(line)}</p>`);
     }
-  }
   
   if (listOpen) html.push('</ul>');
   return html.join('');
