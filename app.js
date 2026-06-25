@@ -303,6 +303,20 @@ function renderStats(report) {
   $('statsSection').classList.remove('hidden');
 }
 
+function renderMetrics(report) {
+  const metrics = report.key_metrics || report.metrics || [];
+  if (!Array.isArray(metrics) || !metrics.length) return;
+
+  $('metricsContent').innerHTML = metrics.map(metric => `
+    <div class="metric-card">
+      <div class="metric-value">${escapeHtml(metric.value || '')}</div>
+      <div class="metric-label">${escapeHtml(metric.label || '')}</div>
+    </div>
+  `).join('');
+  
+  $('metricsSection').classList.remove('hidden');
+}
+
 function renderDynamicCards(report) {
   const blocks = [];
   
