@@ -224,6 +224,17 @@ function renderTextBlock(text) {
     }
   }
 
+function renderArchitecture(items) {
+  if (!Array.isArray(items) || !items.length) return '';
+
+  return items.map(item => `
+    <div class="architecture-item">
+      <h3>${escapeHtml(item.title || '')}</h3>
+      <p>${escapeHtml(item.description || '')}</p>
+    </div>
+  `).join('');
+}
+  
   if (listOpen) html.push('</ul>');
   return html.join('');
 }
@@ -435,7 +446,7 @@ function renderReport(payload) {
   }
 
   if (!isEmptyValue(report.architecture)) {
-    $('architectureContent').innerHTML = renderTextBlock(report.architecture);
+    $('architectureContent').innerHTML = renderArchitecture(report.architecture);
     $('architectureSection').classList.remove('hidden');
   }
 
