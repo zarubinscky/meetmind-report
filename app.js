@@ -354,7 +354,13 @@ function renderReport(payload) {
   }
 
   const report = normalizeReport(meeting.report || {});
-  const title = meeting.title || report.title || t('meetingReport');
+  const title =
+    meeting.meeting_title ||
+    meeting.title ||
+    report.meeting_title ||
+    report.title ||
+    t('meetingReport');
+  
   document.title = `${title} — MeetMind AI`;
   $('meetingTitle').textContent = title;
 
