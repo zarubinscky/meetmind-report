@@ -223,6 +223,10 @@ function renderTextBlock(text) {
       html.push(`<p>${escapeHtml(line)}</p>`);
     }
   }
+  
+  if (listOpen) html.push('</ul>');
+  return html.join('');
+}
 
 function renderArchitecture(items) {
   if (!Array.isArray(items) || !items.length) return '';
@@ -233,10 +237,6 @@ function renderArchitecture(items) {
       <p>${escapeHtml(item.description || '')}</p>
     </div>
   `).join('');
-}
-  
-  if (listOpen) html.push('</ul>');
-  return html.join('');
 }
 
 function showToast(message) {
