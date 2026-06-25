@@ -210,6 +210,33 @@ body {
   border-color: var(--summary-border);
 }
 
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+}
+
+.metric-label {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
 .architecture-section {
   padding: 20px;
 }
@@ -494,6 +521,7 @@ body {
   .actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
   .btn { width: 100%; }
   .summary-section { padding: 28px; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
   .architecture-section, .tasks-section, .owners-section, .dynamic-card { padding: 20px; }
   .section h2, .dynamic-card h2 { font-size: 22px; line-height: 28px; }
   .body-text { font-size: 16px; line-height: 26px; }
