@@ -446,7 +446,7 @@ function renderTasksAndOwners(report) {
 
     $('ownersSection').classList.remove('hidden');
 }
-
+}
 
 function renderTranscript(transcript) {
   if (isEmptyValue(transcript)) return;
