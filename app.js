@@ -294,22 +294,71 @@ function renderStats(report) {
 
 function renderDynamicCards(report) {
   const blocks = [];
-  if (report.insights.length) blocks.push({ key: 'insights', title: t('insights'), items: report.insights });
-  if (report.decisions.length) blocks.push({ key: 'decisions', title: t('decisions'), items: report.decisions });
-  if (report.risks.length) blocks.push({ key: 'risks', title: t('risks'), items: report.risks });
+  
+  if (report.insights?.length) {
+    blocks.push({
+      key: 'insights',
+      title: t('insights'),
+      items: report.insights
+    });
+  }
+
+  if (report.decisions?.length) {
+    blocks.push({
+      key: 'decisions',
+      title: t('decisions'),
+      items: report.decisions
+    });
+  }
+
+  if (report.risks?.length) {
+    blocks.push({
+      key: 'risks',
+      title: t('risks'),
+      items: report.risks
+    });
+  }
 
   if (!blocks.length) return;
-
   const grid = $('insightsDecisionsRisksGrid');
   grid.style.setProperty('--grid-cols', Math.min(blocks.length, 3));
-  grid.innerHTML = blocks.map((block) => `
-    <section class="dynamic-card ${block.key}">
-      <h2>${escapeHtml(block.title)}</h2>
-      <div class="item-list">
-        ${block.items.map((item) => `<div class="report-item"><span class="report-dot"></span><span>${escapeHtml(item)}</span></div>`).join('')}
-      </div>
-    </section>
-  `).join('');
+  grid.innerHTML = blocks.map(block => {
+
+    const html = block.items.map(item => {
+      // Старый формат (строка)
+      if (typeof item === 'string') {
+        return `
+          <div class="report-item">
+            <span class="report-dot"></span>
+            <div>${escapeHtml(item)}</div>
+          </div>
+        `;
+      }
+      // Новый формат (объект)
+      return `
+        <div class="report-item">
+          <span class="report-dot"></span>
+          <div>
+            <strong>${escapeHtml(item.title || '')}</strong>
+            ${
+              item.details
+                ? `<div class="item-description">${escapeHtml(item.details)}</div>`
+                : ''
+            }
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section class="dynamic-card ${block.key}">
+        <h2>${escapeHtml(block.title)}</h2>
+        <div class="item-list">
+          ${html}
+        </div>
+      </section>
+    `;
+  }).join('');
   grid.classList.remove('hidden');
 }
 
