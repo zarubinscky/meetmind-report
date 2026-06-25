@@ -493,7 +493,8 @@ function renderReport(payload) {
 
   renderMeta(meeting, report);
   renderStats(report);
-
+  renderMetrics(report);
+  
   if (!isEmptyValue(report.summary)) {
     $('summaryContent').innerHTML = renderTextBlock(report.summary);
     $('summarySection').classList.remove('hidden');
