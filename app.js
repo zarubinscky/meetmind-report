@@ -382,21 +382,72 @@ function renderTasksAndOwners(report) {
   wrapper.classList.remove('hidden');
   wrapper.style.gridTemplateColumns = hasTasks && hasOwners ? 'minmax(0, 1.45fr) minmax(300px, .85fr)' : '1fr';
 
+  function normalizeTask(item) {
+    if (typeof item === 'string') return parseTask(item);
+
+    return {
+      task: item.task || item.title || '',
+      owner: item.owner || '',
+      dueDate: item.due_date || item.dueDate || '',
+      priority: item.business_priority || item.priority || ''
+    };
+  }
+
+  function visible(value) {
+    return value && value !== 'Не указано' && value !== 'Not specified';
+  }
+
   if (hasTasks) {
-    const tasks = report.tasks.map(parseTask);
+    const tasks = report.tasks.map(normalizeTask).filter((task) => !isEmptyValue(task.task));
+
     $('tasksContent').innerHTML = `
       <table class="task-table">
-        <thead><tr><th>${escapeHtml(t('task'))}</th><th>${escapeHtml(t('owner'))}</th><th>${escapeHtml(t('dueDate'))}</th></tr></thead>
+        <thead>
+          <tr>
+            <th>${escapeHtml(t('task'))}</th>
+            <th>${escapeHtml(t('owner'))}</th>
+            <th>${escapeHtml(t('dueDate'))}</th>
+          </tr>
+        </thead>
         <tbody>
-          ${tasks.map((task) => `<tr><td>${escapeHtml(task.task)}</td><td>${escapeHtml(task.owner || t('notSpecified'))}</td><td>${escapeHtml(task.dueDate || t('notSpecified'))}</td></tr>`).join('')}
+          ${tasks.map((task) => `
+            <tr>
+              <td>${escapeHtml(task.task)}</td>
+              <td>${visible(task.owner) ? escapeHtml(task.owner) : ''}</td>
+              <td>${visible(task.dueDate) ? escapeHtml(task.dueDate) : ''}</td>
+            </tr>
+          `).join('')}
         </tbody>
       </table>
+
       <div class="task-cards">
-        ${tasks.map((task) => `<div class="task-card"><strong>${escapeHtml(task.task)}</strong><span>${escapeHtml(t('owner'))}: ${escapeHtml(task.owner || t('notSpecified'))}</span><span>${escapeHtml(t('dueDate'))}: ${escapeHtml(task.dueDate || t('notSpecified'))}</span></div>`).join('')}
+        ${tasks.map((task) => `
+          <div class="task-card">
+            <strong>${escapeHtml(task.task)}</strong>
+            ${visible(task.owner) ? `<span>${escapeHtml(t('owner'))}: ${escapeHtml(task.owner)}</span>` : ''}
+            ${visible(task.dueDate) ? `<span>${escapeHtml(t('dueDate'))}: ${escapeHtml(task.dueDate)}</span>` : ''}
+          </div>
+        `).join('')}
       </div>
     `;
+
     $('tasksSection').classList.remove('hidden');
   }
+
+  if (hasOwners) {
+    $('ownersContent').innerHTML = report.owners.map(parseOwner).map((owner) => `
+      <div class="owner-card">
+        <div class="owner-avatar">${escapeHtml(initials(owner.name))}</div>
+        <div>
+          <div class="owner-name">${escapeHtml(owner.name)}</div>
+          ${owner.role ? `<div class="owner-role">${escapeHtml(owner.role)}</div>` : ''}
+        </div>
+      </div>
+    `).join('');
+
+    $('ownersSection').classList.remove('hidden');
+  }
+}
 
   if (hasOwners) {
     $('ownersContent').innerHTML = report.owners.map(parseOwner).map((owner) => `
