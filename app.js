@@ -132,6 +132,7 @@ function normalizeReport(report = {}) {
     architecture: toList(report.architecture),
     insights: toList(report.key_takeaways || report.insights),
     decisions: toList(report.decisions),
+    key_metrics: toList(report.key_metrics || report.metrics),
     metrics: toList(report.metrics),
     risks: toList(report.risks),
     dependencies: toList(report.dependencies),
