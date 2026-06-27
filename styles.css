@@ -335,7 +335,7 @@ body {
 
 .task-table th:first-child,
 .task-table td:first-child {
-    width: 70%;
+    width: 65%;
 }
 
 .task-table th:nth-child(2),
@@ -346,8 +346,8 @@ body {
 
 .task-table th:last-child,
 .task-table td:last-child {
-    width: 15%;
-    min-width: 140px;
+    width: 20%;
+    min-width: 170px;
     white-space: nowrap;
 }
 
