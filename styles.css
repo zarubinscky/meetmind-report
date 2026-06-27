@@ -409,6 +409,34 @@ body {
   text-align: left;
 }
 
+.details-toggle {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+
+    transition: .18s ease;
+}
+
+.details-toggle:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+#detailsToggleLabel{
+    color: var(--secondary);
+    font-weight:500;
+}
+
 .transcript-toggle span:first-child {
   font-size: 20px;
   font-weight: 700;
