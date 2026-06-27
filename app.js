@@ -438,7 +438,9 @@ function renderTasksAndOwners(report) {
             <tr>
               <td>${escapeHtml(task.task)}</td>
               <td>${visible(task.owner) ? escapeHtml(task.owner) : '—'}</td>
-              <td>${visible(task.dueDate) ? escapeHtml(task.dueDate) : '—'}</td>
+              <td>${visible(task.dueDate) 
+                ? `<span class="due-badge">📅 ${escapeHtml(task.dueDate)}</span>`
+                : '—'}
             </tr>
           `).join('')}
         </tbody>
