@@ -602,7 +602,6 @@ $('detailsToggle').addEventListener('click', () => {
 
   content.classList.toggle('hidden', expanded);
   $('detailsToggle').setAttribute('aria-expanded', String(!expanded));
-  $('detailsToggleLabel').textContent = expanded ? 'Show details' : 'Hide details';
   $('detailsToggleArrow').textContent = expanded ? '▼' : '▲';
 });
   
