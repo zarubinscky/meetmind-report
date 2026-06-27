@@ -398,6 +398,10 @@ function renderDynamicCards(report) {
 }
 
 function renderTasksAndOwners(report) {
+
+  console.log('owners:', report.owners);
+  console.log('tasks:', report.tasks);
+  
   const hasTasks = report.tasks.length > 0;
   const hasOwners = report.owners.length > 0;
   if (!hasTasks && !hasOwners) return;
