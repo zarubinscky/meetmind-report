@@ -443,10 +443,6 @@ body {
     font-size: 13px;
     transition: transform .2s ease;
 }
-#detailsToggleLabel{
-    color: var(--secondary);
-    font-weight: 500;
-}
 
 .transcript-toggle span:first-child {
   font-size: 20px;
