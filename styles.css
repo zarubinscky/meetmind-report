@@ -302,14 +302,6 @@ body {
 .decisions .report-dot { color: var(--success-accent); }
 .risks .report-dot { color: var(--risks-accent); }
 
-.tasks-owners-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(300px, .85fr);
-  gap: 24px;
-  margin-bottom: 48px;
-}
-
-.tasks-owners-grid > .section { margin-bottom: 0; }
 .tasks-section, .owners-section { padding: 16px; }
 
 .task-table {
@@ -565,7 +557,6 @@ body {
   .actions { justify-content: flex-start; }
   .meeting-title { font-size: 32px; line-height: 38px; }
   .dynamic-grid { grid-template-columns: 1fr !important; }
-  .tasks-owners-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 767px) {
