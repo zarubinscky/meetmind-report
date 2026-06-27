@@ -166,12 +166,21 @@ function parseTask(line) {
   };
 }
 
-function parseOwner(line) {
-  const parts = String(line).split(/\s+—\s+|\s+-\s+/).map((p) => p.trim()).filter(Boolean);
-  return {
-    name: parts[0] || line,
-    role: parts.slice(1).join(' — ')
-  };
+function parseOwner(owner) {
+    if (owner && typeof owner === 'object') {
+        return {
+            name: owner.name || owner.owner || owner.person || '',
+            role: owner.role || owner.title || ''
+        };
+    }
+    const parts = String(owner)
+        .split(/\s+–\s+|\s+-\s+/)
+        .map(p => p.trim())
+        .filter(Boolean);
+    return {
+        name: parts[0] || owner,
+        role: parts.slice(1).join(' – ')
+    };
 }
 
 function initials(name) {
@@ -310,8 +319,8 @@ function renderMetrics(report) {
 
   $('metricsContent').innerHTML = metrics.map(metric => `
     <div class="metric-card">
-      <div class="metric-value">${escapeHtml(metric.value || '')}</div>
       <div class="metric-label">${escapeHtml(metric.label || '')}</div>
+      <div class="metric-value">${escapeHtml(metric.value || '')}</div>
     </div>
   `).join('');
   
