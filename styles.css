@@ -314,9 +314,22 @@ body {
   background: var(--surface);
 }
 
+.due-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: #EEF5FF;
+    color: #2B5CC7;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
 .task-table th,
 .task-table td {
-  padding: 8px 10px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   text-align: left;
   vertical-align: top;
