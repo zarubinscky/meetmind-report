@@ -437,7 +437,7 @@ function renderTasksAndOwners(report) {
           ${tasks.map((task) => `
             <tr>
               <td>${escapeHtml(task.task)}</td>
-              <td>${visible(task.owner) ? escapeHtml(task.owner) : ''}</td>
+              <td>${visible(task.owner) ? escapeHtml(task.owner) : '—'}</td>
               <td>${visible(task.dueDate) ? escapeHtml(task.dueDate) : ''}</td>
             </tr>
           `).join('')}
