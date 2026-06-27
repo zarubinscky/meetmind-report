@@ -406,10 +406,6 @@ function renderTasksAndOwners(report) {
   const hasOwners = report.owners.length > 0;
   if (!hasTasks && !hasOwners) return;
 
-  const wrapper = $('tasksOwnersGrid');
-  wrapper.classList.remove('hidden');
-  wrapper.style.gridTemplateColumns = hasTasks && hasOwners ? 'minmax(0, 1.45fr) minmax(300px, .85fr)' : '1fr';
-
   function normalizeTask(item) {
     if (typeof item === 'string') return parseTask(item);
 
