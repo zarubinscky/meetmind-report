@@ -501,14 +501,29 @@ function renderReport(payload) {
     $('summarySection').classList.remove('hidden');
   }
 
-  if (!isEmptyValue(report.architecture)) {
-    $('architectureContent').innerHTML = renderArchitecture(report.architecture);
-    $('architectureSection').classList.remove('hidden');
-  }
+renderDynamicCards(report);
+renderTasksAndOwners(report);
 
-  renderDynamicCards(report);
-  renderTasksAndOwners(report);
-  renderTranscript(meeting.transcript);
+let hasDetails = false;
+
+if (!isEmptyValue(report.architecture)) {
+  $('architectureContent').innerHTML = renderArchitecture(report.architecture);
+  $('architectureSection').classList.remove('hidden');
+  hasDetails = true;
+}
+
+renderTranscript(meeting.transcript);
+if (!isEmptyValue(meeting.transcript)) {
+  hasDetails = true;
+}
+
+if (report.owners && report.owners.length > 0) {
+  hasDetails = true;
+}
+
+if (hasDetails) {
+  $('detailsSection').classList.remove('hidden');
+}
 
   if (meeting.branding_visible === false) $('brandingFooter').classList.add('hidden');
 
@@ -581,6 +596,15 @@ function bindActions() {
     }
   });
 
+$('detailsToggle').addEventListener('click', () => {
+  const content = $('detailsContent');
+  const expanded = !content.classList.contains('hidden');
+
+  content.classList.toggle('hidden', expanded);
+  $('detailsToggle').setAttribute('aria-expanded', String(!expanded));
+  $('detailsToggleLabel').textContent = expanded ? 'Show details' : 'Hide details';
+});
+  
   $('transcriptToggle').addEventListener('click', () => {
     const content = $('transcriptContent');
     const expanded = !content.classList.contains('hidden');
