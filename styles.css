@@ -431,10 +431,21 @@ body {
     background: #f8fafc;
     border-color: #cbd5e1;
 }
-
+.details-toggle-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.details-title {
+    font-weight: 600;
+}
+#detailsToggleArrow {
+    font-size: 13px;
+    transition: transform .2s ease;
+}
 #detailsToggleLabel{
     color: var(--secondary);
-    font-weight:500;
+    font-weight: 500;
 }
 
 .transcript-toggle span:first-child {
