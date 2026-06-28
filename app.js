@@ -129,7 +129,7 @@ function normalizeReport(report = {}) {
     importance_reason: report.importance_reason || '',
 
     summary: report.executive_brief || report.summary || '',
-    architecture: toList(report.architecture),
+    architecture: report.architecture || { sections: [] },
     insights: toList(report.key_takeaways || report.insights),
     decisions: toList(report.decisions),
     key_metrics: toList(report.key_metrics || report.metrics),
