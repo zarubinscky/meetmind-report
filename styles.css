@@ -238,7 +238,53 @@ body {
 }
 
 .architecture-section {
-  padding: 20px;
+    padding: 20px;
+    margin-bottom: 28px;
+}
+
+.architecture-section:last-child {
+    margin-bottom: 0;
+}
+
+.architecture-section-title {
+    margin: 0 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.architecture-components {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.architecture-process {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.architecture-item {
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    flex: 1;
+    min-width: 180px;
+}
+
+.architecture-item h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.architecture-item p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--secondary);
 }
 
 .body-text {
