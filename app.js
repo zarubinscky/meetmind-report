@@ -238,15 +238,34 @@ function renderTextBlock(text) {
   return html.join('');
 }
 
-function renderArchitecture(items) {
-  if (!Array.isArray(items) || !items.length) return '';
+function renderArchitecture(architecture) {
 
-  return items.map(item => `
-    <div class="architecture-item">
-      <h3>${escapeHtml(item.title || '')}</h3>
-      <p>${escapeHtml(item.description || '')}</p>
-    </div>
-  `).join('');
+    if (!architecture) return '';
+    const sections = architecture.sections || [];
+    if (!sections.length) return '';
+    return sections.map(section => {
+        const items = section.items || [];
+
+        if (!items.length) return '';
+
+        return `
+            <div class="architecture-section">
+                <h3 class="architecture-section-title">
+                    ${escapeHtml(section.title || '')}
+                </h3>
+
+                <div class="architecture-${section.layout}">
+
+                    ${items.map(item => `
+                        <div class="architecture-item">
+                            <h4>${escapeHtml(item.title || '')}</h4>
+                            <p>${escapeHtml(item.description || '')}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 function showToast(message) {
