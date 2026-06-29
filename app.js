@@ -660,6 +660,9 @@ $('detailsToggle').addEventListener('click', () => {
 bindActions();
 function toggleEditMode() {
     isEditMode = !isEditMode;
+    document.body.classList.toggle('edit-mode', isEditMode);
+    $('editReportBtn').textContent =
+        isEditMode ? 'Save Changes' : 'Edit Report';
     console.log('Edit mode:', isEditMode);
 }
 loadReport();
