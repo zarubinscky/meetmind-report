@@ -338,19 +338,23 @@ body {
 .dynamic-card.decisions { background: var(--success-bg); border-color: var(--success-border); }
 .dynamic-card.risks { background: var(--risks-bg); border-color: var(--risks-border); }
 
-.item-list { display: grid; gap: 10px; }
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 10px 16px;
+}
 
 .report-item {
   display: grid;
   grid-template-columns: 12px 1fr;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 8px 10px;
   border: 1px solid rgba(226, 232, 240, .85);
   border-radius: 12px;
   background: rgba(255,255,255,.75);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 20px;
 }
 
 .report-dot {
