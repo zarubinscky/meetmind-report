@@ -219,6 +219,40 @@ body {
     color: #16a34a;
 }
 
+.dynamic-card.highlights {
+
+    padding: 24px;
+
+}
+
+.highlight-section + .highlight-section {
+
+    margin-top: 28px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #eceff5;
+
+}
+
+.highlight-section h3 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.highlight-section.insights h3 {
+    color: #ec4899;
+}
+
+.highlight-section.decisions h3 {
+    color: #16a34a;
+}
+
+.highlight-section.risks h3 {
+    color: #f59e0b;
+}
+
 .summary-section {
   padding: 18px 20px;
   background: var(--summary-bg);
