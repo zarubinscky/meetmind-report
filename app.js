@@ -661,10 +661,24 @@ bindActions();
 function toggleEditMode() {
     isEditMode = !isEditMode;
     document.body.classList.toggle('edit-mode', isEditMode);
+    setEditable('#meetingTitle', isEditMode);
+    setEditable('#summaryContent', isEditMode);
     $('editReportBtn').textContent =
         isEditMode ? 'Save Changes' : 'Edit Report';
     console.log($('editReportBtn').textContent);
   
     console.log('Edit mode:', isEditMode);
+}
+
+function setEditable(selector, editable) {
+    document.querySelectorAll(selector).forEach(el => {
+        el.contentEditable = editable;
+        el.spellcheck = editable;
+        if (editable) {
+            el.classList.add('editable-field');
+        } else {
+            el.classList.remove('editable-field');
+        }
+    });
 }
 loadReport();
