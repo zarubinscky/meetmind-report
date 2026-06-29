@@ -532,7 +532,9 @@ function renderReport(payload) {
     t('meetingReport');
   
   document.title = `${title} — MeetMind AI`;
-  $('meetingTitle').textContent = title;
+  $('meetingTitle').innerHTML = `
+  <span class="editable-title">${escapeHtml(title)}</span>
+  `;
 
   renderMeta(meeting, report);
   renderStats(report);
@@ -571,6 +573,7 @@ if (hasDetails) {
 
   $('loadingState').classList.add('hidden');
   $('reportPage').classList.remove('hidden');
+  applyEditMode();
 }
 
 async function loadReport() {
@@ -680,5 +683,10 @@ function setEditable(selector, editable) {
             el.classList.remove('editable-field');
         }
     });
+}
+
+ function applyEditMode() {
+    setEditable('.editable-title', isEditMode);
+    setEditable('#summaryContent', isEditMode);
 }
 loadReport();
