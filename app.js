@@ -93,6 +93,7 @@ i18n.pt = { ...i18n.en, meetingReport: 'Relatório da reunião', deleted: 'Este 
 let currentMeeting = null;
 let currentLang = 'en';
 let currentToken = null;
+let isEditMode = false;
 
 const $ = (id) => document.getElementById(id);
 
@@ -614,11 +615,12 @@ function bindActions() {
         if (error.name === 'AbortError') return;
       }
     }
-
+    
     await navigator.clipboard.writeText(url);
     showToast(t('copied'));
   });
-
+  
+  $('editReportBtn').addEventListener('click', toggleEditMode);
   $('deleteBtn').addEventListener('click', () => $('deleteModal').classList.remove('hidden'));
   $('cancelDeleteBtn').addEventListener('click', () => $('deleteModal').classList.add('hidden'));
 
@@ -656,4 +658,8 @@ $('detailsToggle').addEventListener('click', () => {
 }
 
 bindActions();
+function toggleEditMode() {
+    isEditMode = !isEditMode;
+    console.log('Edit mode:', isEditMode);
+}
 loadReport();
