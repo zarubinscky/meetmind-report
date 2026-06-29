@@ -666,10 +666,13 @@ function toggleEditMode() {
     document.body.classList.toggle('edit-mode', isEditMode);
     setEditable('#meetingTitle', isEditMode);
     setEditable('#summaryContent', isEditMode);
-    $('editReportBtn').textContent =
-        isEditMode ? 'Save Changes' : 'Edit Report';
-    console.log($('editReportBtn').textContent);
-  
+    const btn = $('editReportBtn');
+    btn.textContent = isEditMode
+        ? t('saveChanges')
+        : t('editReport');
+    btn.classList.toggle('btn-success', isEditMode);
+    btn.classList.toggle('btn-secondary', !isEditMode);
+    console.log(btn.textContent);
     console.log('Edit mode:', isEditMode);
 }
 
