@@ -136,6 +136,10 @@ body {
 .btn-danger { color: var(--danger); border-color: #FECACA; background: #FFF7F7; }
 .btn-disabled { color: #94A3B8; background: #F8FAFC; cursor: not-allowed; }
 
+#editReportBtn {
+    min-width: 200px;
+}
+
 .btn-success {
     color: #FFFFFF;
     background: #16A34A;
