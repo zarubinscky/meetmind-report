@@ -382,7 +382,7 @@ function renderDynamicCards(report) {
   if (!blocks.length) return;
   const grid = $('insightsDecisionsRisksGrid');
   grid.style.setProperty('--grid-cols', 1);
-  grid.innerHTML = blocks.map(block => {
+  const sectionsHtml = blocks.map(block => {
 
     const html = block.items.map(item => {
       // Старый формат (строка)
@@ -411,15 +411,20 @@ function renderDynamicCards(report) {
     }).join('');
 
     return `
-      <section class="dynamic-card ${block.key}">
-        <h2>${escapeHtml(block.title)}</h2>
-        <div class="item-list">
-          ${html}
-        </div>
-      </section>
+    <div class="highlight-section ${block.key}">
+   <h3>${escapeHtml(block.title)}</h3>
+    <div class="item-list">
+        ${html}
+    </div>
+</div>
     `;
   }).join('');
-  grid.classList.remove('hidden');
+  grid.innerHTML = `
+<section class="dynamic-card highlights">
+    ${sectionsHtml}
+</section>
+`;
+grid.classList.remove('hidden');
 }
 
 function renderTasksAndOwners(report) {
