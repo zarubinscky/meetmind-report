@@ -397,33 +397,27 @@ function renderDynamicCards(report) {
           </div>
         `;
       }
-      // Новый формат (объект)
-      return `
-        <div class="report-item">
-          <span class="report-dot"></span>
-      
-       <div>
 
-         <strong
-           class="editable"
-           data-editable="true"
-           data-field="${block.key}.title">
-           ${escapeHtml(item.title || '')}
-         </strong>
-    ${
-      item.details
-        ? `
-        <div
-            class="item-description editable"
-            data-editable="true"
-            data-field="${block.key}.details">
-            ${escapeHtml(item.details)}
-        </div>`
-        : ''
-    }
-</div>
-        </div>
-      `;
+// Новый формат (объект)
+
+return `
+  <div class="report-item" data-section="${block.key}">
+    <span class="report-dot"></span>
+    <div
+      class="editable dynamic-item-editor"
+      data-editable="true"
+      data-field="${block.key}"
+    >
+      <strong>${escapeHtml(item.title || '')}</strong>
+      ${
+        item.details
+          ? `<div class="item-description">${escapeHtml(item.details)}</div>`
+          : ''
+      }
+    </div>
+  </div>
+`;
+      
     }).join('');
 
     return `
