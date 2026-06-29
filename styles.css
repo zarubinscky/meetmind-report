@@ -208,13 +208,13 @@ body {
 }
 
 .highlight-section + .highlight-section {
-    margin-top: 24px;
-    padding-top: 24px;
+    margin-top: 12px;
+    padding-top: 12px;
     border-top: 1px solid var(--border);
 }
 
 .highlight-section h3 {
-    margin: 0 0 16px;
+    margin: 0 0 8px;
     font-size: 20px;
     font-weight: 700;
 }
