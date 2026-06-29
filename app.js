@@ -682,6 +682,11 @@ function setEditable(selector, editable) {
     document.querySelectorAll(selector).forEach(el => {
         el.contentEditable = editable;
         el.spellcheck = editable;
+      el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+    }
+});
         if (editable) {
             el.classList.add('editable-field');
         } else {
