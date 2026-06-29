@@ -225,12 +225,12 @@ body {
     background: #f8fafc;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 8px 10px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 72px;
+    min-height: 60px;
 
 }
 
@@ -241,18 +241,18 @@ body {
 }
 
 .metric-value {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.05;
   color: #111827;
 }
 
 .metric-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 400;
     line-height: 1.15;
     color: #6b7280;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .architecture-section {
