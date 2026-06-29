@@ -155,9 +155,9 @@ body {
 .stats-card {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 24px 32px;
-  padding: 16px;
-  margin-bottom: 20px;
+  gap: 16px 28px;
+  padding: 8px 16px;
+  margin-bottom: 16px;
   border: 1px solid var(--border);
   border-radius: 20px;
   background: var(--surface);
@@ -167,7 +167,7 @@ body {
 .stat-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .stat-icon {
@@ -182,8 +182,8 @@ body {
   font-weight: 700;
 }
 
-.stat-value { font-size: 18px; font-weight: 700; line-height: 24px; }
-.stat-label { color: var(--secondary); font-size: 14px; font-weight: 500; line-height: 20px; }
+.stat-value { font-size: 18px; font-weight: 700; line-height: 20px; }
+.stat-label { color: var(--secondary); font-size: 13px; font-weight: 500; line-height: 16px; }
 
 .section {
   width: 100%;
@@ -232,13 +232,13 @@ body {
 }
 
 .summary-section {
-  padding: 18px 20px;
+  padding: 14px 18px;
   background: var(--summary-bg);
   border-color: var(--summary-border);
 }
 
 .metrics-section {
-    padding: 18px;
+    padding: 14px 18px;
 }
 
 .metrics-grid {
@@ -257,8 +257,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 60px;
-
+    min-height: 56px;
 }
 
   display: flex;
@@ -268,8 +267,8 @@ body {
 }
 
 .metric-value {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   line-height: 1.05;
   color: #111827;
 }
@@ -333,9 +332,9 @@ body {
 }
 
 .body-text {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 30px;
+  line-height: 20px;
   color: var(--text);
 }
 
