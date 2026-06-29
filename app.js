@@ -703,6 +703,21 @@ function setEditable(selector, editable) {
     });
 }
 
+function cleanupEmptyDynamicItems() {
+    document.querySelectorAll('.report-item').forEach(item => {
+        const editor = item.querySelector('.dynamic-item-editor');
+        if (!editor) return;
+        if (editor.innerText.trim() === '') {
+            item.remove();
+        }
+    });
+    document.querySelectorAll('.highlight-section').forEach(section => {
+        if (!section.querySelector('.report-item')) {
+            section.remove();
+        }
+    });
+}
+
  function applyEditMode() {
     setEditable('[data-editable="true"]', isEditMode);
 }
