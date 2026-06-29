@@ -203,36 +203,14 @@ body {
   letter-spacing: -0.01em;
 }
 
-.dynamic-card h2{
-    padding-left: 0px;
-}
-
-.dynamic-card.insights h2 {
-    color: #ec4899;
-}
-
-.dynamic-card.risks h2 {
-    color: #f59e0b;
-}
-
-.dynamic-card.decisions h2 {
-    color: #16a34a;
-}
-
 .dynamic-card.highlights {
-
     padding: 24px;
-
 }
 
 .highlight-section + .highlight-section {
-
     margin-top: 28px;
-
     padding-top: 24px;
-
     border-top: 1px solid #eceff5;
-
 }
 
 .highlight-section h3 {
