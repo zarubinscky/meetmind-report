@@ -124,6 +124,22 @@ body {
 .btn-danger { color: var(--danger); border-color: #FECACA; background: #FFF7F7; }
 .btn-disabled { color: #94A3B8; background: #F8FAFC; cursor: not-allowed; }
 
+.btn-success {
+    color: #FFFFFF;
+    background: #16A34A;
+    border-color: #16A34A;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: #15803D;
+    border-color: #15803D;
+}
+
+.btn-success:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
 .hero { margin-bottom: 12px; }
 
 .meeting-title {
