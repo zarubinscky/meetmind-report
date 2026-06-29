@@ -699,3 +699,18 @@ body {
   .transcript-section { display: none !important; }
   
 }
+
+.editable-field {
+    outline: none;
+    border-radius: 8px;
+    transition: background .2s, box-shadow .2s;
+}
+
+body.edit-mode .editable-field:hover {
+    background: #FFF8DB;
+}
+
+body.edit-mode .editable-field:focus {
+    background: #FFF3BF;
+    box-shadow: inset 0 0 0 2px #F59E0B;
+}
