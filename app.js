@@ -695,6 +695,11 @@ function setEditable(selector, editable) {
         e.preventDefault();
     }
 });
+
+      el.addEventListener('input', () => {
+    cleanupEmptyDynamicItems();
+});
+      
         if (editable) {
             el.classList.add('editable-field');
         } else {
