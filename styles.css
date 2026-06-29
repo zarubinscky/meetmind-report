@@ -121,6 +121,18 @@ body {
 }
 
 .btn-secondary { color: #475569; }
+
+.btn-success {
+    background: #16A34A;
+    border-color: #16A34A;
+    color: #FFFFFF;
+}
+
+.btn-success:hover {
+    background: #15803D;
+    border-color: #15803D;
+}
+
 .btn-danger { color: var(--danger); border-color: #FECACA; background: #FFF7F7; }
 .btn-disabled { color: #94A3B8; background: #F8FAFC; cursor: not-allowed; }
 
