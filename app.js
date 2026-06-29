@@ -381,7 +381,7 @@ function renderDynamicCards(report) {
 
   if (!blocks.length) return;
   const grid = $('insightsDecisionsRisksGrid');
-  grid.style.setProperty('--grid-cols', Math.min(blocks.length, 3));
+  grid.style.setProperty('--grid-cols', 1);
   grid.innerHTML = blocks.map(block => {
 
     const html = block.items.map(item => {
