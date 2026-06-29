@@ -535,7 +535,7 @@ function renderReport(payload) {
   
   document.title = `${title} — MeetMind AI`;
   $('meetingTitle').innerHTML = `
-  <span class="editable-title">${escapeHtml(title)}</span>
+  <span class="editable-title" data-editable="true" data-field="meeting_title">${escapeHtml(title)}</span>
   `;
 
   renderMeta(meeting, report);
@@ -544,6 +544,8 @@ function renderReport(payload) {
   
   if (!isEmptyValue(report.summary)) {
     $('summaryContent').innerHTML = renderTextBlock(report.summary);
+    $('summaryContent').setAttribute('data-editable', 'true');
+    $('summaryContent').setAttribute('data-field', 'summary');
     $('summarySection').classList.remove('hidden');
   }
 
@@ -666,8 +668,7 @@ bindActions();
 function toggleEditMode() {
     isEditMode = !isEditMode;
     document.body.classList.toggle('edit-mode', isEditMode);
-    setEditable('#meetingTitle', isEditMode);
-    setEditable('#summaryContent', isEditMode);
+   setEditable('[data-editable="true"]', isEditMode);
     const btn = $('editReportBtn');
     btn.textContent = isEditMode
         ? t('saveChanges')
@@ -696,7 +697,7 @@ function setEditable(selector, editable) {
 }
 
  function applyEditMode() {
-    setEditable('.editable-title', isEditMode);
-    setEditable('#summaryContent', isEditMode);
+    setEditable('[data-editable="true"]', isEditMode);
 }
+
 loadReport();
