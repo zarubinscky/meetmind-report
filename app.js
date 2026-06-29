@@ -401,14 +401,27 @@ function renderDynamicCards(report) {
       return `
         <div class="report-item">
           <span class="report-dot"></span>
-          <div>
-            <strong>${escapeHtml(item.title || '')}</strong>
-            ${
-              item.details
-                ? `<div class="item-description">${escapeHtml(item.details)}</div>`
-                : ''
-            }
-          </div>
+      
+       <div>
+
+         <strong
+           class="editable"
+           data-editable="true"
+           data-field="${block.key}.title">
+           ${escapeHtml(item.title || '')}
+         </strong>
+    ${
+      item.details
+        ? `
+        <div
+            class="item-description editable"
+            data-editable="true"
+            data-field="${block.key}.details">
+            ${escapeHtml(item.details)}
+        </div>`
+        : ''
+    }
+</div>
         </div>
       `;
     }).join('');
