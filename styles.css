@@ -204,13 +204,13 @@ body {
 }
 
 .dynamic-card.highlights {
-    padding: 24px;
+    padding: 16px 24px 24px;
 }
 
 .highlight-section + .highlight-section {
-    margin-top: 28px;
+    margin-top: 24px;
     padding-top: 24px;
-    border-top: 1px solid #eceff5;
+    border-top: 1px solid var(--border);
 }
 
 .highlight-section h3 {
