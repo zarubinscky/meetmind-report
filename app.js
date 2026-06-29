@@ -663,6 +663,8 @@ function toggleEditMode() {
     document.body.classList.toggle('edit-mode', isEditMode);
     $('editReportBtn').textContent =
         isEditMode ? 'Save Changes' : 'Edit Report';
+    console.log($('editReportBtn').textContent);
+  
     console.log('Edit mode:', isEditMode);
 }
 loadReport();
