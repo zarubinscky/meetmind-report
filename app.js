@@ -333,16 +333,22 @@ function renderStats(report) {
 }
 
 function renderMetrics(report) {
+
   const metrics = report.key_metrics || report.metrics || [];
   if (!Array.isArray(metrics) || !metrics.length) return;
+  const grid = $('metricsContent');
+  let cols = metrics.length;
+  if (metrics.length >= 7) {
+    cols = 4;
+  }
 
-  $('metricsContent').innerHTML = metrics.map(metric => `
+  grid.style.setProperty('--metric-cols', cols);
+  grid.innerHTML = metrics.map(metric => `
     <div class="metric-card">
       <div class="metric-label">${escapeHtml(metric.label || '')}</div>
       <div class="metric-value">${escapeHtml(metric.value || '')}</div>
     </div>
   `).join('');
-  
   $('metricsSection').classList.remove('hidden');
 }
 
