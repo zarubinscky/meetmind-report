@@ -216,7 +216,8 @@ body {
 
 .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    --metric-cols: 4;
+    grid-template-columns: repeat(var(--metric-cols), minmax(0, 1fr));
     gap: 10px;
 }
 
