@@ -43,9 +43,8 @@ body {
 }
 
 .report {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
+    width: min(94vw, 1440px);
+    margin: 0 auto;
 }
 
 .topbar {
@@ -242,7 +241,7 @@ body {
 
 .metric-value {
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.05;
   color: #111827;
 }
@@ -621,9 +620,6 @@ body {
 .modal-card p { margin: 0 0 24px; color: var(--secondary); font-size: 16px; line-height: 26px; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 12px; }
 
-@media (max-width: 1439px) and (min-width: 1024px) {
-  .report { max-width: 1080px; }
-}
 
 @media (max-width: 1023px) {
   .page-shell { padding: 16px 16px 32px; }
