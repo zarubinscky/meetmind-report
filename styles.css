@@ -702,15 +702,20 @@ body {
 
 .editable-field {
     outline: none;
+    border: 1px dashed #CBD5E1;
     border-radius: 8px;
-    transition: background .2s, box-shadow .2s;
+    padding: 6px 8px;
+    background: #FAFBFC;
+    transition: all .15s ease;
 }
 
 body.edit-mode .editable-field:hover {
-    background: #FFF8DB;
+    border-color: #94A3B8;
+    background: #F8FAFC;
 }
 
 body.edit-mode .editable-field:focus {
-    background: #FFF3BF;
-    box-shadow: inset 0 0 0 2px #F59E0B;
+    background: #FFFFFF;
+    border-color: #2563EB;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
 }
