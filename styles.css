@@ -343,7 +343,7 @@ body {
 
 .dynamic-card {
   min-width: 0;
-  padding: 12px;
+  padding: 18px 24px;
   border-radius: 20px;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -361,7 +361,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px 16px;
-    padding-left: 22px;
 }
 
 .report-item {
