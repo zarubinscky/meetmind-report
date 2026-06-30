@@ -348,9 +348,19 @@ function renderMetrics(report) {
   grid.style.setProperty('--metric-cols', cols);
   grid.innerHTML = metrics.map(metric => `
     <div class="metric-card">
-      <div class="metric-label">${escapeHtml(metric.label || '')}</div>
-      <div class="metric-value">${escapeHtml(metric.value || '')}</div>
+    <div
+        class="metric-label"
+        data-editable="true"
+    >
+        ${escapeHtml(metric.label || '')}
     </div>
+    <div
+        class="metric-value"
+        data-editable="true"
+    >
+        ${escapeHtml(metric.value || '')}
+    </div>
+</div>
   `).join('');
   $('metricsSection').classList.remove('hidden');
 }
