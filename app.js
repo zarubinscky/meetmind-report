@@ -509,16 +509,6 @@ function renderTasksAndOwners(report) {
           `).join('')}
         </tbody>
       </table>
-
-      <div class="task-cards">
-        ${tasks.map((task) => `
-          <div class="task-card">
-            <strong>${escapeHtml(task.task)}</strong>
-            ${visible(task.owner) ? `<span>${escapeHtml(t('owner'))}: ${escapeHtml(task.owner)}</span>` : ''}
-            ${visible(task.dueDate) ? `<span>${escapeHtml(t('dueDate'))}: ${escapeHtml(task.dueDate)}</span>` : ''}
-          </div>
-        `).join('')}
-      </div>
     `;
 
     $('tasksSection').classList.remove('hidden');
