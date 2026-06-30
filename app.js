@@ -721,6 +721,12 @@ function cleanupEmptyDynamicItems() {
             section.remove();
         }
     });
+
+  const dynamicGrid = $('insightsDecisionsRisksGrid');
+  if (dynamicGrid && !dynamicGrid.querySelector('.highlight-section')) {
+    dynamicGrid.innerHTML = '';
+    dynamicGrid.classList.add('hidden');
+}
 }
 
  function applyEditMode() {
