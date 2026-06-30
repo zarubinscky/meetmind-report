@@ -816,7 +816,16 @@ function buildReportJson() {
         architecture: cleanText(
             $('architectureContent')?.innerText
         ),
-    };
+metrics: [...document.querySelectorAll('.metric-card')].map(card => ({
+    label: cleanText(
+        card.querySelector('.metric-label')?.innerText
+    ),
+    value: cleanText(
+        card.querySelector('.metric-value')?.innerText
+    )
+   })),
+      
+  };
 }
 
  function applyEditMode() {
