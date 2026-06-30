@@ -501,8 +501,34 @@ function renderTasksAndOwners(report) {
         `).join('')}
     </tbody>
 </table>
+
+<div class="task-cards">
+${tasks.map(task => `
+<div class="task-card">
+    <div class="task-title"
+         data-editable="true">
+        ${escapeHtml(task.task)}
+    </div>
+    ${visible(task.owner) ? `
+    <div class="task-meta">
+        <strong>${escapeHtml(t('owner'))}:</strong>
+        <span data-editable="true">
+            ${escapeHtml(task.owner)}
+        </span>
+    </div>` : ''}
+    ${visible(task.dueDate) ? `
+    <div class="task-meta">
+        <strong>${escapeHtml(t('dueDate'))}:</strong>
+        <span class="due-badge"
+              data-editable="true">
+            ${escapeHtml(task.dueDate)}
+        </span>
+    </div>` : ''}
+</div>
+`).join('')}
+</div>
 `;
-   
+    
     $('tasksSection').classList.remove('hidden');
   }
 
