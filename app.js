@@ -595,6 +595,8 @@ let hasDetails = false;
 
 if (!isEmptyValue(report.architecture)) {
   $('architectureContent').innerHTML = renderArchitecture(report.architecture);
+  $('architectureContent').setAttribute('data-editable', 'true');
+  $('architectureContent').setAttribute('data-field', 'architecture');
   $('architectureSection').classList.remove('hidden');
   hasDetails = true;
 }
