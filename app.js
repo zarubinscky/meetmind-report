@@ -813,6 +813,9 @@ function buildReportJson() {
         summary: cleanText(
             $('summaryContent')?.innerText
         ),
+        architecture: cleanText(
+            $('architectureContent')?.innerText
+        ),
     };
 }
 
