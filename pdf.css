@@ -1,11 +1,11 @@
 .pdf-root {
     position: fixed;
-    left: -99999px;
-    top: 0;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
     width: 1280px;
     height: 720px;
-    background: #F8FAFC;
-    z-index: -1;
+    z-index: 9999;
 }
 
 .pdf-slide {
