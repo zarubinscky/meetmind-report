@@ -1,6 +1,7 @@
 const API_BASE = 'https://zarubinscky.app.n8n.cloud/webhook';
 const REPORT_ENDPOINT = `${API_BASE}/report`;
 const DELETE_ENDPOINT = `${API_BASE}/report-delete`;
+const SAVE_ENDPOINT = `${API_BASE}/report-save`;
 
 const i18n = {
   en: {
@@ -717,9 +718,16 @@ $('detailsToggle').addEventListener('click', () => {
 
 bindActions();
 function toggleEditMode() {
-    isEditMode = !isEditMode;
-  if (!isEditMode) {
-    console.log(buildReportJson());
+   if (!isEditMode) {
+    saveReport()
+        .then(() => {
+            console.log('Report saved successfully');
+        })
+        .catch(err => {
+            console.error('Save error:', err);
+            alert('Не удалось сохранить отчет');
+        });
+
 }
     document.body.classList.toggle('edit-mode', isEditMode);
    setEditable('[data-editable="true"]', isEditMode);
@@ -925,6 +933,26 @@ function buildReportJson() {
         tasks: collectTasks(),
         owners: collectOwners()
     };
+}
+
+async function saveReport() {
+    const payload = {
+        token: currentToken,
+        report: buildReportJson()
+    };
+
+    console.log('Saving report...', payload);
+    const response = await fetch(SAVE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+    if (!response.ok) {
+        throw new Error(`Save failed: ${response.status}`);
+    }
+    return response.json();
 }
 
  function applyEditMode() {
