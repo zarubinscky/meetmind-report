@@ -119,6 +119,9 @@ function isEmptyValue(value) {
   const normalized = String(value).replace(/[#*•\-\s.]/g, '').trim().toLowerCase();
   return !normalized || ['неуказано', 'not specified', 'n/a', 'none', 'null'].includes(normalized);
 }
+function cleanText(value) {
+    return String(value ?? '').trim();
+}
 
 function normalizeReport(report = {}) {
   return {
@@ -715,6 +718,9 @@ $('detailsToggle').addEventListener('click', () => {
 bindActions();
 function toggleEditMode() {
     isEditMode = !isEditMode;
+  if (!isEditMode) {
+    console.log(buildReportJson());
+}
     document.body.classList.toggle('edit-mode', isEditMode);
    setEditable('[data-editable="true"]', isEditMode);
     const btn = $('editReportBtn');
@@ -798,6 +804,16 @@ const metricsGrid = $('metricsContent');
 if (metricsGrid && !metricsGrid.querySelector('.metric-card')) {
     $('metricsSection').classList.add('hidden');
 }
+}
+function buildReportJson() {
+    return {
+        title: cleanText(
+            document.querySelector('.editable-title')?.innerText
+        ),
+        summary: cleanText(
+            $('summaryContent')?.innerText
+        ),
+    };
 }
 
  function applyEditMode() {
