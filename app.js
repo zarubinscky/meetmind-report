@@ -805,27 +805,126 @@ if (metricsGrid && !metricsGrid.querySelector('.metric-card')) {
     $('metricsSection').classList.add('hidden');
 }
 }
+
 function buildReportJson() {
+    const baseReport = normalizeReport(currentMeeting?.report || {});
+
+    function collectDynamicSection(sectionKey) {
+        const section = document.querySelector(`.highlight-section.${sectionKey}`);
+        if (!section) return [];
+
+        return [...section.querySelectorAll('.report-item')]
+            .map(item => {
+                const editor = item.querySelector('.dynamic-item-editor');
+
+                if (editor) {
+                    const title = cleanText(editor.querySelector('strong')?.innerText);
+                    const details = cleanText(editor.querySelector('.item-description')?.innerText);
+
+                    if (!title && !details) return null;
+
+                    return {
+                        title,
+                        details
+                    };
+                }
+
+                const text = cleanText(item.innerText);
+                return text ? { title: text, details: '' } : null;
+            })
+            .filter(Boolean);
+    }
+
+    function collectMetrics() {
+        return [...document.querySelectorAll('.metric-card')]
+            .map(card => ({
+                label: cleanText(card.querySelector('.metric-label')?.innerText),
+                value: cleanText(card.querySelector('.metric-value')?.innerText)
+            }))
+            .filter(metric => metric.label || metric.value);
+    }
+
+    function collectTasks() {
+        return [...document.querySelectorAll('.task-table tbody tr')]
+            .map(row => {
+                const cells = row.querySelectorAll('td');
+
+                return {
+                    task: cleanText(cells[0]?.innerText),
+                    owner: cleanText(cells[1]?.innerText),
+                    due_date: cleanText(cells[2]?.innerText),
+                    status: 'open'
+                };
+            })
+            .filter(task => task.task);
+    }
+
+    function collectOwners() {
+        return [...document.querySelectorAll('.owner-card')]
+            .map(card => ({
+                name: cleanText(card.querySelector('.owner-name')?.innerText),
+                role: cleanText(card.querySelector('.owner-role')?.innerText)
+            }))
+            .filter(owner => owner.name || owner.role);
+    }
+
+    function collectArchitecture() {
+        const sections = [...document.querySelectorAll('#architectureContent .architecture-section')]
+            .map(section => {
+                const title = cleanText(section.querySelector('.architecture-section-title')?.innerText);
+                const layoutEl = [...section.querySelectorAll('div')]
+                    .find(el => [...el.classList].some(cls => cls.startsWith('architecture-') && cls !== 'architecture-section'));
+
+                const layoutClass = layoutEl
+                    ? [...layoutEl.classList].find(cls => cls.startsWith('architecture-') && cls !== 'architecture-section')
+                    : '';
+
+                const layout = layoutClass ? layoutClass.replace('architecture-', '') : 'grid';
+
+                const items = [...section.querySelectorAll('.architecture-item')]
+                    .map(item => ({
+                        title: cleanText(item.querySelector('h4')?.innerText),
+                        description: cleanText(item.querySelector('p')?.innerText)
+                    }))
+                    .filter(item => item.title || item.description);
+
+                if (!title && !items.length) return null;
+
+                return {
+                    title,
+                    layout,
+                    items
+                };
+            })
+            .filter(Boolean);
+
+        return { sections };
+    }
+
+    const title = cleanText(document.querySelector('.editable-title')?.innerText);
+    const summary = cleanText($('summaryContent')?.innerText);
+    const metrics = collectMetrics();
+
     return {
-        title: cleanText(
-            document.querySelector('.editable-title')?.innerText
-        ),
-        summary: cleanText(
-            $('summaryContent')?.innerText
-        ),
-        architecture: cleanText(
-            $('architectureContent')?.innerText
-        ),
-metrics: [...document.querySelectorAll('.metric-card')].map(card => ({
-    label: cleanText(
-        card.querySelector('.metric-label')?.innerText
-    ),
-    value: cleanText(
-        card.querySelector('.metric-value')?.innerText
-    )
-   })),
-      
-  };
+        ...baseReport,
+
+        title,
+        meeting_title: title,
+        summary,
+        executive_brief: summary,
+
+        architecture: collectArchitecture(),
+
+        key_metrics: metrics,
+        metrics,
+
+        insights: collectDynamicSection('insights'),
+        decisions: collectDynamicSection('decisions'),
+        risks: collectDynamicSection('risks'),
+
+        tasks: collectTasks(),
+        owners: collectOwners()
+    };
 }
 
  function applyEditMode() {
