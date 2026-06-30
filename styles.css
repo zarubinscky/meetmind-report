@@ -767,6 +767,30 @@ body {
   .footer-signature { break-inside: avoid; }
   .transcript-section { display: none !important; }
   
+  /* Temporary print stylesheet (browser print).
+  Will remain until dedicated Executive PDF export is implemented. */
+  
+  #editReportBtn,
+  #deleteBtn,
+  #shareBtn {
+    display: none !important;
+}
+
+.metrics-grid,
+.dynamic-grid,
+.task-table,
+.architecture-section,
+.owner-card,
+.footer-signature {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+.report {
+    box-shadow: none !important;
+}
+.section {
+    page-break-inside: avoid;
+}
 }
 
 body.edit-mode .editable-field {
