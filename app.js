@@ -732,15 +732,14 @@ function cleanupEmptyDynamicItems() {
     dynamicGrid.classList.add('hidden');
 }
 
-  const summarySection = $('summarySection');
-  const summaryContent = $('summaryContent');
-  if (
-    summarySection &&
-    summaryContent &&
-    summaryContent.innerText.trim() === ''
-) {
-    summarySection.classList.add('hidden');
-}
+ const summarySection = $('summarySection');
+ const summaryContent = $('summaryContent');
+ if (summarySection && summaryContent) {
+    if (summaryContent.innerText.trim() === '') {
+        summarySection.classList.add('hidden');
+    } else {
+        summarySection.classList.remove('hidden');
+    }
 }
 
  function applyEditMode() {
