@@ -505,13 +505,13 @@ body {
 
 .task-table th:nth-child(2),
 .task-table td:nth-child(2) {
-    width: 15%;
+    width: 120px;
 }
 
 .task-table th:last-child,
 .task-table td:last-child {
-    width: 20%;
-    min-width: 90px;
+    width: 120px;
+    min-width: 120px;
 }
 
 .task-table td:nth-child(2),
