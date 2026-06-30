@@ -505,13 +505,13 @@ body {
 
 .task-table th:nth-child(2),
 .task-table td:nth-child(2) {
-    width: 120px;
+    width: 15%;
 }
 
 .task-table th:last-child,
 .task-table td:last-child {
-    width: 120px;
-    min-width: 120px;
+    width: 20%;
+    min-width: 90px;
 }
 
 .task-table td:nth-child(2),
@@ -522,7 +522,7 @@ body {
 
 .task-table tr:last-child td { border-bottom: 0; }
 
-.task-cards { display: none; gap: 12px; }
+.task-cards { display: grid; gap: 12px; }
 .task-card {
   padding: 16px;
   border: 1px solid var(--border);
@@ -737,7 +737,7 @@ body {
   .body-text { font-size: 16px; line-height: 26px; }
   
   .task-table {
-    display: table;
+    display: none;
     width: 100%;
     table-layout: fixed;
 }
