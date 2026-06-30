@@ -1,15 +1,43 @@
 /*
-
  * MeetMind AI
-
- * Executive PDF Styles
-
- *
-
- * Здесь будут только стили PDF.
-
- * Веб-отчет продолжает использовать styles.css
-
+ * Executive PDF Generator
  */
 
-/* PDF styles will be added here */
+'use strict';
+
+async function generateExecutivePdf() {
+
+    const report = document.querySelector('.report');
+
+    if (!report) {
+        alert('Report not found');
+        return;
+    }
+
+    const filename =
+        (window.currentMeeting?.title || document.title || 'Meeting Report')
+        + ' - MeetMind AI.pdf';
+
+    const opt = {
+        margin: 0,
+        filename: filename,
+        image: {
+            type: 'jpeg',
+            quality: 1
+        },
+        html2canvas: {
+            scale: 2,
+            useCORS: true
+        },
+        jsPDF: {
+            unit: 'px',
+            format: [1280, 720],
+            orientation: 'landscape'
+        }
+    };
+
+    await html2pdf()
+        .set(opt)
+        .from(report)
+        .save();
+}
