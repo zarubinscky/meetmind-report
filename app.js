@@ -525,8 +525,20 @@ function renderTasksAndOwners(report) {
       <div class="owner-card">
         <div class="owner-avatar">${escapeHtml(initials(owner.name))}</div>
         <div>
-          <div class="owner-name">${escapeHtml(owner.name)}</div>
-          ${owner.role ? `<div class="owner-role">${escapeHtml(owner.role)}</div>` : ''}
+          <div
+    class="owner-name"
+    data-editable="true"
+>
+    ${escapeHtml(owner.name)}
+</div>
+         ${owner.role ? `
+<div
+    class="owner-role"
+    data-editable="true"
+>
+    ${escapeHtml(owner.role)}
+</div>
+` : ''}
         </div>
       </div>
     `).join('');
