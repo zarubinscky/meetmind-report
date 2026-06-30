@@ -767,6 +767,22 @@ function cleanupEmptyDynamicItems() {
         summarySection.classList.remove('hidden');
     }
 }
+  document.querySelectorAll('.metric-card').forEach(card => {
+    const label = card.querySelector('.metric-label');
+    const value = card.querySelector('.metric-value');
+    if (
+        label &&
+        value &&
+        label.innerText.trim() === '' &&
+        value.innerText.trim() === ''
+    ) {
+        card.remove();
+    }
+});
+const metricsGrid = $('metricsContent');
+if (metricsGrid && !metricsGrid.querySelector('.metric-card')) {
+    $('metricsSection').classList.add('hidden');
+}
 }
 
  function applyEditMode() {
