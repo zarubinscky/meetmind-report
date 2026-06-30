@@ -91,29 +91,4 @@ async function generateExecutivePdf() {
     }
 }
 
-    const title = sanitizePdfFilename(getPdfTitle());
-    const filename = `${title}${PDF_CONFIG.fileSuffix}`;
-
-    const options = {
-        margin: 0,
-        filename,
-        image: {
-            type: 'jpeg',
-            quality: 1
-        },
-        html2canvas: {
-            scale: 2,
-            useCORS: true
-        },
-        jsPDF: {
-            unit: 'px',
-            format: [PDF_CONFIG.pageWidth, PDF_CONFIG.pageHeight],
-            orientation: 'landscape'
-        }
-    };
-
-    await html2pdf()
-        .set(options)
-        .from(report)
-        .save();
-}
+    
