@@ -697,6 +697,10 @@ function setEditable(selector, editable) {
 });
 
       el.addEventListener('input', () => {
+      cleanupEmptyDynamicItems();
+});
+
+      el.addEventListener('input', () => {
     cleanupEmptyDynamicItems();
 });
       
