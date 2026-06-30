@@ -477,39 +477,13 @@ function renderTasksAndOwners(report) {
 
   if (hasTasks) {
     const tasks = report.tasks.map(normalizeTask).filter((task) => !isEmptyValue(task.task));
-
+   
     $('tasksContent').innerHTML = `
-      <table class="task-table">
-        <thead>
-          <tr>
-            <th>${escapeHtml(t('task'))}</th>
-            <th>${escapeHtml(t('owner'))}</th>
-            <th>${escapeHtml(t('dueDate'))}</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${tasks.map((task) => `
-            <tr>
-             <td data-editable="true">
-
-    ${escapeHtml(task.task)}
-</td>
-<td data-editable="true">
-    ${visible(task.owner) ? escapeHtml(task.owner) : ''}
-</td>
-<td>
-    <span
-        class="due-badge"
-        data-editable="true"
-    >
-        ${visible(task.dueDate) ? escapeHtml(task.dueDate) : ''}
-    </span>
-</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `;
+<div style="background:red;color:white;padding:20px;font-size:20px">
+TEST TASKS
+</div>
+`;
+   
 
     $('tasksSection').classList.remove('hidden');
   }
