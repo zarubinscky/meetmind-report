@@ -486,11 +486,21 @@ function renderTasksAndOwners(report) {
         <tbody>
           ${tasks.map((task) => `
             <tr>
-              <td>${escapeHtml(task.task)}</td>
-              <td>${visible(task.owner) ? escapeHtml(task.owner) : '—'}</td>
-              <td>${visible(task.dueDate) 
-                ? `<span class="due-badge">${escapeHtml(task.dueDate)}</span>`
-                : '—'}
+             <td data-editable="true">
+
+    ${escapeHtml(task.task)}
+</td>
+<td data-editable="true">
+    ${visible(task.owner) ? escapeHtml(task.owner) : ''}
+</td>
+<td>
+    <span
+        class="due-badge"
+        data-editable="true"
+    >
+        ${visible(task.dueDate) ? escapeHtml(task.dueDate) : ''}
+    </span>
+</td>
             </tr>
           `).join('')}
         </tbody>
