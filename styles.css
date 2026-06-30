@@ -729,8 +729,23 @@ body {
   .architecture-section, .tasks-section, .owners-section, .dynamic-card { padding: 20px; }
   .section h2, .dynamic-card h2 { font-size: 22px; line-height: 28px; }
   .body-text { font-size: 16px; line-height: 26px; }
-  .task-table { display: none; }
-  .task-cards { display: grid; }
+  
+  .task-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+  
+  .task-table td {
+        vertical-align: top;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .task-table th {
+        white-space: nowrap;
+    }
+  
   .transcript-toggle { align-items: flex-start; flex-direction: column; }
   .toast { right: 20px; left: 20px; bottom: 20px; max-width: none; }
 }
