@@ -750,6 +750,7 @@ function cleanupEmptyDynamicItems() {
         summarySection.classList.remove('hidden');
     }
 }
+}
 
  function applyEditMode() {
     setEditable('[data-editable="true"]', isEditMode);
