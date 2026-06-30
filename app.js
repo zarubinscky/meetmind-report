@@ -635,7 +635,14 @@ function bindActions() {
   });
   
   $('editReportBtn').addEventListener('click', toggleEditMode);
-  $('deleteBtn').addEventListener('click', () => $('deleteModal').classList.remove('hidden'));
+  $('deleteBtn').addEventListener('click', () => {
+    if (isEditMode) {
+        location.reload();
+        return;
+    }
+    $('deleteModal').classList.remove('hidden');
+
+});
   $('cancelDeleteBtn').addEventListener('click', () => $('deleteModal').classList.add('hidden'));
 
   $('confirmDeleteBtn').addEventListener('click', async () => {
