@@ -718,34 +718,40 @@ $('detailsToggle').addEventListener('click', () => {
 
 bindActions();
 function toggleEditMode() {
-   if (!isEditMode) {
-    saveReport()
-        .then(() => {
-            console.log('Report saved successfully');
-        })
-        .catch(err => {
-            console.error('Save error:', err);
-            alert('Не удалось сохранить отчет');
-        });
 
-}
+    isEditMode = !isEditMode;
+
+    if (!isEditMode) {
+        saveReport()
+            .then(() => {
+                console.log('Report saved successfully');
+            })
+            .catch(err => {
+                console.error('Save error:', err);
+                alert('Не удалось сохранить отчет');
+            });
+    }
+
     document.body.classList.toggle('edit-mode', isEditMode);
-   setEditable('[data-editable="true"]', isEditMode);
+
+    setEditable('[data-editable="true"]', isEditMode);
+
     const btn = $('editReportBtn');
     btn.textContent = isEditMode
         ? t('saveChanges')
         : t('editReport');
+
     btn.classList.toggle('btn-success', isEditMode);
     btn.classList.toggle('btn-secondary', !isEditMode);
 
     const deleteBtn = $('deleteBtn');
     deleteBtn.textContent = isEditMode
-    ? 'Cancel'
-    : t('deleteReport');
+        ? 'Cancel'
+        : t('deleteReport');
 
-deleteBtn.classList.toggle('btn-warning', isEditMode);
-deleteBtn.classList.toggle('btn-danger', !isEditMode);
-  
+    deleteBtn.classList.toggle('btn-warning', isEditMode);
+    deleteBtn.classList.toggle('btn-danger', !isEditMode);
+
     console.log(btn.textContent);
     console.log('Edit mode:', isEditMode);
 }
