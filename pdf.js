@@ -63,6 +63,12 @@ function createPdfDOM() {
 async function generateExecutivePdf() {
     
     const pdfRoot = createPdfDOM();
+    
+    document.body.appendChild(pdfRoot);
+    alert(pdfRoot.outerHTML);
+    pdfRoot.remove();
+// document.body.appendChild(pdfRoot);
+    
     document.body.appendChild(pdfRoot);
     const title = sanitizePdfFilename(getPdfTitle());
     const filename = `${title}${PDF_CONFIG.fileSuffix}`;
