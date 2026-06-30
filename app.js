@@ -594,29 +594,31 @@ function renderReport(payload) {
 
 renderDynamicCards(report);
 renderTasksAndOwners(report);
-
-let hasDetails = false;
-
-if (!isEmptyValue(report.architecture)) {
-  $('architectureContent').innerHTML = renderArchitecture(report.architecture);
-  $('architectureContent').setAttribute('data-editable', 'true');
-  $('architectureContent').setAttribute('data-field', 'architecture');
-  $('architectureSection').classList.remove('hidden');
-  hasDetails = true;
-}
-
 renderTranscript(meeting.transcript);
-if (!isEmptyValue(meeting.transcript)) {
-  hasDetails = true;
-}
 
-if (report.owners && report.owners.length > 0) {
-  hasDetails = true;
+  if (report.architecture?.sections?.length > 0) {
+    $('architectureContent').innerHTML = renderArchitecture(report.architecture);
+    $('architectureContent').setAttribute('data-editable', 'true');
+    $('architectureContent').setAttribute('data-field', 'architecture');
 }
-
-if (hasDetails) {
-  $('detailsSection').classList.remove('hidden');
-}
+  
+  toggleSection(
+    '#architectureSection',
+    report.architecture?.sections?.length > 0
+);
+toggleSection(
+    '#ownersSection',
+    report.owners?.length > 0
+);
+toggleSection(
+    '#transcriptSection',
+    !!meeting.transcript?.trim()
+);
+const hasDetails =
+    report.architecture?.sections?.length > 0 ||
+    report.owners?.length > 0 ||
+    !!meeting.transcript?.trim();
+toggleSection('#detailsSection', hasDetails);
 
   if (meeting.branding_visible === false) $('brandingFooter').classList.add('hidden');
 
@@ -768,10 +770,6 @@ function setEditable(selector, editable) {
 
       el.addEventListener('input', () => {
       cleanupEmptyDynamicItems();
-});
-
-      el.addEventListener('input', () => {
-    cleanupEmptyDynamicItems();
 });
       
         if (editable) {
@@ -964,5 +962,12 @@ async function saveReport() {
  function applyEditMode() {
     setEditable('[data-editable="true"]', isEditMode);
 }
+
+function toggleSection(selector, visible) {
+    const section = document.querySelector(selector);
+    if (!section) return;
+    section.classList.toggle('hidden', !visible);
+}
+
 
 loadReport();
