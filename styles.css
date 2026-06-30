@@ -133,6 +133,18 @@ body {
     border-color: #15803D;
 }
 
+.btn-warning {
+    color: #92400E;
+    background: #FFFBEB;
+    border-color: #F59E0B;
+}
+
+.btn-warning:hover:not(:disabled) {
+    color: #78350F;
+    background: #FEF3C7;
+    border-color: #D97706;
+}
+
 .btn-danger { color: var(--danger); border-color: #FECACA; background: #FFF7F7; }
 .btn-disabled { color: #94A3B8; background: #F8FAFC; cursor: not-allowed; }
 
