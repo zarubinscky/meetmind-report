@@ -731,9 +731,9 @@ body {
   .body-text { font-size: 16px; line-height: 26px; }
   
   .task-table {
-    display: none;
+    display: table;
     width: 100%;
-    overflow-x: auto;
+    table-layout: fixed;
 }
   
   .task-table td {
