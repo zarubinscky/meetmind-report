@@ -1,43 +1,87 @@
-/*
- * MeetMind AI
- * Executive PDF Generator
- */
+.pdf-root {
+    position: fixed;
+    left: -99999px;
+    top: 0;
+    width: 1280px;
+    height: 720px;
+    background: #F8FAFC;
+    z-index: -1;
+}
 
-'use strict';
+.pdf-slide {
+    width: 1280px;
+    height: 720px;
+    box-sizing: border-box;
+    padding: 36px 44px 28px;
+    background: #F8FAFC;
+    color: #0F172A;
+    font-family: Inter, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
 
-async function generateExecutivePdf() {
+.pdf-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
 
-    const report = document.querySelector('.report');
+.pdf-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 22px;
+}
 
-    if (!report) {
-        alert('Report not found');
-        return;
-    }
+.pdf-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+}
 
-    const filename =
-        (window.currentMeeting?.title || document.title || 'Meeting Report')
-        + ' - MeetMind AI.pdf';
+.pdf-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
 
-    const opt = {
-        margin: 0,
-        filename: filename,
-        image: {
-            type: 'jpeg',
-            quality: 1
-        },
-        html2canvas: {
-            scale: 2,
-            useCORS: true
-        },
-        jsPDF: {
-            unit: 'px',
-            format: [1280, 720],
-            orientation: 'landscape'
-        }
-    };
+.pdf-body {
+    flex: 1;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 28px;
+    padding: 34px;
+}
 
-    await html2pdf()
-        .set(opt)
-        .from(report)
-        .save();
+.pdf-body h1 {
+    margin: 0 0 18px;
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.pdf-body p {
+    margin: 0;
+    font-size: 22px;
+    color: #64748B;
+}
+
+.pdf-footer {
+    height: 42px;
+    padding-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #64748B;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pdf-footer a {
+    color: #2563EB;
+    text-decoration: none;
 }
