@@ -478,11 +478,7 @@ function renderTasksAndOwners(report) {
   if (hasTasks) {
     const tasks = report.tasks.map(normalizeTask).filter((task) => !isEmptyValue(task.task));
    
-    $('tasksContent').innerHTML = `
-<div style="background:red;color:white;padding:20px;font-size:20px">
-TEST TASKS
-</div>
-`;
+  alert($('tasksContent'));
    
 
     $('tasksSection').classList.remove('hidden');
