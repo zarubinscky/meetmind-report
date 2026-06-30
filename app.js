@@ -682,6 +682,15 @@ function toggleEditMode() {
         : t('editReport');
     btn.classList.toggle('btn-success', isEditMode);
     btn.classList.toggle('btn-secondary', !isEditMode);
+
+    const deleteBtn = $('deleteBtn');
+    deleteBtn.textContent = isEditMode
+    ? 'Cancel'
+    : t('deleteReport');
+
+deleteBtn.classList.toggle('btn-warning', isEditMode);
+deleteBtn.classList.toggle('btn-danger', !isEditMode);
+  
     console.log(btn.textContent);
     console.log('Edit mode:', isEditMode);
 }
