@@ -727,6 +727,16 @@ function cleanupEmptyDynamicItems() {
     dynamicGrid.innerHTML = '';
     dynamicGrid.classList.add('hidden');
 }
+
+  const summarySection = $('summarySection');
+  const summaryContent = $('summaryContent');
+  if (
+    summarySection &&
+    summaryContent &&
+    summaryContent.innerText.trim() === ''
+) {
+    summarySection.classList.add('hidden');
+}
 }
 
  function applyEditMode() {
