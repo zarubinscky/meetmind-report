@@ -782,15 +782,6 @@ function cleanupEmptyDynamicItems() {
     dynamicGrid.classList.add('hidden');
 }
 
- const summarySection = $('summarySection');
- const summaryContent = $('summaryContent');
- if (summarySection && summaryContent) {
-    if (summaryContent.innerText.trim() === '') {
-        summarySection.classList.add('hidden');
-    } else {
-        summarySection.classList.remove('hidden');
-    }
-}
   document.querySelectorAll('.metric-card').forEach(card => {
     const label = card.querySelector('.metric-label');
     const value = card.querySelector('.metric-value');
