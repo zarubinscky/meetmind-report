@@ -115,6 +115,10 @@ body {
   transition: transform .15s ease, border-color .15s ease, background .15s ease, color .15s ease;
 }
 
+.actions .btn {
+    min-width: 170px;
+}
+
 .btn:hover:not(:disabled) {
   transform: translateY(-1px);
   border-color: #CBD5E1;
