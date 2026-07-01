@@ -113,6 +113,33 @@
     padding-left: 24px;
 }
 
+.pdf-metrics{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-top:18px;
+}
+
+.pdf-metric{
+    border:1px solid #E2E8F0;
+    border-radius:16px;
+    padding:16px;
+    text-align:center;
+}
+
+.pdf-metric-label{
+    font-size:13px;
+    color:#64748B;
+    margin-bottom:8px;
+}
+
+.pdf-metric-value{
+    font-size:22px;
+    font-weight:700;
+    color:#0F172A;
+}
+
+
 
 
 /* ===========================
@@ -148,3 +175,4 @@
     --pdf-card-padding: 20px;
     --pdf-gap: 16px;
 }
+
