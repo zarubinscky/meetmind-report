@@ -149,7 +149,7 @@ function createPdfDOM() {
             </div>
             
           <div class="pdf-body">
-            <h1>${getPdfTitle()}</h1>
+            ${blocks.map(renderPdfBlock).join('')}
           </div>
 
             <div class="pdf-footer">
