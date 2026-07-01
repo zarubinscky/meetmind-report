@@ -168,9 +168,18 @@ function createPdfDOM() {
 }
 
 async function generateExecutivePdf() {
-    const pdfRoot = createPdfDOM();
-    document.body.appendChild(pdfRoot);
-    await new Promise(resolve => requestAnimationFrame(resolve));
+   const pdfRoot = createPdfDOM();
+   document.body.appendChild(pdfRoot);
+   pdfRoot.style.width = PDF_CONFIG.pageWidth + 'px';
+   pdfRoot.style.height = PDF_CONFIG.pageHeight + 'px';
+   console.log(
+    pdfRoot.offsetWidth,
+    pdfRoot.offsetHeight,
+    getComputedStyle(pdfRoot).display,
+    getComputedStyle(pdfRoot).visibility
+);
+
+await new Promise(resolve => requestAnimationFrame(resolve));
     const filename =
         sanitizePdfFilename(getPdfTitle()) +
         PDF_CONFIG.fileSuffix;
