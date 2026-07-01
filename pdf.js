@@ -136,6 +136,9 @@ function createPdfDOM() {
     const root = document.createElement('div');
     const report = currentMeeting?.report || {};
     const blocks = buildPdfBlocks(report);
+    
+    console.log(blocks);
+    alert(JSON.stringify(blocks, null, 2));
     root.className = 'pdf-root';
     root.innerHTML = `
         <div class="pdf-slide">
