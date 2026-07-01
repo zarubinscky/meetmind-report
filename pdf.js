@@ -64,31 +64,6 @@ function buildPdfBlocks(report) {
         });
     }
 
-    function renderPdfBlock(block) {
-
-    if (block.type === 'summary') {
-        return `
-            <div class="pdf-card pdf-card-summary">
-                <h2>${block.title}</h2>
-                <p>${block.items[0].title}</p>
-            </div>
-        `;
-    }
-    return `
-        <div class="pdf-card">
-            <h2>${block.title}</h2>
-            <ul>
-                ${block.items.map(item => `
-                    <li>
-                        <strong>${item.title}</strong>
-                        ${item.details ? `<div>${item.details}</div>` : ''}
-                    </li>
-                `).join('')}
-            </ul>
-        </div>
-    `;
-}
-
     if ((report.insights || []).length) {
         blocks.push({
             key: 'insights',
@@ -130,6 +105,31 @@ function buildPdfBlocks(report) {
     }
 
     return blocks.sort((a, b) => b.priority - a.priority);
+}
+
+function renderPdfBlock(block) {
+
+    if (block.type === 'summary') {
+        return `
+            <div class="pdf-card pdf-card-summary">
+                <h2>${block.title}</h2>
+                <p>${block.items[0].title}</p>
+            </div>
+        `;
+    }
+    return `
+        <div class="pdf-card">
+            <h2>${block.title}</h2>
+            <ul>
+                ${block.items.map(item => `
+                    <li>
+                        <strong>${item.title}</strong>
+                        ${item.details ? `<div>${item.details}</div>` : ''}
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `;
 }
 
 function createPdfDOM() {
