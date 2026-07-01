@@ -184,7 +184,7 @@ async function generateExecutivePdf() {
     getComputedStyle(pdfRoot).visibility
 );
 
-await new Promise(resolve => requestAnimationFrame(resolve));
+await new Promise(resolve => setTimeout(resolve, 500));
     const filename =
         sanitizePdfFilename(getPdfTitle()) +
         PDF_CONFIG.fileSuffix;
