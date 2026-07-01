@@ -136,6 +136,7 @@ function createPdfDOM() {
     const root = document.createElement('div');
     const report = currentMeeting?.report || {};
     const blocks = buildPdfBlocks(report);
+    console.log(blocks);
     
     root.className = 'pdf-root';
     root.innerHTML = `
@@ -162,6 +163,7 @@ function createPdfDOM() {
             </div>
         </div>
     `;
+    console.log(root.innerHTML);
     return root;
 }
 
