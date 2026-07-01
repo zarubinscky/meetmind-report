@@ -121,8 +121,18 @@ function calculateLayoutScore(blocks) {
     });
     return Math.round(score);
 }
-
-
+function choosePdfTheme(score) {
+    if (score < 50) {
+        return 'xl';
+    }
+    if (score < 80) {
+        return 'l';
+    }
+    if (score < 110) {
+        return 'm';
+    }
+    return 's';
+}
 
 function renderPdfBlock(block) {
 
@@ -154,11 +164,13 @@ function createPdfDOM() {
     const report = currentMeeting?.report || {};
     const blocks = buildPdfBlocks(report);
     const layoutScore = calculateLayoutScore(blocks);
+    const theme = choosePdfTheme(layoutScore);
+    console.log("PDF Theme:", theme);
     console.log("Layout Score:", layoutScore);
     
     root.className = 'pdf-root';
     root.innerHTML = `
-        <div class="pdf-slide">
+        <div class="pdf-slide pdf-theme-${theme}">
             <div class="pdf-header">
                 <div class="pdf-brand">
                     <img src="logo.png" alt="MeetMind AI" class="pdf-logo">
