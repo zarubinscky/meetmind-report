@@ -169,36 +169,53 @@ function createPdfDOM() {
 }
 
 async function generateExecutivePdf() {
-    
     const pdfRoot = createPdfDOM();
     document.body.appendChild(pdfRoot);
-    
+
     await new Promise(resolve => requestAnimationFrame(resolve));
-    
+
     const title = sanitizePdfFilename(getPdfTitle());
     const filename = `${title}${PDF_CONFIG.fileSuffix}`;
-    const options = {
-        margin: 0,
-        filename,
-        image: {
-            type: 'jpeg',
-            quality: 1
-        },
-        html2canvas: {
-            scale: 2,
-            useCORS: true
-        },
-        jsPDF: {
-            unit: 'px',
-            format: [PDF_CONFIG.pageWidth, PDF_CONFIG.pageHeight],
-            orientation: 'landscape'
-        }
-    };
+
     try {
-        await html2pdf()
-            .set(options)
-            .from(pdfRoot)
-            .save();
+        const canvas = await html2canvas(pdfRoot, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#F8FAFC',
+            width: PDF_CONFIG.pageWidth,
+            height: PDF_CONFIG.pageHeight,
+            windowWidth: PDF_CONFIG.pageWidth,
+            windowHeight: PDF_CONFIG.pageHeight
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+
+        const { jsPDF } = window.jspdf;
+
+        const pdf = new jsPDF({
+            orientation: 'landscape',
+            unit: 'px',
+            format: [PDF_CONFIG.pageWidth, PDF_CONFIG.pageHeight]
+        });
+
+        pdf.setProperties({
+            title: getPdfTitle(),
+            subject: 'Meeting Report',
+            author: 'MeetMind AI',
+            creator: 'MeetMind AI',
+            keywords: 'MeetMind AI, Meeting, AI, Summary, Tasks, Decisions'
+        });
+
+        pdf.addImage(
+            imgData,
+            'PNG',
+            0,
+            0,
+            PDF_CONFIG.pageWidth,
+            PDF_CONFIG.pageHeight
+        );
+
+        pdf.save(filename);
     } finally {
         pdfRoot.remove();
     }
