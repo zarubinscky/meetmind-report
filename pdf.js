@@ -53,6 +53,16 @@ function normalizePdfItem(item) {
 
 function buildPdfBlocks(report) {
     const blocks = [];
+    
+    if ((report.key_metrics || []).length) {
+    blocks.push({
+        key: 'metrics',
+        title: 'Key Metrics',
+        type: 'metrics',
+        priority: 98,
+        items: report.key_metrics
+    });
+}
 
     if (isPdfValueVisible(report.summary)) {
         blocks.push({
@@ -144,6 +154,27 @@ function renderPdfBlock(block) {
             </div>
         `;
     }
+
+    if (block.type === 'metrics') {
+    return `
+        <div class="pdf-card">
+            <h2>${block.title}</h2>
+            <div class="pdf-metrics">
+                ${block.items.map(metric => `
+                    <div class="pdf-metric">
+                        <div class="pdf-metric-label">
+                            ${metric.title || ''}
+                        </div>
+                        <div class="pdf-metric-value">
+                            ${metric.value || ''}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+    
     return `
         <div class="pdf-card">
             <h2>${block.title}</h2>
