@@ -176,3 +176,25 @@
     --pdf-gap: 16px;
 }
 
+.pdf-list-compact{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.pdf-list-item{
+    line-height:1.2;
+}
+
+.pdf-list-item strong{
+    display:block;
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:2px;
+}
+
+.pdf-list-item div{
+    font-size:15px;
+    color:#64748B;
+}
+
