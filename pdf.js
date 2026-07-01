@@ -137,8 +137,6 @@ function createPdfDOM() {
     const report = currentMeeting?.report || {};
     const blocks = buildPdfBlocks(report);
     
-    console.log(blocks);
-    alert(JSON.stringify(blocks, null, 2));
     root.className = 'pdf-root';
     root.innerHTML = `
         <div class="pdf-slide">
@@ -174,15 +172,6 @@ async function generateExecutivePdf() {
     
     const pdfRoot = createPdfDOM();
     document.body.appendChild(pdfRoot);
-    console.log(pdfRoot);
-    console.log(pdfRoot.outerHTML);
-    console.log(pdfRoot.offsetWidth, pdfRoot.offsetHeight);
-    pdfRoot.style.position = 'fixed';
-
-    pdfRoot.style.left = '0';
-    pdfRoot.style.top = '0';
-    pdfRoot.style.zIndex = '999999';
-    pdfRoot.style.background = 'white';
     
     await new Promise(resolve => requestAnimationFrame(resolve));
     
