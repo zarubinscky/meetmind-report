@@ -263,9 +263,15 @@ function createPdfDOM() {
                 <div class="pdf-label">Executive PDF</div>
             </div>
             
-         <div class="pdf-body">
-    <div class="pdf-main-grid">
-        ${blocks.map(renderPdfBlock).join('')}
+     <div class="pdf-body">
+    ${layout.fullWidth.map(renderPdfBlock).join('')}
+    <div class="pdf-columns">
+        <div class="pdf-column">
+            ${layout.left.map(renderPdfBlock).join('')}
+        </div>
+        <div class="pdf-column">
+            ${layout.right.map(renderPdfBlock).join('')}
+        </div>
     </div>
 </div>
 
