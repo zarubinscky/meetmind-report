@@ -210,10 +210,9 @@ await new Promise(resolve => requestAnimationFrame(resolve));
             .set(options)
             .from(pdfRoot)
             .save();
-    finally {
+}  finally {
     // pdfRoot.remove();
 
 }
 }
-
     
