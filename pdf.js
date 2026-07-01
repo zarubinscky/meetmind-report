@@ -45,12 +45,21 @@ function normalizePdfItem(item) {
         };
     }
 
+    const title = item.title || item.task || item.name || '';
+    const details = [
+        item.details,
+        item.description,
+        item.owner ? `Owner: ${item.owner}` : '',
+        item.due_date ? `Due: ${item.due_date}` : '',
+        item.dueDate ? `Due: ${item.dueDate}` : ''
+    ]
+        .filter(Boolean)
+        .join(' · ');
     return {
-        title: item.title || item.task || item.name || '',
-        details: item.details || item.description || item.owner || item.due_date || item.dueDate || ''
+        title,
+        details
     };
 }
-
 function buildPdfBlocks(report) {
     const blocks = [];
     
