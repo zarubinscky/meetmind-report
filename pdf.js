@@ -209,11 +209,10 @@ await new Promise(resolve => setTimeout(resolve, 500));
     try {
         await html2pdf()
             .set(options)
-            .from(pdfRoot)
+            .from(pdfRoot.querySelector('.pdf-slide'))
             .save();
 }  finally {
-    // pdfRoot.remove();
-
+    pdfRoot.remove();
 }
 }
     
