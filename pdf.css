@@ -86,3 +86,37 @@
     color: #2563EB;
     text-decoration: none;
 }
+
+/* ===========================
+
+   PDF THEMES
+
+=========================== */
+
+.pdf-theme-xl {
+    --pdf-title: 22px;
+    --pdf-text: 16px;
+    --pdf-card-padding: 32px;
+    --pdf-gap: 28px;
+}
+
+.pdf-theme-l {
+    --pdf-title: 20px;
+    --pdf-text: 15px;
+    --pdf-card-padding: 28px;
+    --pdf-gap: 24px;
+}
+
+.pdf-theme-m {
+    --pdf-title: 18px;
+    --pdf-text: 14px;
+    --pdf-card-padding: 24px;
+    --pdf-gap: 20px;
+}
+
+.pdf-theme-s {
+    --pdf-title: 16px;
+    --pdf-text: 13px;
+    --pdf-card-padding: 20px;
+    --pdf-gap: 16px;
+}
