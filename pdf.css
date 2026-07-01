@@ -214,3 +214,28 @@
 .pdf-column .pdf-card{
     margin:0;
 }
+
+.pdf-columns{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
+
+.pdf-column{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.pdf-theme-l .pdf-column{
+    gap:14px;
+}
+
+.pdf-theme-m .pdf-column{
+    gap:12px;
+}
+
+.pdf-theme-s .pdf-column{
+    gap:10px;
+}
