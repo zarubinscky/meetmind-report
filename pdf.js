@@ -116,10 +116,13 @@ function buildPdfBlocks(report) {
 
 function layoutBlocks(blocks, theme) {
     const layout = {
-        fullWidth: [],
-        left: [],
-        right: []
+      fullWidth: [],
+      left: [],
+      right: [],
+      leftHeight: 0,
+      rightHeight: 0
     };
+    
     for (const block of blocks) {
         if (
             block.type === 'summary' ||
@@ -128,13 +131,36 @@ function layoutBlocks(blocks, theme) {
             layout.fullWidth.push(block);
             continue;
         }
-        if (layout.left.length <= layout.right.length) {
-            layout.left.push(block);
-        } else {
-            layout.right.push(block);
-        }
+       const height = estimateBlockHeight(block);
+
+if (layout.leftHeight <= layout.rightHeight) {
+    layout.left.push(block);
+    layout.leftHeight += height;
+} else {
+    layout.right.push(block);
+    layout.rightHeight += height;
+}
     }
     return layout;
+}
+
+function estimateBlockHeight(block) {
+    switch (block.type) {
+        case 'summary':
+            return 8 + (block.items[0]?.title?.length || 0) * 0.03;
+        case 'metrics':
+            return 10;
+        case 'insights':
+            return block.items.length * 6;
+        case 'tasks':
+            return block.items.length * 5;
+        case 'decisions':
+            return block.items.length * 4;
+        case 'risks':
+            return block.items.length * 4;
+        default:
+            return block.items.length * 5;
+    }
 }
 
 
