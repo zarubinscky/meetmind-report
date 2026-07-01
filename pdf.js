@@ -93,7 +93,6 @@ function buildPdfBlocks(report) {
             items: report.decisions.map(normalizePdfItem)
         });
     }
-
     if ((report.risks || []).length) {
         blocks.push({
             key: 'risks',
@@ -103,7 +102,6 @@ function buildPdfBlocks(report) {
             items: report.risks.map(normalizePdfItem)
         });
     }
-
     if ((report.tasks || []).length) {
         blocks.push({
             key: 'tasks',
@@ -113,9 +111,32 @@ function buildPdfBlocks(report) {
             items: report.tasks.map(normalizePdfItem)
         });
     }
-
     return blocks.sort((a, b) => b.priority - a.priority);
 }
+
+function layoutBlocks(blocks, theme) {
+    const layout = {
+        fullWidth: [],
+        left: [],
+        right: []
+    };
+    for (const block of blocks) {
+        if (
+            block.type === 'summary' ||
+            block.type === 'metrics'
+        ) {
+            layout.fullWidth.push(block);
+            continue;
+        }
+        if (layout.left.length <= layout.right.length) {
+            layout.left.push(block);
+        } else {
+            layout.right.push(block);
+        }
+    }
+    return layout;
+}
+
 
 function calculateLayoutScore(blocks) {
     let score = 0;
@@ -229,6 +250,7 @@ function createPdfDOM() {
     console.log("PDF Theme:", theme);
     console.log("Layout Score:", layoutScore);
     window.currentPdfTheme = theme;
+    const layout = layoutBlocks(blocks, theme);
     
     root.className = 'pdf-root';
     root.innerHTML = `
