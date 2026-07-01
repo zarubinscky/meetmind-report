@@ -170,10 +170,11 @@ function createPdfDOM() {
 async function generateExecutivePdf() {
    const pdfRoot = createPdfDOM();
    document.body.appendChild(pdfRoot);
-    pdfRoot.style.position = "fixed";
+    pdfRoot.style.background = "#ffffff";
+    document.body.style.background = "#ffffff";
+    pdfRoot.style.position = "absolute";
     pdfRoot.style.left = "0";
     pdfRoot.style.top = "0";
-    pdfRoot.style.zIndex = "999999";
     
    pdfRoot.style.width = PDF_CONFIG.pageWidth + 'px';
    pdfRoot.style.height = PDF_CONFIG.pageHeight + 'px';
