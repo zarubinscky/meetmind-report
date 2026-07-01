@@ -198,3 +198,14 @@
     color:#64748B;
 }
 
+.pdf-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--pdf-gap);
+    align-items: start;
+}
+
+.pdf-card-summary,
+.pdf-card:has(.pdf-metrics) {
+    grid-column: 1 / -1;
+}
