@@ -198,14 +198,19 @@
     color:#64748B;
 }
 
-.pdf-main-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--pdf-gap);
-    align-items: start;
+.pdf-columns{
+    display:flex;
+    gap:24px;
+    align-items:flex-start;
 }
 
-.pdf-card-summary,
-.pdf-card:has(.pdf-metrics) {
-    grid-column: 1 / -1;
+.pdf-column{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.pdf-column .pdf-card{
+    margin:0;
 }
