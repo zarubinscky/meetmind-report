@@ -107,6 +107,23 @@ function buildPdfBlocks(report) {
     return blocks.sort((a, b) => b.priority - a.priority);
 }
 
+function calculateLayoutScore(blocks) {
+    let score = 0;
+    blocks.forEach(block => {
+        if (block.type === 'summary') {
+            score += (block.items[0]?.title?.length || 0) * 0.03;
+            return;
+        }
+        score += block.items.length * 6;
+        block.items.forEach(item => {
+            score += (item.title?.length || 0) * 0.02;
+        });
+    });
+    return Math.round(score);
+}
+
+
+
 function renderPdfBlock(block) {
 
     if (block.type === 'summary') {
@@ -136,7 +153,8 @@ function createPdfDOM() {
     const root = document.createElement('div');
     const report = currentMeeting?.report || {};
     const blocks = buildPdfBlocks(report);
-    console.log(blocks);
+    const layoutScore = calculateLayoutScore(blocks);
+    console.log("Layout Score:", layoutScore);
     
     root.className = 'pdf-root';
     root.innerHTML = `
@@ -163,7 +181,7 @@ function createPdfDOM() {
             </div>
         </div>
     `;
-    console.log(root.innerHTML);
+
     return root;
 }
 
@@ -178,13 +196,7 @@ async function generateExecutivePdf() {
     
    pdfRoot.style.width = PDF_CONFIG.pageWidth + 'px';
    pdfRoot.style.height = PDF_CONFIG.pageHeight + 'px';
-   console.log(
-    pdfRoot.offsetWidth,
-    pdfRoot.offsetHeight,
-    getComputedStyle(pdfRoot).display,
-    getComputedStyle(pdfRoot).visibility
-);
-
+   
 await new Promise(resolve => setTimeout(resolve, 500));
     const filename =
         sanitizePdfFilename(getPdfTitle()) +
