@@ -62,8 +62,9 @@ function createPdfDOM() {
 
 async function generateExecutivePdf() {
     
-    const pdfRoot = createPdfDOM();
-    document.body.appendChild(pdfRoot);
+    const pdfRoot = document.querySelector('.report').cloneNode(true);
+    pdfRoot.style.width = '1280px';
+    pdfRoot.style.maxWidth = '1280px';
     await new Promise(resolve => requestAnimationFrame(resolve));
     
     const title = sanitizePdfFilename(getPdfTitle());
