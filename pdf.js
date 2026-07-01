@@ -174,20 +174,50 @@ function renderPdfBlock(block) {
         </div>
     `;
 }
-    
+
+    const compact =
+    window.currentPdfTheme === 'l' ||
+    window.currentPdfTheme === 'm';
+
     return `
-        <div class="pdf-card">
-            <h2>${block.title}</h2>
-            <ul>
-                ${block.items.map(item => `
-                    <li>
-                        <strong>${item.title}</strong>
-                        ${item.details ? `<div>${item.details}</div>` : ''}
-                    </li>
-                `).join('')}
-            </ul>
+<div class="pdf-card">
+    <h2>${block.title}</h2>
+    ${
+        compact
+        ?
+        `
+        <div class="pdf-list-compact">
+            ${block.items.map(item=>`
+                <div class="pdf-list-item">
+                    <strong>${item.title}</strong>
+                    ${
+                        item.details
+                        ? `<div>${item.details}</div>`
+                        : ''
+                    }
+                </div>
+            `).join('')}
         </div>
-    `;
+        `
+        :
+        `
+        <ul>
+            ${block.items.map(item=>`
+                <li>
+                    <strong>${item.title}</strong>
+                    ${
+                        item.details
+                        ? `<div>${item.details}</div>`
+                        : ''
+                    }
+                </li>
+            `).join('')}
+        </ul>
+        `
+    }
+</div>
+`;
+    
 }
 
 function createPdfDOM() {
@@ -198,6 +228,7 @@ function createPdfDOM() {
     const theme = choosePdfTheme(layoutScore);
     console.log("PDF Theme:", theme);
     console.log("Layout Score:", layoutScore);
+    window.currentPdfTheme = theme;
     
     root.className = 'pdf-root';
     root.innerHTML = `
