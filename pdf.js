@@ -63,8 +63,9 @@ function createPdfDOM() {
 async function generateExecutivePdf() {
     
     const pdfRoot = createPdfDOM();
-    
     document.body.appendChild(pdfRoot);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    
     const title = sanitizePdfFilename(getPdfTitle());
     const filename = `${title}${PDF_CONFIG.fileSuffix}`;
     const options = {
