@@ -62,14 +62,20 @@
         return { beforeFindings, findings, afterFindings };
     }
 
-    function solveFindingsGeometry(findings, area, page) {
-        if (!findings.length) return null;
+    function estimateFindingHeight(block, width) {
+        const count = block.data?.items?.length || 1;
+        const chars = block.weight?.chars || 0;
 
-        const gap = page.gap;
-        const minWidth = 150;
-        const maxWidth = 360;
-        const availableWidth = area.width;
+        const widthFactor = clamp(220 / Math.max(width, 120), 0.75, 1.45);
 
+        return clamp(
+            58 + count * 20 + chars * 0.035 * widthFactor,
+            88,
+            260
+        );
+    }
+
+    function enrichFindings(findings) {
         const enriched = findings.map((block) => ({
             ...block,
             weight: block.weight || calculateWeight(block)
@@ -78,117 +84,218 @@
         const totalScore =
             enriched.reduce((sum, block) => sum + Math.max(block.weight.score, 1), 0) || 1;
 
-        const blocks = enriched.map((block) => {
-            const ratio = Math.max(block.weight.score, 1) / totalScore;
-            const rawWidth = availableWidth * ratio;
-            const width = clamp(rawWidth, minWidth, maxWidth);
+        return enriched.map((block) => ({
+            ...block,
+            layoutWeight: Math.max(block.weight.score, 1) / totalScore
+        }));
+    }
 
-            return {
-                ...block,
-                layout: {
-                    width,
-                    height: estimateFindingHeight(block),
-                    ratio
+    function getCandidateLayouts(blocks, area, page) {
+        const count = blocks.length;
+
+        if (count === 0) return [];
+
+        if (count === 1) {
+            return [
+                {
+                    name: "single-full",
+                    rows: [[{ id: blocks[0].id, span: 1 }]]
                 }
-            };
-        });
-
-        return composeFindingsRows(blocks, area, page);
-    }
-
-    function estimateFindingHeight(block) {
-        const count = block.data?.items?.length || 1;
-        const chars = block.weight?.chars || 0;
-
-        return clamp(70 + count * 22 + chars * 0.04, 105, 260);
-    }
-
-    function composeFindingsRows(blocks, area, page) {
-        const gap = page.gap;
-        const rows = [];
-        let currentRow = [];
-        let usedWidth = 0;
-
-        blocks.forEach((block) => {
-            const nextWidth = currentRow.length
-                ? usedWidth + gap + block.layout.width
-                : block.layout.width;
-
-            if (currentRow.length && nextWidth > area.width) {
-                rows.push(normalizeRow(currentRow, area.width, gap));
-                currentRow = [block];
-                usedWidth = block.layout.width;
-            } else {
-                currentRow.push(block);
-                usedWidth = nextWidth;
-            }
-        });
-
-        if (currentRow.length) {
-            rows.push(normalizeRow(currentRow, area.width, gap));
+            ];
         }
 
-        let y = 0;
+        if (count === 2) {
+            return [
+                {
+                    name: "two-equal",
+                    rows: [[
+                        { id: blocks[0].id, span: 1 },
+                        { id: blocks[1].id, span: 1 }
+                    ]]
+                },
+                {
+                    name: "two-stacked",
+                    rows: [
+                        [{ id: blocks[0].id, span: 1 }],
+                        [{ id: blocks[1].id, span: 1 }]
+                    ]
+                }
+            ];
+        }
 
-        const positionedRows = rows.map((row) => {
-            const rowHeight = Math.max(...row.map((block) => block.layout.height));
+        return [
+            {
+                name: "three-equal-row",
+                rows: [[
+                    { id: blocks[0].id, span: 1 },
+                    { id: blocks[1].id, span: 1 },
+                    { id: blocks[2].id, span: 1 }
+                ]]
+            },
+            {
+                name: "dominant-first",
+                rows: [
+                    [{ id: blocks[0].id, span: 1 }],
+                    [
+                        { id: blocks[1].id, span: 1 },
+                        { id: blocks[2].id, span: 1 }
+                    ]
+                ]
+            },
+            {
+                name: "first-two-then-third",
+                rows: [
+                    [
+                        { id: blocks[0].id, span: 1 },
+                        { id: blocks[1].id, span: 1 }
+                    ],
+                    [{ id: blocks[2].id, span: 1 }]
+                ]
+            },
+            {
+                name: "stacked",
+                rows: [
+                    [{ id: blocks[0].id, span: 1 }],
+                    [{ id: blocks[1].id, span: 1 }],
+                    [{ id: blocks[2].id, span: 1 }]
+                ]
+            }
+        ];
+    }
+
+    function materializeCandidate(candidate, blocks, area, page) {
+        const gap = page.gap;
+        const blockById = Object.fromEntries(blocks.map((block) => [block.id, block]));
+
+        let y = 0;
+        const rows = [];
+        let totalHeight = 0;
+
+        candidate.rows.forEach((rowSpec) => {
+            const rowCount = rowSpec.length;
+            const availableRowWidth = area.width - gap * (rowCount - 1);
+
+            const rowBlocks = rowSpec.map((spec) => blockById[spec.id]).filter(Boolean);
+
+            const totalWeight =
+                rowBlocks.reduce((sum, block) => sum + block.layoutWeight, 0) || 1;
+
             let x = 0;
 
-            const positionedBlocks = row.map((block) => {
+            const placedBlocks = rowBlocks.map((block, index) => {
+                let width;
+
+                if (rowCount === 1) {
+                    width = area.width;
+                } else {
+                    const raw = availableRowWidth * (block.layoutWeight / totalWeight);
+                    width = clamp(raw, 120, availableRowWidth * 0.72);
+                }
+
+                const height = estimateFindingHeight(block, width);
+
                 const placed = {
                     ...block,
                     box: {
                         x,
                         y,
-                        width: block.layout.width,
-                        height: rowHeight
+                        width,
+                        height
                     }
                 };
 
-                x += block.layout.width + gap;
+                x += width + gap;
+
+                if (index === rowBlocks.length - 1) {
+                    const rowUsed = placed.box.x + placed.box.width;
+                    const remaining = area.width - rowUsed;
+                    if (remaining > 0 && remaining < 80) {
+                        placed.box.width += remaining;
+                    }
+                }
+
                 return placed;
             });
 
-            y += rowHeight + gap;
+            const rowHeight = Math.max(...placedBlocks.map((block) => block.box.height));
 
-            return {
+            placedBlocks.forEach((block) => {
+                block.box.height = rowHeight;
+            });
+
+            rows.push({
                 type: "row",
                 height: rowHeight,
-                blocks: positionedBlocks
-            };
+                blocks: placedBlocks
+            });
+
+            y += rowHeight + gap;
+            totalHeight += rowHeight;
         });
+
+        totalHeight += gap * Math.max(0, rows.length - 1);
 
         return {
             id: "strategic-findings",
             type: "adaptive-group",
             title: "Strategic Findings",
-            rows: positionedRows,
-            height: Math.max(0, y - gap)
+            strategy: candidate.name,
+            rows,
+            height: totalHeight
         };
     }
 
-    function normalizeRow(row, availableWidth, gap) {
-        if (row.length === 1) {
-            return row.map((block) => ({
-                ...block,
-                layout: {
-                    ...block.layout,
-                    width: availableWidth
-                }
-            }));
-        }
+    function scoreCandidate(layout, area) {
+        const blocks = layout.rows.flatMap((row) => row.blocks);
+        const totalBlockArea = blocks.reduce(
+            (sum, block) => sum + block.box.width * block.box.height,
+            0
+        );
 
-        const totalWidth = row.reduce((sum, block) => sum + block.layout.width, 0);
-        const totalGap = gap * (row.length - 1);
-        const scale = (availableWidth - totalGap) / totalWidth;
+        const boundingArea = area.width * layout.height;
+        const utilization = boundingArea ? totalBlockArea / boundingArea : 0;
 
-        return row.map((block) => ({
-            ...block,
-            layout: {
-                ...block.layout,
-                width: block.layout.width * scale
-            }
-        }));
+        const maxHeight = Math.max(...blocks.map((block) => block.box.height));
+        const minHeight = Math.min(...blocks.map((block) => block.box.height));
+        const imbalance = maxHeight ? (maxHeight - minHeight) / maxHeight : 0;
+
+        const rowPenalty = layout.rows.length * 0.06;
+
+        const readingOrderPenalty = blocks.some((block, index) => {
+            if (index === 0) return false;
+            return blocks[index - 1].readingOrder > block.readingOrder;
+        }) ? 1 : 0;
+
+        return utilization - imbalance * 0.25 - rowPenalty - readingOrderPenalty;
+    }
+
+    function solveFindingsGeometry(findings, area, page) {
+        if (!findings.length) return null;
+
+        const enriched = enrichFindings(findings);
+        const candidates = getCandidateLayouts(enriched, area, page);
+
+        const scored = candidates
+            .map((candidate) => {
+                const layout = materializeCandidate(candidate, enriched, area, page);
+
+                return {
+                    candidate,
+                    layout,
+                    score: scoreCandidate(layout, area)
+                };
+            })
+            .sort((a, b) => b.score - a.score);
+
+        return {
+            ...scored[0].layout,
+            score: scored[0].score,
+            evaluatedStrategies: scored.map((item) => ({
+                name: item.candidate.name,
+                score: Number(item.score.toFixed(4)),
+                height: Number(item.layout.height.toFixed(1))
+            }))
+        };
     }
 
     function solve(blocks, page = DEFAULT_PAGE) {
