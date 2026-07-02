@@ -16,6 +16,43 @@
 
     };
 
+    function calculateWeight(block){
+
+    if(!block || !block.data){
+        return 0;
+    }
+
+    const data = block.data;
+
+    let items = 0;
+    let chars = 0;
+
+    Object.values(data).forEach(value => {
+        if(Array.isArray(value)){
+            items += value.length;
+            value.forEach(item => {
+                chars += JSON.stringify(item).length;
+
+            });
+
+        }
+
+        else if(typeof value === "string"){
+            chars += value.length;
+        }
+    });
+
+    return {
+
+        items,
+        chars,
+        score:
+            items * 10
+            +
+            chars * 0.02
+    };
+}
+
     function getContentArea(page = DEFAULT_PAGE){
 
         return {
