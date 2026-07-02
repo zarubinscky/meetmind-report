@@ -89,19 +89,19 @@
 
         generateCandidates,
 
-        search(layout) {
+       search(layout) {
 
-            const findings = layout.findings.rows
-                ? layout.findings.rows.flatMap(r => r.blocks)
-                : [];
+    const findingsGroup = layout.layout.findings;
 
-            const candidates = generateCandidates(findings);
+    const findings = findingsGroup.rows.flatMap(row => row.blocks);
 
-            layout.findings.candidates = candidates;
+    const candidates = generateCandidates(findings);
 
-            return layout;
+    findingsGroup.candidates = candidates;
 
-        }
+    return layout;
+
+}
 
     };
 
