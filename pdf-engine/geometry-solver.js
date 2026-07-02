@@ -298,7 +298,43 @@
         };
     }
 
+
+/*
+Geometry Solver v2
+Input:
+selected layout
+Output:
+absolute coordinates
+Solver never creates layouts.
+Solver never scores layouts.
+Solver never evaluates density.
+Its only responsibility is computing positions.
+*/
+
+    
     function solve(blocks, page = DEFAULT_PAGE) {
+
+        /*
+Geometry Solver v2
+Input:
+selected layout
+Output:
+absolute coordinates
+Solver never creates layouts.
+Solver never scores layouts.
+Solver never evaluates density.
+Its only responsibility is computing positions.
+*/
+
+      // if(layout.selectedCandidate){
+//
+//     console.log(
+//         "Geometry Solver: using selected candidate",
+//         layout.selectedCandidate.name
+//     );
+//
+// }
+        
         const area = getContentArea(page);
 
         const enrichedBlocks = blocks.map((block) => ({
