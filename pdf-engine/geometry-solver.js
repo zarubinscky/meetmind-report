@@ -78,21 +78,18 @@
     function solve(blocks, page = DEFAULT_PAGE){
 
         return {
-
             page,
-
             area: getContentArea(page),
+            blocks: blocks.map(block => ({
+                ...block,
+              weight: calculateWeight(block)
 
-            blocks
-
+           }))
         };
-
     }
 
     window.GeometrySolver = {
-
         version: "1.0.0",
-
         solve
 
     };
