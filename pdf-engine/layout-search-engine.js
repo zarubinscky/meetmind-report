@@ -74,26 +74,62 @@
     }
 
     function scoreCandidate(candidate) {
-        const height = estimateCandidateHeight(candidate);
 
-        const heightScore = height > 0 ? 1 / height : 0;
+    const height = estimateCandidateHeight(candidate);
+    const rowCount = candidate.rows.length;
 
-        const rowPenalty = candidate.rows.length * 0.02;
+    // 1. Height (меньше = лучше)
+    const heightScore = Math.max(0, 1 - (height / 600));
 
-        const score = heightScore - rowPenalty;
+    // 2. Density (меньше строк = выше плотность)
+    const densityScore = Math.max(0, 1 - ((rowCount - 1) * 0.2));
 
-        return {
-            ...candidate,
-            metrics: {
-                height,
-                rowCount: candidate.rows.length,
-                heightScore,
-                rowPenalty
-            },
-            score
-        };
+    // 3. Balance
+    let balanceScore = 1;
+
+    if (rowCount > 1) {
+
+        const heights = candidate.rows.map(row =>
+            Math.max(...row.map(block => block.box?.height || 120))
+        );
+
+        const maxHeight = Math.max(...heights);
+        const minHeight = Math.min(...heights);
+
+        balanceScore = minHeight / maxHeight;
     }
 
+    // 4. Reading Priority
+    const readingScore = 1;
+
+    // 5. White Space (временная оценка)
+    const whitespaceScore = rowCount === 1
+        ? 1
+        : rowCount === 2
+            ? 0.9
+            : 0.8;
+
+    // Общая оценка
+    const score =
+        heightScore * 0.30 +
+        densityScore * 0.20 +
+        balanceScore * 0.25 +
+        whitespaceScore * 0.15 +
+        readingScore * 0.10;
+    return {
+        ...candidate,
+        metrics: {
+            height,
+            rowCount,
+            heightScore,
+            densityScore,
+            balanceScore,
+            whitespaceScore,
+            readingScore
+        },
+        score
+    };
+}
     function chooseBestCandidate(candidates) {
         if (!candidates.length) return null;
 
