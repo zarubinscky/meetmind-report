@@ -1,1 +1,14 @@
-// MeetMind PDF Engine
+(function () {
+    "use strict";
+
+    window.OverflowEngine = {
+
+        paginate(layout) {
+
+            return layout;
+
+        }
+
+    };
+
+})();
