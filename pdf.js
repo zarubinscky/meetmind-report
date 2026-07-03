@@ -325,8 +325,13 @@ function createPdfDOM() {
 }
 
 async function generateExecutivePdf() {
-   const pdfRoot = createPdfDOM();
+   const report = currentMeeting.report;
+   const html = await MeetMindPDF.generate(report);
+   const pdfRoot = document.createElement("div");
+   pdfRoot.className = "pdf-root";
+   pdfRoot.innerHTML = html;
    document.body.appendChild(pdfRoot);
+    
     pdfRoot.style.background = "#ffffff";
     document.body.style.background = "#ffffff";
     pdfRoot.style.position = "absolute";
