@@ -6,54 +6,68 @@
 
         render(report){
 
-            const duration =
-                report?.duration ??
-                "";
+            const stats = [
 
-            const participants =
-                report?.participants?.length ??
-                report?.participants ??
-                0;
+                {
+                    label: "Duration",
+                    value:
+                        report?.duration ||
+                        report?.meeting_duration ||
+                        "-"
+                },
 
-            const tasks =
-                report?.tasks?.length ??
-                0;
+                {
+                    label: "Participants",
+                    value:
+                        report?.participants?.length ??
+                        report?.participants ??
+                        report?.participant_count ??
+                        "-"
+                },
 
-            const decisions =
-                report?.decisions?.length ??
-                0;
+                {
+                    label: "Tasks",
+                    value:
+                        report?.tasks?.length ?? 0
+                },
+
+                {
+                    label: "Decisions",
+                    value:
+                        report?.decisions?.length ?? 0
+                }
+
+            ];
 
             return RenderHelpers.section(
 
-                "Meeting Statistics",
+                "",
 
-                RenderHelpers.card(`
-
+                `
                     <div class="mm-stats-grid">
 
-                        <div class="mm-stat">
-                            <div class="mm-stat-value">${duration}</div>
-                            <div class="mm-stat-label">Duration</div>
-                        </div>
+                        ${stats.map(stat =>
 
-                        <div class="mm-stat">
-                            <div class="mm-stat-value">${participants}</div>
-                            <div class="mm-stat-label">Participants</div>
-                        </div>
+                            RenderHelpers.card(`
 
-                        <div class="mm-stat">
-                            <div class="mm-stat-value">${tasks}</div>
-                            <div class="mm-stat-label">Tasks</div>
-                        </div>
+                                <div class="mm-stat">
 
-                        <div class="mm-stat">
-                            <div class="mm-stat-value">${decisions}</div>
-                            <div class="mm-stat-label">Decisions</div>
-                        </div>
+                                    <div class="mm-stat-value">
+                                        ${RenderHelpers.escape(String(stat.value))}
+                                    </div>
+
+                                    <div class="mm-stat-label">
+                                        ${RenderHelpers.escape(stat.label)}
+                                    </div>
+
+                                </div>
+
+                            `)
+
+                        ).join("")}
 
                     </div>
-
-                `),
+                `,
 
                 "mm-statistics-section"
 
