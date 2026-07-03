@@ -35,35 +35,26 @@
       renderHeader(report){
     return HeaderRenderer.render(report);
 },
-
-
 renderStatistics(report){
     return StatisticsRenderer.render(report);
 },
-
       renderSummary(report){
     return SummaryRenderer.render(report);
 
 },
-        
       renderStrategicFindings(report){
     return FindingsRenderer.render(report);
 
 },
-        
         renderTasks(report){
     return TasksRenderer.render(report);
 },
-
        renderOwners(report){
     return OwnersRenderer.render(report);
 },
-
         renderArchitecture(report){
     return ArchitectureRenderer.render(report);
 },
-
-
         renderFooter(report){
     return FooterRenderer.render(report);
 },
