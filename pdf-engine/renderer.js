@@ -46,7 +46,10 @@
     return HeaderRenderer.render(report);
 },
 
-        
+
+renderStatistics(report){
+    return StatisticsRenderer.render(report);
+},
 
         renderSummary(report){
 
