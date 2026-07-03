@@ -46,57 +46,6 @@
     return HeaderRenderer.render(report);
 },
 
-renderStatistics(report){
-    const stats = [
-
-        {
-            label: "Duration",
-            value:
-                report?.duration ||
-                report?.meeting_duration ||
-                "-"
-        },
-
-        {
-            label: "Participants",
-            value:
-                report?.participants ||
-                report?.participant_count ||
-                "-"
-        },
-
-        {
-            label: "Tasks",
-            value:
-                report?.tasks?.length ?? 0
-        },
-        
-        {
-            label: "Decisions",
-            value:
-                report?.decisions?.length ?? 0
-        }
-    ];
-    return this.section(
-        "",
-        `
-            <div class="mm-stats-grid">
-                ${stats.map(stat => this.card(`
-                    <div class="mm-stat">
-                        <div class="mm-stat-value">
-                            ${this.escape(String(stat.value))}
-                        </div>
-
-                        <div class="mm-stat-label">
-                            ${this.escape(stat.label)}
-                        </div>
-                    </div>
-                `)).join("")}
-            </div>
-        `,
-        "mm-statistics-section"
-    );
-},
         
 
         renderSummary(report){
