@@ -1,14 +1,20 @@
 (function () {
+
     "use strict";
 
-    const VERSION = "1.0.0";
+    const VERSION = "1.1.0";
 
-    async function generate(reportData) {
-        console.log(`🚀 MeetMind PDF Engine ${VERSION}`);
-        console.log(reportData);
+    async function generate(report) {
 
-        // Пока просто проверяем, что цепочка работает.
-        return true;
+        console.log("🚀 MeetMind PDF Engine", VERSION);
+
+        if (!report) {
+            throw new Error("Report is required.");
+        }
+
+        const html = PDFRenderer.render(report);
+
+        return html;
     }
 
     window.MeetMindPDF = {
@@ -17,4 +23,5 @@
     };
 
     console.log("✅ MeetMind PDF Engine loaded.");
+
 })();
