@@ -167,12 +167,9 @@ renderStatistics(report){
         findings.title || "Strategic Findings",
         findings.rows.map(row => `
             <div class="mm-findings-row">
-                ${row.blocks.map(block => `
-                    <div class="mm-findings-block">
-                        <strong>${this.escape(block.title)}</strong>
-                    </div>
-
-                `).join("")}
+              ${row.blocks.map(block =>
+    this.renderBlock(block)
+).join("")}
 
             </div>
         `).join(""),
