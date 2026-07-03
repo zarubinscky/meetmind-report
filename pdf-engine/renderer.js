@@ -25,7 +25,6 @@
                     ${this.renderTasks(report)}
                     ${this.renderOwners(report)}
                     ${this.renderArchitecture(report)}
-                    ${this.renderTranscript(report)}
                     ${this.renderFooter(report)}
 
                 </div>
@@ -61,16 +60,10 @@ renderStatistics(report){
 },
 
         renderArchitecture(){
-
             return "";
 
         },
 
-        renderTranscript(){
-
-            return "";
-
-        },
 
         renderFooter(report){
     return FooterRenderer.render(report);
