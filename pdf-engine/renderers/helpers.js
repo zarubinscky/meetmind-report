@@ -23,8 +23,16 @@
             ${content || ""}
         </section>
     `;
-}
+        },
+
+        card(content, className = ""){
+    return `
+        <div class="mm-pdf-card ${className}">
+            ${content || ""}
+        </div>
+    `;
+      }
+        
 
 };
-
 })();
