@@ -28,7 +28,6 @@
         }
 
         if (isEmpty(value)) return [];
-
         return String(value)
             .split(/\n+/)
             .map((line) => line.trim())
