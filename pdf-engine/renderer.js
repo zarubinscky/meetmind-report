@@ -156,10 +156,32 @@ renderStatistics(report){
     );
 },
         
-        renderStrategicFindings(){
-            return "";
-        },
+       renderStrategicFindings(report){
 
+    const findings = report?.layout?.findings;
+    if(!findings){
+        return "";
+    }
+
+    return this.section(
+        findings.title || "Strategic Findings",
+        this.card(`
+            <div class="mm-findings-info">
+                Strategy:
+                ${this.escape(findings.strategy)}
+
+            </div>
+            <div class="mm-findings-info">
+
+                Rows:
+                ${findings.rows.length}
+            </div>
+        `),
+        "mm-strategic-findings"
+    );
+},
+
+        
         renderTasks(){
 
             return "";
