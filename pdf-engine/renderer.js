@@ -51,26 +51,9 @@ renderStatistics(report){
     return StatisticsRenderer.render(report);
 },
 
-        renderSummary(report){
+      renderSummary(report){
+    return SummaryRenderer.render(report);
 
-    const summary =
-        report?.summary ||
-        report?.executive_brief ||
-        report?.data?.text ||
-        "";
-    if(!summary){
-        return "";
-    }
-
-    return this.section(
-        "Executive Summary",
-        this.card(`
-            <p class="mm-pdf-summary-text">
-                ${this.escape(summary)}
-            </p>
-        `),
-        "mm-pdf-summary-section"
-    );
 },
         
        renderStrategicFindings(report){
