@@ -263,8 +263,18 @@ badge(label, className = ""){
 
     `;
 
-}
+},
 
+renderBlock(block){
+    if(!block){
+        return "";
+    }
+
+    return this.card(`
+        <strong>${this.escape(block.title || block.type || "Block")}</strong>
+    `);
+},
+        
     };
 
 })();
