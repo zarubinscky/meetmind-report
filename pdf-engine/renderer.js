@@ -42,18 +42,20 @@
 
         },
 
-       renderHeader(report){
+      renderHeader(report){
+
     const title =
-        report?.title ||
-        report?.meeting_title ||
-        report?.name ||
+        report?.title ??
+        report?.meeting_title ??
+        report?.meetingName ??
+        report?.name ??
         "Meeting Report";
 
     const date =
-        report?.date ||
-        report?.meeting_date ||
+        report?.date ??
+        report?.meeting_date ??
+        report?.meetingDate ??
         "";
-
     return this.section(
         "",
         this.card(`
@@ -67,11 +69,10 @@
                     <h1 class="mm-report-title">
                         ${this.escape(title)}
                     </h1>
-
                     ${
                         date
-                        ? `<div class="mm-report-date">${this.escape(date)}</div>`
-                        : ""
+                            ? `<div class="mm-report-date">${this.escape(date)}</div>`
+                            : ""
                     }
                 </div>
             </div>
