@@ -165,22 +165,20 @@ renderStatistics(report){
 
     return this.section(
         findings.title || "Strategic Findings",
-        this.card(`
-            <div class="mm-findings-info">
-                Strategy:
-                ${this.escape(findings.strategy)}
+        findings.rows.map(row => `
+            <div class="mm-findings-row">
+                ${row.blocks.map(block => `
+                    <div class="mm-findings-block">
+                        <strong>${this.escape(block.title)}</strong>
+                    </div>
+
+                `).join("")}
 
             </div>
-            <div class="mm-findings-info">
-
-                Rows:
-                ${findings.rows.length}
-            </div>
-        `),
+        `).join(""),
         "mm-strategic-findings"
     );
 },
-
         
         renderTasks(){
 
