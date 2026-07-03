@@ -193,31 +193,19 @@ section(title, content, className = ""){
 },
 
 card(content, className = ""){
-
     return `
-
         <div class="mm-pdf-card ${className}">
-
             ${content || ""}
-
         </div>
-
     `;
-
 },
 
 badge(label, className = ""){
-
     return `
-
         <span class="mm-pdf-badge ${className}">
-
             ${this.escape(label)}
-
         </span>
-
     `;
-
 },
 
 renderBlock(block){
