@@ -56,25 +56,9 @@ renderStatistics(report){
 
 },
         
-       renderStrategicFindings(report){
+      renderStrategicFindings(report){
+    return FindingsRenderer.render(report);
 
-    const findings = report?.layout?.findings;
-    if(!findings){
-        return "";
-    }
-
-    return this.section(
-        findings.title || "Strategic Findings",
-        findings.rows.map(row => `
-            <div class="mm-findings-row">
-              ${row.blocks.map(block =>
-    this.renderBlock(block)
-).join("")}
-
-            </div>
-        `).join(""),
-        "mm-strategic-findings"
-    );
 },
         
         renderTasks(report){
@@ -135,15 +119,6 @@ badge(label, className = ""){
     `;
 },
 
-renderBlock(block){
-    if(!block){
-        return "";
-    }
-
-    return this.card(`
-        <strong>${this.escape(block.title || block.type || "Block")}</strong>
-    `);
-},
         
     };
 
