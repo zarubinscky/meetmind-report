@@ -101,13 +101,9 @@ renderStatistics(report){
 
         },
 
-        renderFooter(){
-
-            return "";
-
-        },
-
-
+        renderFooter(report){
+    return FooterRenderer.render(report);
+},
 
         escape(value){
     return String(value ?? "")
