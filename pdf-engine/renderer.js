@@ -77,17 +77,13 @@ renderStatistics(report){
     );
 },
         
-        renderTasks(){
+        renderTasks(report){
+    return TasksRenderer.render(report);
+},
 
-            return "";
-
-        },
-
-        renderOwners(){
-
-            return "";
-
-        },
+       renderOwners(report){
+    return OwnersRenderer.render(report);
+},
 
         renderArchitecture(){
 
