@@ -59,10 +59,9 @@ renderStatistics(report){
     return OwnersRenderer.render(report);
 },
 
-        renderArchitecture(){
-            return "";
-
-        },
+        renderArchitecture(report){
+    return ArchitectureRenderer.render(report);
+},
 
 
         renderFooter(report){
