@@ -365,7 +365,7 @@ await new Promise(resolve => setTimeout(resolve, 500));
     try {
         await html2pdf()
             .set(options)
-            .from(pdfRoot.querySelector('.pdf-slide'))
+            .from(pdfRoot.querySelector(".mm-report"))
             .save();
 }  finally {
     pdfRoot.remove();
