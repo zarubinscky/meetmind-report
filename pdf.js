@@ -277,7 +277,7 @@ function renderPdfBlock(block) {
 }
 
 function createPdfDOM() {
-    const root = document.createElement('div');
+   // const root = document.createElement('div');
     const report = currentMeeting?.report || {};
     const blocks = buildPdfBlocks(report);
     const layoutScore = calculateLayoutScore(blocks);
