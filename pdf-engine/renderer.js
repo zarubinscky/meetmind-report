@@ -7,9 +7,8 @@
        render(report, options = {}) {
             console.log("Renderer started");
             const html = this.renderPage(report, options);
-           
+    
             return html;
-
         },
 
         renderPage(report, options = {}){
