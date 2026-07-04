@@ -28,3 +28,33 @@
     overflow: hidden;
 
 }
+
+.mm-modal-header {
+
+    padding: 24px 28px;
+
+    border-bottom: 1px solid #E5E7EB;
+
+}
+
+.mm-modal-body {
+
+    padding: 24px 28px;
+
+    min-height: 240px;
+
+}
+
+.mm-modal-footer {
+
+    padding: 20px 28px;
+
+    border-top: 1px solid #E5E7EB;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+}
