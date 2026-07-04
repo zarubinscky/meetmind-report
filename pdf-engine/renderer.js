@@ -4,7 +4,7 @@
 
     window.PDFRenderer = {
 
-        render(report){
+       render(report, options = {})
 
             console.log("Renderer started");
 
