@@ -24,7 +24,6 @@ dialog.innerHTML = `
 `;
 
 overlay.appendChild(dialog);
-    
     document.body.appendChild(overlay);
     console.log("Modal.show()", config);
 }
