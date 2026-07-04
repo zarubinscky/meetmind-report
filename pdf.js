@@ -111,6 +111,7 @@ function buildPdfBlocks(report) {
             items: report.risks.map(normalizePdfItem)
         });
     }
+    
     if ((report.tasks || []).length) {
         blocks.push({
             key: 'tasks',
