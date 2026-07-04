@@ -145,21 +145,6 @@ function estimateBlockHeight(block) {
 }
 
 
-function calculateLayoutScore(blocks) {
-    let score = 0;
-    blocks.forEach(block => {
-        if (block.type === 'summary') {
-            score += (block.items[0]?.title?.length || 0) * 0.03;
-            return;
-        }
-        score += block.items.length * 6;
-        block.items.forEach(item => {
-            score += (item.title?.length || 0) * 0.02;
-        });
-    });
-    return Math.round(score);
-}
-
 async function generateExecutivePdf() {
    const report = currentMeeting.report;
    const html = await MeetMindPDF.generate(report);
