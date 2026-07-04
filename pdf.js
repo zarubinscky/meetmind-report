@@ -60,6 +60,7 @@ function normalizePdfItem(item) {
         details
     };
 }
+
 function buildPdfBlocks(report) {
     const blocks = [];
     
