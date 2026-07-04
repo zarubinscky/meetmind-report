@@ -9,6 +9,9 @@ function show(config) {
     const overlay = document.createElement("div");
     overlay.className = "mm-modal-overlay";
     currentModal = overlay;
+    const dialog = document.createElement("div");
+    dialog.className = "mm-modal";
+    overlay.appendChild(dialog);
     document.body.appendChild(overlay);
     console.log("Modal.show()", config);
 }
