@@ -11,10 +11,16 @@ function show(config) {
 
     const dialog = document.createElement("div");
     dialog.className = "mm-modal";
-    dialog.innerHTML = `
-    <div class="mm-modal-header"></div>
-    <div class="mm-modal-body"></div>
-    <div class="mm-modal-footer"></div>
+dialog.innerHTML = `
+    <div class="mm-modal-header">
+        <h2>Export PDF</h2>
+    </div>
+    <div class="mm-modal-body">
+        Modal Body
+    </div>
+    <div class="mm-modal-footer">
+        Footer
+    </div>
 `;
 
 overlay.appendChild(dialog);
