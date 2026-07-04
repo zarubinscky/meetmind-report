@@ -1,7 +1,6 @@
 (function () {
 
 "use strict";
-
 let currentModal = null;
 
 function show(config) {
