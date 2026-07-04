@@ -6,13 +6,13 @@
 
        render(report, options = {}) {
             console.log("Renderer started");
-            const html = this.renderPage(report);
+            const html = this.renderPage(report, options);
            
             return html;
 
         },
 
-        renderPage(report){
+        renderPage(report, options = {}){
 
             return `
     <div class="mm-report">
