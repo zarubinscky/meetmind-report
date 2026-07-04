@@ -1,0 +1,30 @@
+.mm-modal-overlay {
+
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(15,23,42,.45);
+
+    z-index: 10000;
+
+}
+
+.mm-modal {
+
+    width: 720px;
+    max-width: calc(100vw - 32px);
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.18);
+
+    overflow: hidden;
+
+}
