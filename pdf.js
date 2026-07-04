@@ -124,27 +124,6 @@ function buildPdfBlocks(report) {
     return blocks.sort((a, b) => b.priority - a.priority);
 }
 
-
-function estimateBlockHeight(block) {
-    switch (block.type) {
-        case 'summary':
-            return 8 + (block.items[0]?.title?.length || 0) * 0.03;
-        case 'metrics':
-            return 10;
-        case 'insights':
-            return block.items.length * 6;
-        case 'tasks':
-            return block.items.length * 5;
-        case 'decisions':
-            return block.items.length * 4;
-        case 'risks':
-            return block.items.length * 4;
-        default:
-            return block.items.length * 5;
-    }
-}
-
-
 async function generateExecutivePdf() {
    const report = currentMeeting.report;
    const html = await MeetMindPDF.generate(report);
