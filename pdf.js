@@ -123,35 +123,6 @@ function buildPdfBlocks(report) {
     return blocks.sort((a, b) => b.priority - a.priority);
 }
 
-function layoutBlocks(blocks, theme) {
-    const layout = {
-      fullWidth: [],
-      left: [],
-      right: [],
-      leftHeight: 0,
-      rightHeight: 0
-    };
-    
-    for (const block of blocks) {
-        if (
-            block.type === 'summary' ||
-            block.type === 'metrics'
-        ) {
-            layout.fullWidth.push(block);
-            continue;
-        }
-       const height = estimateBlockHeight(block);
-
-if (layout.leftHeight <= layout.rightHeight) {
-    layout.left.push(block);
-    layout.leftHeight += height;
-} else {
-    layout.right.push(block);
-    layout.rightHeight += height;
-}
-    }
-    return layout;
-}
 
 function estimateBlockHeight(block) {
     switch (block.type) {
