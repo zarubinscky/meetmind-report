@@ -159,19 +159,6 @@ function calculateLayoutScore(blocks) {
     });
     return Math.round(score);
 }
-function choosePdfTheme(score) {
-    if (score < 50) {
-        return 'xl';
-    }
-    if (score < 80) {
-        return 'l';
-    }
-    if (score < 110) {
-        return 'm';
-    }
-    return 's';
-}
-
 
 async function generateExecutivePdf() {
    const report = currentMeeting.report;
