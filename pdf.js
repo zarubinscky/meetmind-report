@@ -44,7 +44,6 @@ function normalizePdfItem(item) {
             details: ''
         };
     }
-
     const title = item.title || item.task || item.name || '';
     const details = [
         item.details,
