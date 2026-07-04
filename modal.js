@@ -14,7 +14,6 @@ function show(config) {
 }
 
 function close() {
-
     if (currentModal) {
 
         currentModal.remove();
