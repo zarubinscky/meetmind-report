@@ -11,6 +11,34 @@ const PDF_CONFIG = {
     fileSuffix: ' - MeetMind AI.pdf'
 };
 
+const PDF_BUILDER_DEFAULT = {
+    header: true,
+    statistics: true,
+    summary: true,
+    findings: true,
+    tasks: true,
+    owners: true,
+    architecture: true,
+    footer: true
+};
+
+let pdfBuilderOptions = {
+    ...PDF_BUILDER_DEFAULT
+};
+
+function resetPdfBuilderOptions() {
+    pdfBuilderOptions = {
+        ...PDF_BUILDER_DEFAULT
+    };
+}
+
+function setPdfBuilderOptions(options) {
+    pdfBuilderOptions = {
+        ...PDF_BUILDER_DEFAULT,
+        ...options
+    };
+}
+
 function sanitizePdfFilename(value) {
     return String(value || 'Meeting Report')
         .replace(/[\\/:*?"<>|]/g, '')
