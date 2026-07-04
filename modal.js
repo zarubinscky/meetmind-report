@@ -15,13 +15,9 @@ function show(config) {
 
 function close() {
     if (currentModal) {
-
         currentModal.remove();
-
         currentModal = null;
-
     }
-
 }
 
 window.Modal = {
