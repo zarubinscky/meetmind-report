@@ -8,9 +8,17 @@ function show(config) {
     const overlay = document.createElement("div");
     overlay.className = "mm-modal-overlay";
     currentModal = overlay;
+
     const dialog = document.createElement("div");
     dialog.className = "mm-modal";
-    overlay.appendChild(dialog);
+    dialog.innerHTML = `
+    <div class="mm-modal-header"></div>
+    <div class="mm-modal-body"></div>
+    <div class="mm-modal-footer"></div>
+`;
+
+overlay.appendChild(dialog);
+    
     document.body.appendChild(overlay);
     console.log("Modal.show()", config);
 }
