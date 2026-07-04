@@ -4,12 +4,10 @@
 
     window.PDFRenderer = {
 
-       render(report, options = {})
-
+       render(report, options = {}) {
             console.log("Renderer started");
-
             const html = this.renderPage(report);
-
+           
             return html;
 
         },
@@ -17,18 +15,40 @@
         renderPage(report){
 
             return `
-                <div class="mm-report">
-                    ${this.renderHeader(report)}
-                    ${this.renderStatistics(report)}
-                    ${this.renderSummary(report)}
-                    ${this.renderStrategicFindings(report)}
-                    ${this.renderTasks(report)}
-                    ${this.renderOwners(report)}
-                    ${this.renderArchitecture(report)}
-                    ${this.renderFooter(report)}
+    <div class="mm-report">
+    ${options.header !== false
+        ? this.renderHeader(report)
+        : ""}
 
-                </div>
-            `;
+    ${options.statistics !== false
+        ? this.renderStatistics(report)
+        : ""}
+
+    ${options.summary !== false
+        ? this.renderSummary(report)
+        : ""}
+
+    ${options.findings !== false
+        ? this.renderStrategicFindings(report)
+        : ""}
+
+    ${options.tasks !== false
+        ? this.renderTasks(report)
+        : ""}
+
+    ${options.owners !== false
+        ? this.renderOwners(report)
+        : ""}
+
+    ${options.architecture !== false
+        ? this.renderArchitecture(report)
+        : ""}
+
+    ${options.footer !== false
+        ? this.renderFooter(report)
+        : ""}
+</div>
+`;
 
         },
 
