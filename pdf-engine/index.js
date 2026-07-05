@@ -18,7 +18,6 @@ const DEFAULT_PDF_OPTIONS = {
     
     async function generate(report, options = {}) {
         console.log("🚀 MeetMind PDF Engine", VERSION);
-
         options = {
     ...DEFAULT_PDF_OPTIONS,
     ...options
