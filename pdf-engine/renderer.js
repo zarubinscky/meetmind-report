@@ -13,11 +13,12 @@
 
         renderPage(report, options = {}){
 
-            return `
-    <div class="mm-report">
-    ${options.header !== false
-        ? this.renderHeader(report)
-        : ""}
+        const densityClass = `mm-density-${options.densityMode || "normal"}`;
+        return `
+         <div class="mm-report ${densityClass}">
+         ${options.header !== false
+         ? this.renderHeader(report)
+         : ""}
 
     ${options.statistics !== false
         ? this.renderStatistics(report)
