@@ -142,6 +142,7 @@ await new Promise(resolve => setTimeout(resolve, 500));
             orientation: 'landscape'
         }
     };
+    
     try {
         await html2pdf()
             .set(options)
