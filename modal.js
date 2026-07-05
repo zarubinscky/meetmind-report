@@ -11,18 +11,28 @@ function show(config) {
 
     const dialog = document.createElement("div");
     dialog.className = "mm-modal";
-dialog.innerHTML = `
+
+    dialog.innerHTML = `
     <div class="mm-modal-header">
-        <h2>Export PDF</h2>
+        <h2 class="mm-modal-title">
+            ${config.title || ""}
+        </h2>
     </div>
     <div class="mm-modal-body">
-        Modal Body
+        ${config.content || ""}
     </div>
     <div class="mm-modal-footer">
-        Footer
+        ${(config.actions || []).map(action => `
+            <button
+                type="button"
+                class="mm-modal-button ${action.className || ""}"
+                data-action="${action.id || ""}"
+            >
+                ${action.label || ""}
+            </button>
+        `).join("")}
     </div>
 `;
-
 overlay.appendChild(dialog);
     document.body.appendChild(overlay);
     console.log("Modal.show()", config);
