@@ -26,6 +26,17 @@ let pdfBuilderOptions = {
     ...PDF_BUILDER_DEFAULT
 };
 
+const PDF_OPTION_LABELS = {
+    header: "Header",
+    statistics: "Meeting Statistics",
+    summary: "Executive Summary",
+    findings: "Insights",
+    tasks: "Tasks",
+    owners: "Owners",
+    architecture: "Architecture",
+    footer: "Footer"
+};
+
 function resetPdfBuilderOptions() {
     pdfBuilderOptions = {
         ...PDF_BUILDER_DEFAULT
@@ -138,52 +149,29 @@ await new Promise(resolve => setTimeout(resolve, 500));
 }
 
 function showPdfBuilder() {
+    const optionsHtml = Object.entries(pdfBuilderOptions)
+    .map(([key, value]) => `
+        <label class="mm-option">
+            <input
+                type="checkbox"
+                data-option="${key}"
+                ${value ? "checked" : ""}
+            >
+            <span>${PDF_OPTION_LABELS[key]}</span>
+        </label>
+    `)
+    .join("");
+    
     Modal.show({
         title: "Export PDF",
-
+        
         content: `
-            <div class="mm-pdf-options">
+           content: `
+    <div class="mm-pdf-options">
+        ${optionsHtml}
+    </div>
 
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Header</span>
-                </label>
-
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Statistics</span>
-                </label>
-
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Executive Summary</span>
-                </label>
-
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Insights</span>
-                </label>
-
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Tasks</span>
-                </label>
-
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Owners</span>
-                </label>
-
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Architecture</span>
-                </label>
-                <label class="mm-option">
-                    <input type="checkbox" checked>
-                    <span>Footer</span>
-                </label>
-            </div>
-        `,
+`,
 
         actions: [
             {
