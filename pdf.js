@@ -4,7 +4,6 @@
  */
 
 'use strict';
-
 const PDF_CONFIG = {
     pageWidth: 1280,
     pageHeight: 720,
