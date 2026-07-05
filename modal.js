@@ -35,6 +35,19 @@ function show(config) {
 `;
 overlay.appendChild(dialog);
     document.body.appendChild(overlay);
+    dialog
+    .querySelectorAll("[data-action]")
+    .forEach(button => {
+        button.addEventListener("click", () => {
+            const action = config.actions.find(
+                a => a.id === button.dataset.action
+            );
+            if (action?.onClick) {
+                action.onClick();
+            }
+        });
+    });
+    
     console.log("Modal.show()", config);
 }
 
