@@ -191,16 +191,25 @@ function showPdfBuilder() {
     </div>
 `,
 
-        actions: [
-            {
-                id: "cancel",
-                label: "Cancel"
-            },
-            {
-                id: "export",
-                label: "Export PDF",
-                className: "mm-modal-button-primary"
-            }
+       actions: [
+    {
+        id: "cancel",
+        label: "Cancel",
+        onClick() {
+            Modal.close();
+        }
+    },
+
+    {
+        id: "export",
+        label: "Export PDF",
+        className: "mm-modal-button-primary",
+        async onClick() {
+            Modal.close();
+            await generateExecutivePdf();
+        }
+    }
+]
         ]
     });
 bindPdfOptions();
