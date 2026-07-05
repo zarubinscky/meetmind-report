@@ -148,19 +148,38 @@ await new Promise(resolve => setTimeout(resolve, 500));
 }
 }
 
+function buildPdfOptionsHtml() {
+    return Object.entries(pdfBuilderOptions)
+        .map(([key, value]) => `
+            <label class="mm-option">
+                <input
+                    type="checkbox"
+                    data-option="${key}"
+                    ${value ? "checked" : ""}
+                >
+                <span>${PDF_OPTION_LABELS[key]}</span>
+            </label>
+        `)
+        .join("");
+}
+
+function buildPdfOptionsHtml() {
+    return Object.entries(pdfBuilderOptions)
+        .map(([key, value]) => `
+            <label class="mm-option">
+                <input
+                    type="checkbox"
+                    data-option="${key}"
+                    ${value ? "checked" : ""}
+                >
+                <span>${PDF_OPTION_LABELS[key]}</span>
+            </label>
+        `)
+        .join("");
+}
+
 function showPdfBuilder() {
-    const optionsHtml = Object.entries(pdfBuilderOptions)
-    .map(([key, value]) => `
-        <label class="mm-option">
-            <input
-                type="checkbox"
-                data-option="${key}"
-                ${value ? "checked" : ""}
-            >
-            <span>${PDF_OPTION_LABELS[key]}</span>
-        </label>
-    `)
-    .join("");
+    const optionsHtml = buildPdfOptionsHtml();
     
     Modal.show({
         title: "Export PDF",
@@ -169,7 +188,6 @@ function showPdfBuilder() {
     <div class="mm-pdf-options">
         ${optionsHtml}
     </div>
-
 `,
 
         actions: [
