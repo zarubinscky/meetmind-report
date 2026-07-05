@@ -166,7 +166,6 @@ function showPdfBuilder() {
         title: "Export PDF",
         
         content: `
-           content: `
     <div class="mm-pdf-options">
         ${optionsHtml}
     </div>
