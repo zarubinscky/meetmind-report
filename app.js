@@ -663,7 +663,10 @@ async function loadReport() {
 }
 
 function bindActions() {
-  $('downloadPdfBtn').addEventListener('click', generateExecutivePdf);
+  $('downloadPdfBtn').addEventListener(
+    'click',
+    showPdfBuilder
+);
 
   $('shareBtn').addEventListener('click', async () => {
     const url = window.location.href;
