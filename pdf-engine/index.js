@@ -11,7 +11,7 @@ const DEFAULT_PDF_OPTIONS = {
     tasks: true,
     owners: true,
     architecture: true,
-    footer: true
+    footer: true,
     densityMode: "normal"
 };
 
