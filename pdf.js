@@ -185,6 +185,7 @@ function bindPdfOptions() {
 }
 
 function showPdfBuilder() {
+    resetPdfBuilderOptions();
     const optionsHtml = buildPdfOptionsHtml();
     
     Modal.show({
