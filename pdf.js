@@ -217,6 +217,7 @@ function showPdfBuilder() {
     }
 ]
     });
+    
 bindPdfOptions();
 }
 
