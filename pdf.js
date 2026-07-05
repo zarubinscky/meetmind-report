@@ -10,6 +10,7 @@ const PDF_CONFIG = {
     fileSuffix: ' - MeetMind AI.pdf'
 };
 
+
 const PDF_BUILDER_DEFAULT = {
     header: true,
     statistics: true,
@@ -169,6 +170,12 @@ function bindPdfOptions() {
                 );
             });
         });
+}
+
+function resetPdfBuilderOptions() {
+    pdfBuilderOptions = {
+        ...PDF_BUILDER_DEFAULT
+    };
 }
 
 function showPdfBuilder() {
