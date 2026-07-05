@@ -12,6 +12,7 @@ const DEFAULT_PDF_OPTIONS = {
     owners: true,
     architecture: true,
     footer: true
+    densityMode: "normal"
 };
 
     
