@@ -218,8 +218,11 @@ function showPdfBuilder() {
 ]
     });
 bindPdfOptions();
-    
 }
+
+window.PDFBuilder = {
+    show: showPdfBuilder
+};
     
 
     
