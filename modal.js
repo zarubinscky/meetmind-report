@@ -46,11 +46,8 @@ function close() {
 }
 
 window.Modal = {
-
     show,
-
     close
-
 };
 
 })();
