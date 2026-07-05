@@ -101,7 +101,11 @@ function normalizePdfItem(item) {
 
 async function generateExecutivePdf() {
    const report = currentMeeting.report;
-   const html = await MeetMindPDF.generate(report);
+   const html = await MeetMindPDF.generate(
+    report,
+    pdfBuilderOptions
+);
+    
    const pdfRoot = document.createElement("div");
    pdfRoot.className = "pdf-root";
    pdfRoot.innerHTML = html;
