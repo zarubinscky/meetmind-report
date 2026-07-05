@@ -136,4 +136,70 @@ await new Promise(resolve => setTimeout(resolve, 500));
     pdfRoot.remove();
 }
 }
+
+    function showPdfBuilder() {
+
+    Modal.show({
+
+        title: "Export PDF",
+
+        content: `
+            <div class="mm-pdf-options">
+
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Header</span>
+                </label>
+
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Statistics</span>
+                </label>
+
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Executive Summary</span>
+                </label>
+
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Insights</span>
+                </label>
+
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Tasks</span>
+                </label>
+
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Owners</span>
+                </label>
+
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Architecture</span>
+                </label>
+                <label class="mm-option">
+                    <input type="checkbox" checked>
+                    <span>Footer</span>
+                </label>
+            </div>
+        `,
+
+        actions: [
+            {
+                id: "cancel",
+                label: "Cancel"
+            },
+            {
+                id: "export",
+                label: "Export PDF",
+                className: "mm-modal-button-primary"
+            }
+        ]
+    });
+}
+    
+
     
