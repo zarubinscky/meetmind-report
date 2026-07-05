@@ -163,19 +163,20 @@ function buildPdfOptionsHtml() {
         .join("");
 }
 
-function buildPdfOptionsHtml() {
-    return Object.entries(pdfBuilderOptions)
-        .map(([key, value]) => `
-            <label class="mm-option">
-                <input
-                    type="checkbox"
-                    data-option="${key}"
-                    ${value ? "checked" : ""}
-                >
-                <span>${PDF_OPTION_LABELS[key]}</span>
-            </label>
-        `)
-        .join("");
+function bindPdfOptions() {
+    document
+        .querySelectorAll(".mm-option input")
+        .forEach(input => {
+            input.addEventListener("change", event => {
+                const key = event.target.dataset.option;
+                pdfBuilderOptions[key] = event.target.checked;
+                console.log(
+                    "PDF option:",
+                    key,
+                    pdfBuilderOptions[key]
+                );
+            });
+        });
 }
 
 function showPdfBuilder() {
@@ -202,6 +203,8 @@ function showPdfBuilder() {
             }
         ]
     });
+bindPdfOptions();
+    
 }
     
 
