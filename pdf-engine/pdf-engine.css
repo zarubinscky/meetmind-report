@@ -71,3 +71,30 @@
     font-weight:500;
     color:#64748B;
 }
+
+/* ==========================================
+   Density Modes
+========================================== */
+
+.mm-density-normal {
+}
+
+.mm-density-compact {
+}
+
+.mm-density-ultra {
+}
+
+.mm-density-compact {
+    --mm-card-padding: 16px;
+    --mm-section-gap: 16px;
+    --mm-title-size: 30px;
+    --mm-text-size: 14px;
+}
+
+.mm-density-ultra {
+    --mm-card-padding: 12px;
+    --mm-section-gap: 12px;
+    --mm-title-size: 28px;
+    --mm-text-size: 13px;
+}
