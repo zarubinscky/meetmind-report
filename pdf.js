@@ -36,19 +36,6 @@ const PDF_OPTION_LABELS = {
     footer: "Footer"
 };
 
-function resetPdfBuilderOptions() {
-    pdfBuilderOptions = {
-        ...PDF_BUILDER_DEFAULT
-    };
-}
-
-function setPdfBuilderOptions(options) {
-    pdfBuilderOptions = {
-        ...PDF_BUILDER_DEFAULT,
-        ...options
-    };
-}
-
 function sanitizePdfFilename(value) {
     return String(value || 'Meeting Report')
         .replace(/[\\/:*?"<>|]/g, '')
