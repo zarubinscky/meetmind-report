@@ -137,10 +137,8 @@ await new Promise(resolve => setTimeout(resolve, 500));
 }
 }
 
-    function showPdfBuilder() {
-
+function showPdfBuilder() {
     Modal.show({
-
         title: "Export PDF",
 
         content: `
