@@ -8,14 +8,14 @@
     background:#F8FAFC;
     color:#0F172A;
     font-family:Inter,system-ui,sans-serif;
-    font-size:14px;
-    line-height:1.55;
-    padding:48px;
+    font-size:var(--mm-text-size);
+    line-height:var(--mm-line-height);
+    padding:var(--mm-page-padding);
     box-sizing:border-box;
 }
 
 .mm-pdf-section{
-    margin-bottom:32px;
+    margin-bottom:var(--mm-section-gap);;
 }
 
 .mm-pdf-section:last-child{
@@ -27,7 +27,7 @@
     font-size: var(--mm-section-title-size);
     font-weight:700;
     color:#0F172A;
-    margin:0 0 20px;
+    margin:0 0 var(--mm-title-gap);
 }
 
 .mm-pdf-card{
