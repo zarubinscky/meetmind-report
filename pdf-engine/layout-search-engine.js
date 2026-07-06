@@ -208,12 +208,13 @@ function generateReportCandidates() {
     ];
 }
     
-    window.LayoutSearchEngine = {
-        generateCandidates,
-        scoreCandidate,
-        chooseBestCandidate,
-        search
-    };
+   window.LayoutSearchEngine = {
+    generateCandidates,
+    generateReportCandidates,
+    scoreCandidate,
+    chooseBestCandidate,
+    search
+};
 
     console.log("✅ Layout Search Engine loaded.");
 })();
