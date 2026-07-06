@@ -108,6 +108,10 @@ async function generateExecutivePdf() {
 
    const density =
       DensityEngine.chooseDensity(measurement);
+    if (density !== renderOptions.densityMode) {
+    renderOptions.densityMode = density;
+}
+    
    console.log("Measurement:", measurement);
    console.log("Density:", density);
     
