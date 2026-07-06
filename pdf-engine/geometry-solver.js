@@ -365,3 +365,11 @@ Its only responsibility is computing positions.
 
     console.log("✅ Geometry Solver loaded.");
 })();
+
+function measureReport(reportElement) {
+    return {
+        totalHeight: 0,
+        sections: {}
+    };
+
+}
