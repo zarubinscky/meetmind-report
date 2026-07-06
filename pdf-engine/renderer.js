@@ -30,12 +30,12 @@
         : ""}
 
     ${options.findings !== false
-        ? this.renderStrategicFindings(report)
-        : ""}
+    ? this.renderStrategicFindings(report, options)
+    : ""}
 
-    ${options.tasks !== false
-        ? this.renderTasks(report)
-        : ""}
+   ${options.tasks !== false
+    ? this.renderTasks(report, options)
+    : ""}
 
    ${options.owners !== false
     ? this.renderOwners(report, options)
