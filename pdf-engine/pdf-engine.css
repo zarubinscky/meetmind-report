@@ -15,7 +15,7 @@
 }
 
 .mm-pdf-section{
-    margin-bottom:var(--mm-section-gap);;
+    margin-bottom:var(--mm-section-gap);
 }
 
 .mm-pdf-section:last-child{
@@ -77,18 +77,20 @@
 ========================================== */
 
 .mm-report {
-    --mm-card-padding: 20px;
-    --mm-section-gap: 20px;
-    --mm-title-size: 32px;
-    --mm-section-title-size: 22px;
-    --mm-text-size: 15px;
-    --mm-line-height: 1.45;
+    --mm-page-padding:48px;
+    --mm-card-padding:20px;
+    --mm-section-gap:20px;
+    --mm-title-size:32px;
+    --mm-section-title-size:22px;
+    --mm-text-size:15px;
+    --mm-line-height:1.45;
 }
 
 .mm-density-normal {
 }
 
 .mm-density-compact {
+   --mm-page-padding:40px;
     --mm-card-padding: 16px;
     --mm-section-gap: 16px;
     --mm-title-size: 30px;
@@ -98,7 +100,8 @@
 }
 
 .mm-density-ultra {
-    --mm-card-padding: 12px;
+   --mm-page-padding:32px; 
+   --mm-card-padding: 12px;
     --mm-section-gap: 12px;
     --mm-title-size: 28px;
     --mm-section-title-size: 18px;
