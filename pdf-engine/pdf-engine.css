@@ -136,3 +136,26 @@
     padding:4px 0;
     font-size:13px;
 }
+
+.mm-task-compact{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:4px 0;
+    font-size:13px;
+}
+
+.mm-task-compact-title{
+    flex:1;
+}
+
+.mm-tasks-inline{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.mm-task-inline{
+    font-size:13px;
+    white-space:nowrap;
+}
