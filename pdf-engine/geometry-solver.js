@@ -385,10 +385,22 @@ function measureReport(reportElement) {
             };
         });
     const reportRect = reportElement.getBoundingClientRect();
-    return {
-        totalHeight: Math.ceil(reportRect.height),
-        sections
-    };
+    
+
+    const availableHeight =
+    DEFAULT_PAGE.height
+    - DEFAULT_PAGE.marginTop
+    - DEFAULT_PAGE.marginBottom;
+
+return {
+    totalHeight: Math.ceil(reportRect.height),
+    availableHeight,
+    overflow:
+        Math.ceil(reportRect.height)
+        - availableHeight,
+    sections
+};
+    
 }
     
 
