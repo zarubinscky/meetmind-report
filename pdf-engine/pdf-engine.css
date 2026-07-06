@@ -47,7 +47,7 @@
 .mm-stats-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:16px;
+    gap:var(--mm-section-gap);
 }
 
 .mm-stat{
@@ -55,19 +55,19 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    min-height:120px;
+    min-height:var(--mm-stat-height);
 }
 
 .mm-stat-value{
-    font-size:42px;
+    font-size:var(--mm-stat-value-size);
     font-weight:700;
     line-height:1;
     color:#0F172A;
-    margin-bottom:12px;
+    margin-bottom:var(--mm-stat-gap);
 }
 
 .mm-stat-label{
-    font-size:14px;
+    font-size:var(--mm-stat-label-size);
     font-weight:500;
     color:#64748B;
 }
@@ -77,6 +77,10 @@
 ========================================== */
 
 .mm-report {
+    --mm-stat-height:120px;
+    --mm-stat-value-size:42px;
+    --mm-stat-label-size:14px;
+    --mm-stat-gap:12px; 
     --mm-page-padding:48px;
     --mm-card-padding:20px;
     --mm-section-gap:20px;
@@ -90,7 +94,11 @@
 }
 
 .mm-density-compact {
-   --mm-page-padding:40px;
+    --mm-stat-height:100px;
+    --mm-stat-value-size:36px;
+    --mm-stat-label-size:13px;
+    --mm-stat-gap:10px; 
+    --mm-page-padding:40px;
     --mm-card-padding: 16px;
     --mm-section-gap: 16px;
     --mm-title-size: 30px;
@@ -100,6 +108,10 @@
 }
 
 .mm-density-ultra {
+   --mm-stat-height:84px;
+   --mm-stat-value-size:30px;
+   --mm-stat-label-size:12px;
+   --mm-stat-gap:8px;
    --mm-page-padding:32px; 
    --mm-card-padding: 12px;
     --mm-section-gap: 12px;
