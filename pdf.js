@@ -89,15 +89,27 @@ function normalizePdfItem(item) {
 
 async function generateExecutivePdf() {
    const report = currentMeeting.report;
-   const html = await MeetMindPDF.generate(
+    let renderOptions = {
+    ...pdfBuilderOptions
+};
+   let html = await MeetMindPDF.generate(
     report,
-    pdfBuilderOptions
+    renderOptions
 );
     
    const pdfRoot = document.createElement("div");
    pdfRoot.className = "pdf-root";
    pdfRoot.innerHTML = html;
    document.body.appendChild(pdfRoot);
+   const measurement =
+      GeometrySolver.measureReport(
+        pdfRoot.querySelector(".mm-report")
+ );
+
+   const density =
+      DensityEngine.chooseDensity(measurement);
+   console.log("Measurement:", measurement);
+   console.log("Density:", density);
     
     pdfRoot.style.background = "#ffffff";
     pdfRoot.style.position = "fixed";
