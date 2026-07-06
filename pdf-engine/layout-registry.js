@@ -58,7 +58,7 @@
                 label: "Inline owners",
                 penalty: 2
             }
-        ]
+        ],
 
          architecture: [
         {
