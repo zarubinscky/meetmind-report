@@ -36,9 +36,9 @@
         ? this.renderTasks(report)
         : ""}
 
-    ${options.owners !== false
-        ? this.renderOwners(report)
-        : ""}
+   ${options.owners !== false
+    ? this.renderOwners(report, options)
+    : ""}
 
     ${options.architecture !== false
         ? this.renderArchitecture(report)
@@ -69,8 +69,8 @@ renderStatistics(report){
         renderTasks(report){
     return TasksRenderer.render(report);
 },
-       renderOwners(report){
-    return OwnersRenderer.render(report);
+       renderOwners(report, options){
+    return OwnersRenderer.render(report, options);
 },
         renderArchitecture(report){
     return ArchitectureRenderer.render(report);
