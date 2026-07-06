@@ -4,48 +4,80 @@
 
     window.OwnersRenderer = {
 
-        render(report, options = {}) {
+      render(report, options = {}) {
 
-            const owners = report?.owners ?? [];
+    const owners = report?.owners ?? [];
 
-            const mode =
-            options.layoutModes?.owners ??
-            "cards";
+    const mode =
+        options.layoutModes?.owners ??
+        "cards";
 
-            console.log("Owners mode:", mode);
-            
-            if(!owners.length){
-                return "";
-            }
+    console.log("Owners mode:", mode);
 
-            return RenderHelpers.section(
+    if (!owners.length) {
+        return "";
+    }
 
-                "Owners",
+    let content = "";
 
-                owners.map(owner =>
+    switch (mode) {
 
-                    RenderHelpers.card(`
+        case "inline":
 
-                        <div class="mm-owner">
-
+            content = `
+                <div class="mm-owners-inline">
+                    ${owners.map(owner =>
+                        `<span class="mm-owner-inline">
                             ${RenderHelpers.escape(
                                 owner.name ||
                                 owner.owner ||
                                 owner.text ||
                                 ""
                             )}
+                        </span>`
+                    ).join(", ")}
+                </div>
+            `;
 
-                        </div>
+            break;
 
-                    `)
+        case "compact":
 
-                ).join(""),
+            content = owners.map(owner => `
+                <div class="mm-owner-compact">
+                    ${RenderHelpers.escape(
+                        owner.name ||
+                        owner.owner ||
+                        owner.text ||
+                        ""
+                    )}
+                </div>
+            `).join("");
 
-                "mm-owners-section"
+            break;
 
-            );
+        default:
 
-        }
+            content = owners.map(owner =>
+                RenderHelpers.card(`
+                    <div class="mm-owner">
+                        ${RenderHelpers.escape(
+                            owner.name ||
+                            owner.owner ||
+                            owner.text ||
+                            ""
+                        )}
+                    </div>
+                `)
+            ).join("");
+    }
+
+    return RenderHelpers.section(
+        "Owners",
+        content,
+        "mm-owners-section"
+    );
+}
 
     };
 
