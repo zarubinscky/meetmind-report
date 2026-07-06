@@ -73,7 +73,6 @@
             penalty: 1
         }
     ]
-
     };
 
     function getModes(blockId) {
