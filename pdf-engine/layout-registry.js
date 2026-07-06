@@ -1,7 +1,6 @@
 (function () {
 
     "use strict";
-
     const BLOCK_LAYOUT_MODES = {
 
         statistics: [
