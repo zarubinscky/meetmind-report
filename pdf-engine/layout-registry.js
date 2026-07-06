@@ -60,6 +60,20 @@
             }
         ]
 
+         architecture: [
+        {
+            id: "cards",
+            label: "Architecture cards",
+            penalty: 0
+        },
+
+        {
+            id: "compact",
+            label: "Compact architecture",
+            penalty: 1
+        }
+    ]
+
     };
 
     function getModes(blockId) {
