@@ -1,7 +1,6 @@
 (function () {
 
     "use strict";
-
     window.FindingsRenderer = {
 
         render(report, options = {}) {
