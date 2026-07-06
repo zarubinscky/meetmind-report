@@ -113,7 +113,6 @@ async function evaluatePdfCandidate(report, candidateOptions) {
     );
 
     root.remove();
-
     return {
         html,
         measurement,
