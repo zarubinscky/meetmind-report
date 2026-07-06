@@ -74,7 +74,7 @@ renderStatistics(report){
        renderOwners(report, options){
     return OwnersRenderer.render(report, options);
 },
-        renderArchitecture(report){
+        renderArchitecture(report, options){
     return ArchitectureRenderer.render(report, options);
 },
         renderFooter(report){
