@@ -78,41 +78,31 @@
 
             }
 
-            if (mode === "compact") {
+           if (mode === "compact") {
 
-                return `
-                    <div class="mm-architecture-compact">
-
-                        <strong>
-                            ${RenderHelpers.escape(
-                                section.title ||
-                                section.name ||
-                                ""
-                            )}
-                        </strong>
-
-                        <div class="mm-architecture-compact-items">
-
-                            ${cards.map(card => `
-
-                                <div class="mm-architecture-compact-item">
-
-                                    ${RenderHelpers.escape(
-                                        card.title ||
-                                        card.name ||
-                                        ""
-                                    )}
-
-                                </div>
-
-                            `).join("")}
-
-                        </div>
-
-                    </div>
-                `;
-
-            }
+    return `
+        <div class="mm-architecture-compact">
+            <strong>
+                ${RenderHelpers.escape(
+                    section.title ||
+                    section.name ||
+                    ""
+                )}
+            </strong>
+            <span class="mm-architecture-inline-items">
+                ${cards
+                    .map(card =>
+                        RenderHelpers.escape(
+                            card.title ||
+                            card.name ||
+                            ""
+                        )
+                    )
+                    .join(" • ")}
+            </span>
+        </div>
+    `;
+}
 
             return RenderHelpers.card(`
 
