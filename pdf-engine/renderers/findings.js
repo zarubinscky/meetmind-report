@@ -14,12 +14,15 @@
 
             const blocks = [];
 
-            if (report.executive_brief) {
+            if (
+               report.executive_brief &&
+               !options.hideExecutiveBrief
+            ) {
                 blocks.push({
-                    title: "Executive Brief",
-                    items: [report.executive_brief]
-                });
-            }
+               title: "Executive Brief",
+              items: [report.executive_brief]
+             });
+             }
 
             if (report.insights?.length) {
                 blocks.push({
