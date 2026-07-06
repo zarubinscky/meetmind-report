@@ -4,10 +4,16 @@
 
     window.OwnersRenderer = {
 
-        render(report){
+        render(report, options = {}) {
 
             const owners = report?.owners ?? [];
 
+            const mode =
+            options.layoutModes?.owners ??
+            "cards";
+
+            console.log("Owners mode:", mode);
+            
             if(!owners.length){
                 return "";
             }
