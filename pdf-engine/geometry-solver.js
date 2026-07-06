@@ -392,6 +392,14 @@ function measureReport(reportElement) {
     - DEFAULT_PAGE.marginTop
     - DEFAULT_PAGE.marginBottom;
 
+console.log("REPORT RECT:", reportRect.height);
+console.log("REPORT OFFSET:", reportElement.offsetHeight);
+console.log("REPORT SCROLL:", reportElement.scrollHeight);
+const lastSection =
+    Object.values(sections)
+        .sort((a, b) => b.bottom - a.bottom)[0];
+console.log("LAST SECTION BOTTOM:", lastSection.bottom);
+    
 return {
     totalHeight: Math.ceil(reportRect.height),
     availableHeight,
