@@ -120,3 +120,19 @@
     --mm-text-size: 13px;
     --mm-line-height: 1.25;
 }
+
+.mm-owners-inline{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.mm-owner-inline{
+    font-size:13px;
+    white-space:nowrap;
+}
+
+.mm-owner-compact{
+    padding:4px 0;
+    font-size:13px;
+}
