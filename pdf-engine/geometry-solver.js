@@ -358,18 +358,19 @@ Its only responsibility is computing positions.
         };
     }
 
-    window.GeometrySolver = {
-        version: "1.0.0",
-        solve
-    };
-
-    console.log("✅ Geometry Solver loaded.");
-})();
-
 function measureReport(reportElement) {
     return {
         totalHeight: 0,
         sections: {}
     };
-
 }
+
+window.GeometrySolver = {
+    version: "1.0.0",
+    solve,
+    measureReport
+};
+
+ console.log("✅ Geometry Solver loaded.");
+
+})();
