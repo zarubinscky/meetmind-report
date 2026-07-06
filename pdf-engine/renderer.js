@@ -63,13 +63,15 @@ renderStatistics(report){
     return SummaryRenderer.render(report);
 
 },
-      renderStrategicFindings(report){
-    return FindingsRenderer.render(report);
 
+        renderStrategicFindings(report, options){
+        return FindingsRenderer.render(report, options);
 },
-        renderTasks(report){
-    return TasksRenderer.render(report);
+
+        renderTasks(report, options){
+        return TasksRenderer.render(report, options);
 },
+        
        renderOwners(report, options){
     return OwnersRenderer.render(report, options);
 },
