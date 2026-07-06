@@ -120,6 +120,41 @@ async function evaluatePdfCandidate(report, candidateOptions) {
     };
 }
 
+async function findBestPdfCandidate(report) {
+
+    const candidates =
+        LayoutSearchEngine.generateReportCandidates();
+
+    let best = null;
+
+    for (const layoutModes of candidates) {
+
+        const result = await evaluatePdfCandidate(
+            report,
+            {
+                ...pdfBuilderOptions,
+                densityMode: "ultra",
+                layoutModes
+            }
+        );
+
+        console.log(
+            "Candidate",
+            layoutModes,
+            result.measurement.totalHeight
+        );
+
+        if (
+            !best ||
+            result.measurement.totalHeight <
+            best.measurement.totalHeight
+        ) {
+            best = result;
+        }
+
+    }
+    return best;
+}
 
 async function generateExecutivePdf() {
    const report = currentMeeting.report;
