@@ -157,52 +157,41 @@ async function findBestPdfCandidate(report) {
 }
 
 async function generateExecutivePdf() {
-   const report = currentMeeting.report;
-    let renderOptions = {
-    ...pdfBuilderOptions
-};
-   let html = await MeetMindPDF.generate(
-    report,
-    renderOptions
-);
     
-   const pdfRoot = document.createElement("div");
-   pdfRoot.className = "pdf-root";
-   pdfRoot.innerHTML = html;
-   document.body.appendChild(pdfRoot);
-   const measurement =
-      GeometrySolver.measureReport(
-        pdfRoot.querySelector(".mm-report")
- );
+    const report = currentMeeting.report;
 
-   const density =
-      DensityEngine.chooseDensity(measurement);
-    if (density !== renderOptions.densityMode) {
-    renderOptions.densityMode = density;
-}
-    
-   console.log("Measurement:", measurement);
-   console.log("Density:", density);
-    
+    const bestCandidate = await findBestPdfCandidate(report);
+
+    console.log("PDF EXPORT BEST:", bestCandidate.options.layoutModes);
+    console.log("PDF EXPORT HEIGHT:", bestCandidate.measurement.totalHeight);
+
+    const html = bestCandidate.html;
+
+    const pdfRoot = document.createElement("div");
+    pdfRoot.className = "pdf-root";
+
     pdfRoot.style.background = "#ffffff";
     pdfRoot.style.position = "fixed";
     pdfRoot.style.left = "-100000px";
     pdfRoot.style.top = "0";
     pdfRoot.style.pointerEvents = "none";
     pdfRoot.style.zIndex = "-1";
-    
-   pdfRoot.style.width = PDF_CONFIG.pageWidth + 'px';
-   pdfRoot.style.height = PDF_CONFIG.pageHeight + 'px';
-   
-await new Promise(resolve => setTimeout(resolve, 500));
+    pdfRoot.style.width = PDF_CONFIG.pageWidth + "px";
+
+    pdfRoot.innerHTML = html;
+    document.body.appendChild(pdfRoot);
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     const filename =
         sanitizePdfFilename(getPdfTitle()) +
         PDF_CONFIG.fileSuffix;
+
     const options = {
         margin: 0,
         filename,
         image: {
-            type: 'jpeg',
+            type: "jpeg",
             quality: 1
         },
         html2canvas: {
@@ -210,20 +199,20 @@ await new Promise(resolve => setTimeout(resolve, 500));
             useCORS: true
         },
         jsPDF: {
-            unit: 'px',
+            unit: "px",
             format: [PDF_CONFIG.pageWidth, PDF_CONFIG.pageHeight],
-            orientation: 'landscape'
+            orientation: "landscape"
         }
     };
-    
+
     try {
         await html2pdf()
             .set(options)
             .from(pdfRoot.querySelector(".mm-report"))
             .save();
-}  finally {
-    pdfRoot.remove();
-}
+    } finally {
+        pdfRoot.remove();
+    }
 }
 
 function buildPdfOptionsHtml() {
