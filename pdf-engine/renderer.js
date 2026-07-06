@@ -42,7 +42,7 @@
     : ""}
 
     ${options.architecture !== false
-        ? this.renderArchitecture(report)
+        ? this.renderArchitecture(report, options)
         : ""}
 
     ${options.footer !== false
@@ -76,7 +76,7 @@ renderStatistics(report){
     return OwnersRenderer.render(report, options);
 },
         renderArchitecture(report){
-    return ArchitectureRenderer.render(report);
+    return ArchitectureRenderer.render(report, options);
 },
         renderFooter(report){
     return FooterRenderer.render(report);
