@@ -210,6 +210,16 @@ function generateReportCandidates() {
         findings: "compact",
         owners: "inline"
     }
+
+{
+    ...defaults,
+    statistics: "compact",
+    tasks: "inline",
+    findings: "compact",
+    owners: "inline",
+    architecture: "compact"
+}
+        
 ];
     
 }
