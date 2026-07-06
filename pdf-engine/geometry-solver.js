@@ -358,12 +358,39 @@ Its only responsibility is computing positions.
         };
     }
 
+
 function measureReport(reportElement) {
+    if (!reportElement) {
+        return {
+            totalHeight: 0,
+            sections: {}
+        };
+    }
+
+    const sections = {};
+
+    reportElement
+        .querySelectorAll(".mm-pdf-section")
+        .forEach((section, index) => {
+
+            const className = Array.from(section.classList)
+                .find(name => name !== "mm-pdf-section") || `section-${index}`;
+
+            const rect = section.getBoundingClientRect();
+
+            sections[className] = {
+                height: Math.ceil(rect.height),
+                top: Math.ceil(rect.top),
+                bottom: Math.ceil(rect.bottom)
+            };
+        });
+    const reportRect = reportElement.getBoundingClientRect();
     return {
-        totalHeight: 0,
-        sections: {}
+        totalHeight: Math.ceil(reportRect.height),
+        sections
     };
 }
+    
 
 window.GeometrySolver = {
     version: "1.0.0",
