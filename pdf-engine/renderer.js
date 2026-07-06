@@ -15,6 +15,12 @@
         renderPage(report, options = {}){
 
         const densityClass = `mm-density-${options.densityMode || "normal"}`;
+
+            const pdfRules = {
+             hideExecutiveBrief:
+             options.hideExecutiveBrief !== false
+         };
+            
         return `
          <div class="mm-report ${densityClass}">
          ${options.header !== false
@@ -29,8 +35,14 @@
         ? this.renderSummary(report)
         : ""}
 
-    ${options.findings !== false
-    ? this.renderStrategicFindings(report, options)
+   ${options.findings !== false
+    ? this.renderStrategicFindings(
+        report,
+        {
+            ...options,
+            ...pdfRules
+        }
+    )
     : ""}
 
    ${options.tasks !== false
