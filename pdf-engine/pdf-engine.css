@@ -108,17 +108,21 @@
 }
 
 .mm-density-ultra {
-   --mm-stat-height:84px;
-   --mm-stat-value-size:30px;
-   --mm-stat-label-size:12px;
-   --mm-stat-gap:8px;
-   --mm-page-padding:32px; 
-   --mm-card-padding: 12px;
-    --mm-section-gap: 12px;
-    --mm-title-size: 28px;
-    --mm-section-title-size: 18px;
-    --mm-text-size: 13px;
-    --mm-line-height: 1.25;
+    --mm-stat-height: 56px;
+    --mm-stat-value-size: 24px;
+    --mm-stat-label-size: 10px;
+    --mm-stat-gap: 4px;
+
+    --mm-page-padding: 20px;
+
+    --mm-card-padding: 8px;
+    --mm-section-gap: 8px;
+
+    --mm-title-size: 24px;
+    --mm-section-title-size: 16px;
+
+    --mm-text-size: 12px;
+    --mm-line-height: 1.15;
 }
 
 .mm-owners-inline{
@@ -158,4 +162,48 @@
 .mm-task-inline{
     font-size:13px;
     white-space:nowrap;
+}
+
+.mm-density-ultra .mm-header-section {
+    margin-bottom: 8px;
+}
+
+.mm-density-ultra .mm-header-section .mm-pdf-card {
+    padding: 14px 18px;
+    border-radius: 12px;
+}
+
+.mm-density-ultra .mm-header {
+    min-height: auto;
+}
+
+.mm-density-ultra .mm-logo {
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.mm-density-ultra .mm-report-title {
+    font-size: 28px;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.mm-density-ultra .mm-statistics-section {
+    margin-bottom: 8px;
+}
+
+.mm-density-ultra .mm-stats-grid {
+    gap: 8px;
+}
+
+.mm-density-ultra .mm-stats-grid .mm-pdf-card {
+    min-height: var(--mm-stat-height);
+}
+
+.mm-density-ultra .mm-stat-value {
+    font-size: var(--mm-stat-value-size);
+}
+
+.mm-density-ultra .mm-stat-label {
+    font-size: var(--mm-stat-label-size);
 }
