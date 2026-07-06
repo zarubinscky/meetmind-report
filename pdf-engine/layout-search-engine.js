@@ -165,6 +165,49 @@
         return layout;
     }
 
+function generateReportCandidates() {
+    const defaults = LayoutRegistry.getDefaultModes();
+
+    return [
+
+        defaults,
+
+        {
+            ...defaults,
+            statistics: "compact"
+        },
+
+        {
+            ...defaults,
+            statistics: "compact",
+            tasks: "compact"
+        },
+
+        {
+            ...defaults,
+            statistics: "compact",
+            tasks: "compact",
+            findings: "compact"
+        },
+
+        {
+            ...defaults,
+            statistics: "compact",
+            tasks: "compact",
+            findings: "compact",
+            owners: "compact"
+        },
+
+        {
+            ...defaults,
+            statistics: "compact",
+            tasks: "compact",
+            findings: "compact",
+            owners: "inline"
+        }
+    ];
+}
+    
     window.LayoutSearchEngine = {
         generateCandidates,
         scoreCandidate,
