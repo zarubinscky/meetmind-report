@@ -4,58 +4,112 @@
 
     window.TasksRenderer = {
 
-        render(report){
+       render(report, options = {}) {
 
-            const tasks = report?.tasks ?? [];
+    const tasks = report?.tasks ?? [];
 
-            if(!tasks.length){
-                return "";
-            }
+    const mode =
+        options.layoutModes?.tasks ??
+        "cards";
 
-            return RenderHelpers.section(
+    console.log("Tasks mode:", mode);
 
-                "Tasks",
+    if (!tasks.length) {
+        return "";
+    }
 
-                tasks.map(task =>
+    let content = "";
 
-                    RenderHelpers.card(`
+    switch (mode) {
 
-                        <div class="mm-task">
+        case "inline":
 
-                            <div class="mm-task-title">
+            content = `
+                <div class="mm-tasks-inline">
+                    ${tasks.map(task => `
+                        <span class="mm-task-inline">
+                            ${RenderHelpers.escape(
+                                task.title ||
+                                task.task ||
+                                task.text ||
+                                ""
+                            )}
+                        </span>
+                    `).join(", ")}
+                </div>
+            `;
 
-                                ${RenderHelpers.escape(
-                                    task.title ||
-                                    task.task ||
-                                    task.text ||
-                                    ""
-                                )}
+            break;
 
-                            </div>
+        case "compact":
 
-                            ${
-                                task.deadline
-                                    ? `
-                                        <div class="mm-task-deadline">
+            content = tasks.map(task => `
+                <div class="mm-task-compact">
 
-                                            ${RenderHelpers.badge(task.deadline)}
+                    <span class="mm-task-compact-title">
+                        ${RenderHelpers.escape(
+                            task.title ||
+                            task.task ||
+                            task.text ||
+                            ""
+                        )}
+                    </span>
 
-                                        </div>
-                                    `
-                                    : ""
-                            }
+                    ${
+                        task.deadline
+                            ? RenderHelpers.badge(task.deadline)
+                            : ""
+                    }
+
+                </div>
+            `).join("");
+
+            break;
+
+        default:
+
+            content = tasks.map(task =>
+
+                RenderHelpers.card(`
+
+                    <div class="mm-task">
+
+                        <div class="mm-task-title">
+
+                            ${RenderHelpers.escape(
+                                task.title ||
+                                task.task ||
+                                task.text ||
+                                ""
+                            )}
 
                         </div>
 
-                    `)
+                        ${
+                            task.deadline
+                                ? `
+                                    <div class="mm-task-deadline">
+                                        ${RenderHelpers.badge(task.deadline)}
+                                    </div>
+                                `
+                                : ""
+                        }
 
-                ).join(""),
+                    </div>
 
-                "mm-tasks-section"
+                `)
 
-            );
+            ).join("");
 
-        }
+    }
+
+    return RenderHelpers.section(
+        "Tasks",
+        content,
+        "mm-tasks-section"
+    );
+
+}
 
     };
 
