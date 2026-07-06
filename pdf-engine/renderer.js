@@ -6,6 +6,7 @@
 
        render(report, options = {}) {
             console.log("Renderer started");
+            console.log("Renderer options:", options);
             const html = this.renderPage(report, options);
     
             return html;
