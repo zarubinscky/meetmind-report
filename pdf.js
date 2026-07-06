@@ -87,6 +87,41 @@ function normalizePdfItem(item) {
     };
 }
 
+async function evaluatePdfCandidate(report, candidateOptions) {
+    const html = await MeetMindPDF.generate(
+        report,
+        candidateOptions
+    );
+
+    const root = document.createElement("div");
+    root.className = "pdf-root";
+    root.innerHTML = html;
+
+    root.style.position = "fixed";
+    root.style.left = "-100000px";
+    root.style.top = "0";
+    root.style.pointerEvents = "none";
+    root.style.zIndex = "-1";
+
+    root.style.width = PDF_CONFIG.pageWidth + "px";
+    root.style.height = PDF_CONFIG.pageHeight + "px";
+
+    document.body.appendChild(root);
+
+    const measurement = GeometrySolver.measureReport(
+        root.querySelector(".mm-report")
+    );
+
+    root.remove();
+
+    return {
+        html,
+        measurement,
+        options: candidateOptions
+    };
+}
+
+
 async function generateExecutivePdf() {
    const report = currentMeeting.report;
     let renderOptions = {
