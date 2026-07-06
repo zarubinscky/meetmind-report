@@ -209,7 +209,7 @@ function generateReportCandidates() {
         tasks: "inline",
         findings: "compact",
         owners: "inline"
-    }
+    },
 
 {
     ...defaults,
