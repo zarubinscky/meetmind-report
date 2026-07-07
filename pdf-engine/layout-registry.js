@@ -1,18 +1,25 @@
 (function () {
 
     "use strict";
+
     const BLOCK_LAYOUT_MODES = {
 
         statistics: [
             {
                 id: "default",
                 label: "Default statistics",
-                penalty: 0
+                penalty: 0,
+                level: 0,
+                next: "compact",
+                canHide: false
             },
             {
                 id: "compact",
                 label: "Compact statistics",
-                penalty: 1
+                penalty: 1,
+                level: 1,
+                next: null,
+                canHide: false
             }
         ],
 
@@ -20,12 +27,29 @@
             {
                 id: "cards",
                 label: "Cards",
-                penalty: 0
+                penalty: 0,
+                level: 0,
+                next: "compact",
+                canHide: false,
+                preserveReadingOrder: true
             },
             {
                 id: "compact",
                 label: "Compact findings",
-                penalty: 1
+                penalty: 1,
+                level: 1,
+                next: "inline",
+                canHide: false,
+                preserveReadingOrder: true
+            },
+            {
+                id: "inline",
+                label: "Inline findings",
+                penalty: 2,
+                level: 2,
+                next: null,
+                canHide: false,
+                preserveReadingOrder: true
             }
         ],
 
@@ -33,12 +57,26 @@
             {
                 id: "cards",
                 label: "Task cards",
-                penalty: 0
+                penalty: 0,
+                level: 0,
+                next: "compact",
+                canHide: true
             },
             {
                 id: "compact",
                 label: "Compact tasks",
-                penalty: 1
+                penalty: 1,
+                level: 1,
+                next: "inline",
+                canHide: true
+            },
+            {
+                id: "inline",
+                label: "Inline tasks",
+                penalty: 2,
+                level: 2,
+                next: null,
+                canHide: true
             }
         ],
 
@@ -46,33 +84,56 @@
             {
                 id: "cards",
                 label: "Owner cards",
-                penalty: 0
+                penalty: 0,
+                level: 0,
+                next: "compact",
+                canHide: true
             },
             {
                 id: "compact",
                 label: "Compact owners",
-                penalty: 1
+                penalty: 1,
+                level: 1,
+                next: "inline",
+                canHide: true
             },
             {
                 id: "inline",
                 label: "Inline owners",
-                penalty: 2
+                penalty: 2,
+                level: 2,
+                next: null,
+                canHide: true
             }
         ],
 
-         architecture: [
-        {
-            id: "cards",
-            label: "Architecture cards",
-            penalty: 0
-        },
+        architecture: [
+            {
+                id: "cards",
+                label: "Architecture cards",
+                penalty: 0,
+                level: 0,
+                next: "compact",
+                canHide: true
+            },
+            {
+                id: "compact",
+                label: "Compact architecture",
+                penalty: 1,
+                level: 1,
+                next: "inline",
+                canHide: true
+            },
+            {
+                id: "inline",
+                label: "Inline architecture",
+                penalty: 2,
+                level: 2,
+                next: null,
+                canHide: true
+            }
+        ]
 
-        {
-            id: "compact",
-            label: "Compact architecture",
-            penalty: 1
-        }
-    ]
     };
 
     function getModes(blockId) {
@@ -80,9 +141,16 @@
             {
                 id: "default",
                 label: "Default",
-                penalty: 0
+                penalty: 0,
+                level: 0,
+                next: null,
+                canHide: true
             }
         ];
+    }
+
+    function getMode(blockId, modeId) {
+        return getModes(blockId).find(mode => mode.id === modeId) || null;
     }
 
     function getDefaultModes() {
@@ -97,10 +165,42 @@
 
     }
 
+    function getNextMode(blockId, currentModeId) {
+        const currentMode = getMode(blockId, currentModeId);
+
+        if (!currentMode || !currentMode.next) {
+            return null;
+        }
+
+        return getMode(blockId, currentMode.next);
+    }
+
+    function canDegrade(blockId, currentModeId) {
+        return !!getNextMode(blockId, currentModeId);
+    }
+
+    function degrade(layoutModes, blockId) {
+        const currentModeId = layoutModes[blockId];
+        const nextMode = getNextMode(blockId, currentModeId);
+
+        if (!nextMode) {
+            return layoutModes;
+        }
+
+        return {
+            ...layoutModes,
+            [blockId]: nextMode.id
+        };
+    }
+
     window.LayoutRegistry = {
-        version: "1.0.0",
+        version: "1.1.0",
         getModes,
-        getDefaultModes
+        getMode,
+        getDefaultModes,
+        getNextMode,
+        canDegrade,
+        degrade
     };
 
     console.log("✅ Layout Registry loaded.");
