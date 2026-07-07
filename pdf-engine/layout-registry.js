@@ -204,5 +204,4 @@
     };
 
     console.log("✅ Layout Registry loaded.");
-
 })();
