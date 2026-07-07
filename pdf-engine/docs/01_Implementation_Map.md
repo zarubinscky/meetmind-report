@@ -156,3 +156,17 @@ Status values:
 | RP-002 | Apply selected layout modes | TBD | TBD | ⚪ Not audited | TBD | TBD |
 | RP-003 | Measure generated DOM | TBD | TBD | ⚪ Not audited | TBD | TBD |
 | RP-004 | Export selected candidate to PDF | TBD | TBD | ⚪ Not audited | TBD | TBD |
+
+
+## Engine API Pipeline Audit
+
+| Stage | Module | Responsibility | Current File(s) | Status | Gap | Decision |
+|------:|--------|----------------|-----------------|--------|-----|----------|
+| 1 | Block Registry | Defines available report blocks | TBD | ⚪ Not audited | TBD | TBD |
+| 2 | Geometry Solver | Computes block geometry / weights / measurement | TBD | ⚪ Not audited | TBD | TBD |
+| 3 | Layout Search Engine | Generates and evaluates candidate layouts | TBD | ⚪ Not audited | TBD | TBD |
+| 4 | Geometry Generator | Converts selected layout into renderable geometry | TBD | ⚪ Not audited | TBD | TBD |
+| 5 | Density Engine | Applies density modes | TBD | ⚪ Not audited | TBD | TBD |
+| 6 | Overflow Engine | Handles overflow strategy / fallback | TBD | ⚪ Not audited | TBD | TBD |
+| 7 | Renderer | Renders final HTML | TBD | ⚪ Not audited | TBD | TBD |
+| 8 | PDF Export | Converts selected HTML to PDF | TBD | ⚪ Not audited | TBD | TBD |
