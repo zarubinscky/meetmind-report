@@ -207,3 +207,14 @@
 .mm-density-ultra .mm-stat-label {
     font-size: var(--mm-stat-label-size);
 }
+
+    display:flex;
+    gap:16px;
+    margin-bottom:16px;
+    align-items:flex-start;
+}
+
+.mm-findings-adaptive-cell{
+    flex:1;
+    min-width:0;
+}
