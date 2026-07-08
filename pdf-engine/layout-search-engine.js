@@ -227,13 +227,8 @@ function generateReportCandidates() {
     function generateAdaptiveCandidates() {
     const defaults = LayoutRegistry.getDefaultModes();
 
-    const degradationOrder = [
-        "statistics",
-        "tasks",
-        "owners",
-        "architecture",
-        "findings"
-    ];
+   const degradationOrder =
+    LayoutRegistry.getDegradationOrder();
 
     const candidates = [];
     let current = { ...defaults };
