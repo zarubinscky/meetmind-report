@@ -174,6 +174,7 @@ if (
     }
 
     function search(layout) {
+        console.log("SEARCH ENGINE START");
         const findingsGroup = layout.layout.findings;
 
         if (!findingsGroup || !findingsGroup.rows) {
