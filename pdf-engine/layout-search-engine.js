@@ -355,7 +355,6 @@ function generateAdaptiveCandidates(weights = null) {
     generateCandidates,
     generateReportCandidates,
     generateAdaptiveCandidates,
-    generateAdaptiveCandidates,
     scoreCandidate,
     chooseBestCandidate,
     search
