@@ -91,6 +91,47 @@
     return result;
 }
 
+
+    function calculateDensity(items) {
+
+    if (!Array.isArray(items) || !items.length) {
+        return 0;
+    }
+
+    const chars = items.reduce((sum, item) => {
+        return sum + JSON.stringify(item || {}).length;
+    }, 0);
+
+    return chars / items.length;
+
+}
+
+function calculateHierarchyScore(items) {
+
+    if (!Array.isArray(items) || !items.length) {
+        return 0;
+    }
+
+    return items.reduce((score, item) => {
+
+        if (typeof item !== "object") {
+            return score + 1;
+        }
+
+        let value = 1;
+
+        if (item.title) value += 1;
+        if (item.description) value += 1;
+        if (item.details) value += 1;
+
+        return score + value;
+
+    }, 0);
+}
+    
+
+    
+
     function clamp(value, min, max) {
         return Math.max(min, Math.min(max, value));
     }
@@ -462,6 +503,8 @@ window.GeometrySolver = {
     solve,
     measureReport,
     calculateContentWeights
+    calculateDensity,
+    calculateHierarchyScore
 };
     
  console.log("✅ Geometry Solver loaded.");
