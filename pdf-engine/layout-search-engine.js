@@ -221,14 +221,13 @@ function generateReportCandidates() {
 }
         
 ];
-    
 }
 
-    function generateAdaptiveCandidates() {
+function generateAdaptiveCandidates(weights = null) {
     const defaults = LayoutRegistry.getDefaultModes();
 
-   const degradationOrder =
-    LayoutRegistry.getDegradationOrder();
+    const degradationOrder =
+        LayoutRegistry.getDegradationOrder();
 
     const candidates = [];
     let current = { ...defaults };
@@ -241,6 +240,10 @@ function generateReportCandidates() {
             candidates.push({ ...current });
         }
     });
+
+    if (weights) {
+        console.log("Adaptive candidates generated with weights:", weights);
+    }
 
     return candidates;
 }
