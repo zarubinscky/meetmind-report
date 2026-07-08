@@ -86,6 +86,31 @@ window.GeometryGenerator = {
 
     }
 
+    generateAdaptiveGeometry(weights, blocks){
+
+    if(!weights){
+        return this.createThreeEqual(blocks);
+    }
+
+    const insightWeight =
+        weights.insights?.weight ?? 0;
+
+    const decisionWeight =
+        weights.decisions?.weight ?? 0;
+
+    const riskWeight =
+        weights.risks?.weight ?? 0;
+
+    console.log("Adaptive geometry weights:",{
+        insightWeight,
+        decisionWeight,
+        riskWeight
+    });
+
+    return this.createThreeEqual(blocks);
+
+},
+
 };
 
 console.log("✅ Geometry Generator loaded.");
