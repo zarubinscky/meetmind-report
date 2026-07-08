@@ -319,6 +319,13 @@ function generateReportCandidates() {
     console.log("Adaptive candidate:", geometry);
 
    const modes = LayoutRegistry.getDefaultModes();
+
+   console.log("=== ADAPTIVE RETURN ===");
+   console.log({
+   findings: "adaptive",
+   findingsLayout: geometry
+});
+        
 return [
     {
         ...modes,
