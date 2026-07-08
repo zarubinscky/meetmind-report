@@ -223,10 +223,38 @@ function generateReportCandidates() {
 ];
     
 }
+
+    function generateAdaptiveCandidates() {
+    const defaults = LayoutRegistry.getDefaultModes();
+
+    const degradationOrder = [
+        "statistics",
+        "tasks",
+        "owners",
+        "architecture",
+        "findings"
+    ];
+
+    const candidates = [];
+    let current = { ...defaults };
+
+    candidates.push({ ...current });
+
+    degradationOrder.forEach(blockId => {
+        while (LayoutRegistry.canDegrade(blockId, current[blockId])) {
+            current = LayoutRegistry.degrade(current, blockId);
+            candidates.push({ ...current });
+        }
+    });
+
+    return candidates;
+}
     
-   window.LayoutSearchEngine = {
+    
+  window.LayoutSearchEngine = {
     generateCandidates,
     generateReportCandidates,
+    generateAdaptiveCandidates,
     scoreCandidate,
     chooseBestCandidate,
     search
