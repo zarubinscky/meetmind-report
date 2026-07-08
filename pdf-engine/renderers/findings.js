@@ -146,50 +146,40 @@
         },
 
 renderAdaptive(blocks, layout) {
-  console.log("===== LAYOUT =====");
-  console.dir(layout, { depth: null });
 
-    if (!blocks || !blocks.length) {
-        return "";
-    }
+    console.log("===== LAYOUT =====");
+    console.dir(layout, { depth: null });
 
-    if (!layout || !layout.name) {
+    if (!layout?.rows?.length) {
         return blocks.map(block =>
             this.renderBlock(block, "cards")
         ).join("");
     }
 
-    let rows;
+    return layout.rows.map(row => `
 
-    if (layout.name === "first-two-then-third") {
-        rows = [
-            blocks.slice(0, 2),
-            blocks.slice(2)
-        ];
-    } else if (layout.name === "dominant-first") {
-        rows = [
-            blocks.slice(0, 1),
-            blocks.slice(1)
-        ];
-    } else {
-        rows = [
-            blocks
-        ];
-    }
-    return rows.map(row => {
-        if (!row.length) {
-            return "";
-        }
-        return `
-            <div class="mm-findings-adaptive-row">
-                ${row.map(block => `
-                    <div class="mm-findings-adaptive-cell">
-                        ${this.renderBlock(block, "cards")}
-                    </div>
-                `).join("")}
-            </div>
-        `;
-    }).join("");
+        <div class="mm-findings-adaptive-row">
+
+            ${row.blocks.map(item => `
+
+                <div class="mm-findings-adaptive-cell">
+
+                    ${RenderHelpers.card(`
+
+                        <h3>${RenderHelpers.escape(item.title)}</h3>
+
+                        <p>${RenderHelpers.escape(item.details || "")}</p>
+
+                    `)}
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+    `).join("");
+
 },
 
     };
