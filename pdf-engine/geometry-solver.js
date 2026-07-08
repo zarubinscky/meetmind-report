@@ -46,6 +46,51 @@
         };
     }
 
+    function calculateContentWeights(report) {
+    const result = {};
+
+    [
+        "insights",
+        "decisions",
+        "risks"
+    ].forEach(section => {
+
+        const items = report[section] || [];
+        const itemCount = items.length;
+        const chars = items.reduce((sum, item) => {
+
+            if (typeof item === "string") {
+                return sum + item.length;
+            }
+
+            return sum +
+                JSON.stringify(item).length;
+
+        }, 0);
+
+        result[section] = {
+            items: itemCount,
+            chars,
+            rawWeight:
+                itemCount * 10 +
+                chars * 0.02
+        };
+    });
+
+    const total =
+        Object.values(result)
+            .reduce(
+                (s, b) => s + b.rawWeight,
+                0
+            ) || 1;
+
+    Object.values(result).forEach(block => {
+        block.weight =
+            block.rawWeight / total;
+    });
+    return result;
+}
+
     function clamp(value, min, max) {
         return Math.max(min, Math.min(max, value));
     }
@@ -415,9 +460,10 @@ return {
 window.GeometrySolver = {
     version: "1.0.0",
     solve,
-    measureReport
+    measureReport,
+    calculateContentWeights
 };
-
+    
  console.log("✅ Geometry Solver loaded.");
 
 })();
