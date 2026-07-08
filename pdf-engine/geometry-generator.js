@@ -158,6 +158,28 @@ if (
     return this.createFirstTwoThenThird(blocks);
 }
 
+// Decisions + Risks
+if (
+    insightCount === 0 &&
+    decisionCount > 0 &&
+    riskCount > 0
+) {
+
+    if (decisionWeight >= 0.60) {
+        return this.createDominantFirst(blocks);
+    }
+
+    return this.createFirstTwoThenThird(blocks);
+}
+
+// Only Decisions or Only Risks
+if (
+    (decisionCount > 0 && insightCount === 0 && riskCount === 0) ||
+    (riskCount > 0 && insightCount === 0 && decisionCount === 0)
+) {
+    return this.createThreeEqual(blocks);
+}
+
 if (insightWeight >= 0.55) {
     return this.createDominantFirst(blocks);
 }
