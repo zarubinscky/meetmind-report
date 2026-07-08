@@ -334,34 +334,6 @@ return [
     }
 ];
 }
-
-    
-    
-function generateAdaptiveCandidates(weights = null) {
-    const defaults = LayoutRegistry.getDefaultModes();
-
-    const degradationOrder =
-        LayoutRegistry.getDegradationOrder();
-
-    const candidates = [];
-    let current = { ...defaults };
-
-    candidates.push({ ...current });
-
-    degradationOrder.forEach(blockId => {
-        while (LayoutRegistry.canDegrade(blockId, current[blockId])) {
-            current = LayoutRegistry.degrade(current, blockId);
-            candidates.push({ ...current });
-        }
-    });
-
-    if (weights) {
-        console.log("Adaptive candidates generated with weights:", weights);
-    }
-
-    return candidates;
-}
-    
     
   window.LayoutSearchEngine = {
     generateCandidates,
