@@ -2,6 +2,14 @@
 
     "use strict";
 
+    const DEGRADATION_ORDER = [
+    "statistics",
+    "tasks",
+    "owners",
+    "architecture",
+    "findings"
+];
+
     const BLOCK_LAYOUT_MODES = {
 
         statistics: [
@@ -193,15 +201,20 @@
         };
     }
 
+    function getDegradationOrder() {
+    return [...DEGRADATION_ORDER];
+}
+
     window.LayoutRegistry = {
-        version: "1.1.0",
-        getModes,
-        getMode,
-        getDefaultModes,
-        getNextMode,
-        canDegrade,
-        degrade
-    };
+    version: "1.1.0",
+    getModes,
+    getMode,
+    getDefaultModes,
+    getNextMode,
+    canDegrade,
+    degrade,
+    getDegradationOrder
+};
 
     console.log("✅ Layout Registry loaded.");
 })();
