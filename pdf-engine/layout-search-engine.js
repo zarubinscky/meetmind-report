@@ -181,8 +181,32 @@ if (
         }
 
         const findings = findingsGroup.rows.flatMap((row) => row.blocks);
+        const report = {
+    insights: findings.filter(b => b.type === "insight"),
+    decisions: findings.filter(b => b.type === "decision"),
+    risks: findings.filter(b => b.type === "risk")
+};
 
-        const candidates = generateCandidates(findings);
+const weights =
+    GeometrySolver.calculateContentWeights(report);
+
+const stats = {
+    insights: report.insights.length,
+    decisions: report.decisions.length,
+    risks: report.risks.length
+};
+
+const adaptive =
+
+    GeometryGenerator.generateAdaptiveGeometry(
+        weights,
+        findings,
+        stats
+    );
+
+const candidates = [adaptive];
+
+        
         const evaluatedCandidates = candidates
             .map(scoreCandidate)
             .sort((a, b) => b.score - a.score);
