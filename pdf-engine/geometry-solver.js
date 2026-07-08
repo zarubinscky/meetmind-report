@@ -502,7 +502,7 @@ window.GeometrySolver = {
     version: "1.0.0",
     solve,
     measureReport,
-    calculateContentWeights
+    calculateContentWeights,
     calculateDensity,
     calculateHierarchyScore
 };
