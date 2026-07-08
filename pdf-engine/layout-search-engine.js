@@ -283,6 +283,48 @@ function generateReportCandidates() {
 ];
 }
 
+    function generateAdaptiveCandidates(report) {
+
+    const weights =
+        GeometrySolver.calculateContentWeights(report);
+
+    const stats = {
+        insights: report.insights?.length || 0,
+        decisions: report.decisions?.length || 0,
+        risks: report.risks?.length || 0
+    };
+
+    const findings = [
+        ...(report.insights || []).map(i => ({
+            ...i,
+            type: "insight"
+        })),
+        ...(report.decisions || []).map(i => ({
+            ...i,
+            type: "decision"
+        })),
+        ...(report.risks || []).map(i => ({
+            ...i,
+            type: "risk"
+        }))
+    ];
+
+    const geometry =
+        GeometryGenerator.generateAdaptiveGeometry(
+            weights,
+            findings,
+            stats
+        );
+
+    console.log("Adaptive candidate:", geometry);
+
+    return [
+        LayoutRegistry.getDefaultModes()
+    ];
+}
+
+    
+    
 function generateAdaptiveCandidates(weights = null) {
     const defaults = LayoutRegistry.getDefaultModes();
 
@@ -312,6 +354,7 @@ function generateAdaptiveCandidates(weights = null) {
   window.LayoutSearchEngine = {
     generateCandidates,
     generateReportCandidates,
+    generateAdaptiveCandidates,
     generateAdaptiveCandidates,
     scoreCandidate,
     chooseBestCandidate,
