@@ -208,6 +208,7 @@
     font-size: var(--mm-stat-label-size);
 }
 
+   .mm-findings-adaptive-row{
     display:flex;
     gap:16px;
     margin-bottom:16px;
