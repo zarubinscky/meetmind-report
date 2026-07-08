@@ -146,7 +146,8 @@
         },
 
 renderAdaptive(blocks, layout) {
-    console.log("Render adaptive findings:", layout);
+  console.log("===== LAYOUT =====");
+  console.dir(layout, { depth: null });
 
     if (!blocks || !blocks.length) {
         return "";
