@@ -149,6 +149,7 @@ renderAdaptive(blocks, layout) {
 
     console.log("===== LAYOUT =====");
     console.dir(layout, { depth: null });
+    console.log("blocks:", blocks);
 
     if (!layout?.rows?.length) {
         return blocks.map(block =>
