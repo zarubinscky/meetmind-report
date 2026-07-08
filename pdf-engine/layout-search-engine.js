@@ -4,16 +4,41 @@
     function generateCandidates(findings) {
         const count = findings.length;
 
-        // New adaptive engine (temporary integration)
-       if (
-          window.GeometryGenerator &&
-          window.GeometrySolver
-       ) {
 
-     console.log("Using adaptive Geometry Generator");
+        // New adaptive geometry
 
-      }
+if (
+    window.GeometryGenerator &&
+    window.GeometrySolver &&
+    findings.length >= 1
+) {
 
+    const report = {
+        insights: findings,
+        decisions: [],
+        risks: []
+    };
+
+    const weights =
+        GeometrySolver.calculateContentWeights(report);
+
+    const stats = {
+        insights: findings.length,
+        decisions: 0,
+        risks: 0
+    };
+
+    const adaptive =
+        GeometryGenerator.generateAdaptiveGeometry(
+            weights,
+            findings,
+            stats
+        );
+
+    console.log("Adaptive candidate:", adaptive);
+}
+
+        
         if (count === 1) {
             return [
                 {
