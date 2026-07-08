@@ -107,7 +107,35 @@ window.GeometryGenerator = {
         riskWeight
     });
 
+    // Only one block
+if (blocks.length <= 1) {
     return this.createThreeEqual(blocks);
+}
+
+// Two blocks
+if (blocks.length === 2) {
+
+    if (Math.abs(insightWeight - decisionWeight) < 0.15) {
+        return this.createThreeEqual(blocks);
+    }
+
+    return this.createDominantFirst(blocks);
+}
+
+// Three or more blocks
+
+if (insightWeight >= 0.55) {
+    return this.createDominantFirst(blocks);
+}
+
+if (
+    Math.abs(insightWeight - decisionWeight) < 0.12 &&
+    Math.abs(decisionWeight - riskWeight) < 0.12
+) {
+    return this.createThreeEqual(blocks);
+}
+
+return this.createFirstTwoThenThird(blocks);
 
 },
 
