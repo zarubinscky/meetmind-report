@@ -59,14 +59,18 @@
             return RenderHelpers.section(
 
     "Strategic Findings",
-    blocks.map(block =>
-
+  mode === "adaptive"
+    ? this.renderAdaptive(
+        blocks,
+        options.layoutModes?.findingsLayout
+    )
+    : blocks.map(block =>
         this.renderBlock(
             block,
             mode,
             options.layoutModes?.findingsLayout
         )
-    ).join(""),
+    ).join("")
     "mm-strategic-findings"
 );
 
@@ -91,15 +95,8 @@
 
             }
 
-            if (mode === "adaptive") {
-    console.log("Adaptive layout in renderer:", layout);
-    return `
-        <pre>${JSON.stringify(layout, null, 2)}</pre>
-    `;
-}
 
             if (mode === "compact") {
-
                 return `
                     <div class="mm-findings-compact">
 
@@ -146,7 +143,26 @@
 
             `);
 
-        }
+        },
+
+renderAdaptive(blocks, layout) {
+    console.log("Render adaptive findings:", layout);
+    if (!layout || !layout.rows) {
+        return blocks.map(block =>
+            this.renderBlock(block, "cards")
+        ).join("");
+    }
+
+    return layout.rows.map(row => `
+        <div class="mm-findings-adaptive-row">
+            ${row.blocks.map(block => `
+                <div class="mm-findings-adaptive-cell">
+                    ${this.renderBlock(block, "cards")}
+                </div>
+            `).join("")}
+        </div>
+    `).join("");
+}
 
     };
 
