@@ -4,6 +4,16 @@
     function generateCandidates(findings) {
         const count = findings.length;
 
+        // New adaptive engine (temporary integration)
+       if (
+          window.GeometryGenerator &&
+          window.GeometrySolver
+       ) {
+
+     console.log("Using adaptive Geometry Generator");
+
+      }
+
         if (count === 1) {
             return [
                 {
