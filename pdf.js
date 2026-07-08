@@ -126,6 +126,10 @@ async function findBestPdfCandidate(report) {
     LayoutSearchEngine.generateAdaptiveCandidates(report);
     console.log("PDF candidates:", candidates);
 
+    console.log("First candidate:", candidates[0]);
+    console.log("findings mode:", candidates[0]?.findings);
+    console.log("findings layout:", candidates[0]?.findingsLayout);
+
     let best = null;
 
     console.log("Candidates array:", candidates);
