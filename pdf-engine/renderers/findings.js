@@ -70,7 +70,7 @@
             mode,
             options.layoutModes?.findingsLayout
         )
-    ).join("")
+    ).join(""),
     "mm-strategic-findings"
 );
 
