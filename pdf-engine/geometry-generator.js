@@ -84,7 +84,7 @@ window.GeometryGenerator = {
             }))
         };
 
-    }
+    },
 
     generateAdaptiveGeometry(weights, blocks){
 
