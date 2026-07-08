@@ -60,7 +60,10 @@ window.GeometryGenerator = {
     },
 
     createFirstTwoThenThird(blocks){
-
+console.log("CREATE first-two-then-third input blocks:", blocks.length);
+console.log("CREATE first-two-then-third row 1:", blocks.slice(0, 2).length);
+console.log("CREATE first-two-then-third row 2:", blocks.slice(2).length);
+        
         return {
             name:"first-two-then-third",
             rows:[
