@@ -147,22 +147,49 @@
 
 renderAdaptive(blocks, layout) {
     console.log("Render adaptive findings:", layout);
-    if (!layout || !layout.rows) {
+
+    if (!blocks || !blocks.length) {
+        return "";
+    }
+
+    if (!layout || !layout.name) {
         return blocks.map(block =>
             this.renderBlock(block, "cards")
         ).join("");
     }
 
-    return layout.rows.map(row => `
-        <div class="mm-findings-adaptive-row">
-            ${row.blocks.map(block => `
-                <div class="mm-findings-adaptive-cell">
-                    ${this.renderBlock(block, "cards")}
-                </div>
-            `).join("")}
-        </div>
-    `).join("");
-}
+    let rows;
+
+    if (layout.name === "first-two-then-third") {
+        rows = [
+            blocks.slice(0, 2),
+            blocks.slice(2)
+        ];
+    } else if (layout.name === "dominant-first") {
+        rows = [
+            blocks.slice(0, 1),
+            blocks.slice(1)
+        ];
+    } else {
+        rows = [
+            blocks
+        ];
+    }
+    return rows.map(row => {
+        if (!row.length) {
+            return "";
+        }
+        return `
+            <div class="mm-findings-adaptive-row">
+                ${row.map(block => `
+                    <div class="mm-findings-adaptive-cell">
+                        ${this.renderBlock(block, "cards")}
+                    </div>
+                `).join("")}
+            </div>
+        `;
+    }).join("");
+},
 
     };
 
