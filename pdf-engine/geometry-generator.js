@@ -86,7 +86,7 @@ window.GeometryGenerator = {
 
     },
 
-    generateAdaptiveGeometry(weights, blocks){
+    generateAdaptiveGeometry(weights, blocks, stats = {}){
 
     if(!weights){
         return this.createThreeEqual(blocks);
@@ -101,12 +101,23 @@ window.GeometryGenerator = {
     const riskWeight =
         weights.risks?.weight ?? 0;
 
+    const insightCount = stats.insights ?? 0;
+    const decisionCount = stats.decisions ?? 0;
+    const riskCount = stats.risks ?? 0;
+
     console.log("Adaptive geometry weights:",{
         insightWeight,
         decisionWeight,
         riskWeight
     });
 
+    console.log("Adaptive geometry stats:", {
+       insightCount,
+       decisionCount,
+       riskCount
+    });
+
+        
     // Only one block
 if (blocks.length <= 1) {
     return this.createThreeEqual(blocks);
