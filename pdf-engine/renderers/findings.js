@@ -58,19 +58,21 @@
 
             return RenderHelpers.section(
 
-                "Strategic Findings",
+    "Strategic Findings",
+    blocks.map(block =>
 
-                blocks.map(block =>
-                    this.renderBlock(block, mode)
-                ).join(""),
-
-                "mm-strategic-findings"
-
-            );
+        this.renderBlock(
+            block,
+            mode,
+            options.layoutModes?.findingsLayout
+        )
+    ).join(""),
+    "mm-strategic-findings"
+);
 
         },
 
-        renderBlock(block, mode) {
+        renderBlock(block, mode, layout) {
 
             if (mode === "inline") {
 
@@ -88,6 +90,13 @@
                 `;
 
             }
+
+            if (mode === "adaptive") {
+    console.log("Adaptive layout in renderer:", layout);
+    return `
+        <pre>${JSON.stringify(layout, null, 2)}</pre>
+    `;
+}
 
             if (mode === "compact") {
 
