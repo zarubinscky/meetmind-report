@@ -135,6 +135,29 @@ if (blocks.length === 2) {
 
 // Three or more blocks
 
+// Only Insights
+if (
+    insightCount > 0 &&
+    decisionCount === 0 &&
+    riskCount === 0
+) {
+    return this.createThreeEqual(blocks);
+}
+
+// Insights + Risks
+if (
+    insightCount > 0 &&
+    decisionCount === 0 &&
+    riskCount > 0
+) {
+
+    if (insightWeight >= 0.60) {
+        return this.createDominantFirst(blocks);
+    }
+
+    return this.createFirstTwoThenThird(blocks);
+}
+
 if (insightWeight >= 0.55) {
     return this.createDominantFirst(blocks);
 }
