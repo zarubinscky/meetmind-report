@@ -24,23 +24,40 @@
 
         case "inline":
 
-            content = `
-                <div class="mm-tasks-inline">
-                    ${tasks.map(task => `
-                        <span class="mm-task-inline">
-                            ${RenderHelpers.escape(
-                                task.title ||
-                                task.task ||
-                                task.text ||
-                                ""
-                            )}
-                        </span>
-                    `).join(", ")}
-                </div>
-            `;
+    content = `
+        <div class="mm-tasks-inline">
+            ${tasks.map(task => {
+                const title =
+                    task.title ||
+                    task.task ||
+                    task.text ||
+                    "";
 
-            break;
+                const owner =
+                    task.owner ||
+                    task.assignee ||
+                    task.responsible ||
+                    "";
 
+                const deadline =
+                    task.deadline ||
+                    task.due_date ||
+                    task.due ||
+                    "";
+
+                return `
+                    <span class="mm-task-inline">
+                        ${RenderHelpers.escape(title)}
+                        ${owner ? ` — ${RenderHelpers.escape(owner)}` : ""}
+                        ${deadline ? ` — ${RenderHelpers.escape(deadline)}` : ""}
+                    </span>
+                `;
+            }).join(" • ")}
+        </div>
+    `;
+
+    break;
+            
         case "compact":
 
             content = tasks.map(task => `
