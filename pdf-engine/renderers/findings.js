@@ -160,10 +160,23 @@ renderAdaptive(blocks, layout) {
         const cells = row.blocks.map(item => {
             const itemHtml = (item.items || []).map(entry => {
 
-                const title = RenderHelpers.escape(entry.title || "");
-                const details = entry.details
-                    ? `<div>${RenderHelpers.escape(entry.details)}</div>`
-                    : "";
+                const title = RenderHelpers.escape(
+                  entry.title ||
+                  entry.item ||
+                  entry.name ||
+                  ""
+                );
+
+                const detailsValue =
+                 entry.details ||
+                 entry.depends_on ||
+                 entry.description ||
+                 entry.text ||
+                  "";
+
+                 const details = detailsValue
+                   ? `<div>${RenderHelpers.escape(detailsValue)}</div>`
+                   : "";
 
                 return `
                     <div class="mm-finding-item">
