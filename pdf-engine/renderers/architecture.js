@@ -46,7 +46,7 @@
 
                 sections
                     .map(section => this.renderSection(section, mode))
-                    .join("")
+                    .join(""),
 
                 "mm-architecture-section"
 
