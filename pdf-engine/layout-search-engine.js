@@ -297,6 +297,8 @@ function generateReportCandidates() {
         });
     }
 
+    console.log("DEPENDENCIES RAW:", report.dependencies);
+        
     if (report.dependencies?.length) {
         sectionBlocks.push({
             id: "dependencies",
