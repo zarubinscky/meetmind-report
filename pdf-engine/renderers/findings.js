@@ -186,14 +186,8 @@ renderAdaptive(blocks, layout) {
         }).join("");
 
         return `
-             <div
-        style="
-            border:8px solid red;
-            background:yellow;
-            margin:20px;
-            padding:20px;
-        "
-        class="mm-findings-adaptive-row">
+             <div class="mm-findings-adaptive-row">
+             
                 ${cells}
             </div>
         `;
