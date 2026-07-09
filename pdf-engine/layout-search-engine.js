@@ -345,13 +345,56 @@ function generateReportCandidates() {
     console.log("=== ADAPTIVE SECTIONS ===", sectionBlocks);
     console.log("=== ADAPTIVE GEOMETRY ===", geometry);
 
-    return [
-        {
-            ...modes,
-            findings: "adaptive",
-            findingsLayout: geometry
-        }
-    ];
+
+        const base = {
+    ...modes,
+    findings: "adaptive",
+    findingsLayout: geometry
+};
+
+return [
+    {
+        ...base
+    },
+
+    {
+        ...base,
+        tasks: "compact"
+    },
+
+    {
+        ...base,
+        tasks: "inline"
+    },
+
+    {
+        ...base,
+        tasks: "inline",
+        owners: "compact"
+    },
+
+    {
+        ...base,
+        tasks: "inline",
+        owners: "inline"
+    },
+
+    {
+        ...base,
+        tasks: "inline",
+        owners: "inline",
+        architecture: "compact"
+    },
+
+    {
+        ...base,
+        statistics: "compact",
+        tasks: "inline",
+        owners: "inline",
+        architecture: "compact"
+    }
+];
+        
 }
     
   window.LayoutSearchEngine = {
