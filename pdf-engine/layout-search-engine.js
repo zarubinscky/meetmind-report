@@ -285,6 +285,46 @@ function generateReportCandidates() {
 
     function generateAdaptiveCandidates(report) {
 
+    const modes = LayoutRegistry.getDefaultModes();
+
+    const sectionBlocks = [];
+
+    if (report.insights?.length) {
+        sectionBlocks.push({
+            id: "insights",
+            title: "Insights",
+            type: "insight-section",
+            items: report.insights
+        });
+    }
+
+    if (report.dependencies?.length) {
+        sectionBlocks.push({
+            id: "dependencies",
+            title: "Dependencies",
+            type: "dependency-section",
+            items: report.dependencies
+        });
+    }
+
+    if (report.decisions?.length) {
+        sectionBlocks.push({
+            id: "decisions",
+            title: "Decisions",
+            type: "decision-section",
+            items: report.decisions
+        });
+    }
+
+    if (report.risks?.length) {
+        sectionBlocks.push({
+            id: "risks",
+            title: "Risks",
+            type: "risk-section",
+            items: report.risks
+        });
+    }
+
     const weights =
         GeometrySolver.calculateContentWeights(report);
 
@@ -294,45 +334,23 @@ function generateReportCandidates() {
         risks: report.risks?.length || 0
     };
 
-    const findings = [
-        ...(report.insights || []).map(i => ({
-            ...i,
-            type: "insight"
-        })),
-        ...(report.decisions || []).map(i => ({
-            ...i,
-            type: "decision"
-        })),
-        ...(report.risks || []).map(i => ({
-            ...i,
-            type: "risk"
-        }))
-    ];
-
     const geometry =
         GeometryGenerator.generateAdaptiveGeometry(
             weights,
-            findings,
+            sectionBlocks,
             stats
         );
 
-    console.log("Adaptive candidate:", geometry);
+    console.log("=== ADAPTIVE SECTIONS ===", sectionBlocks);
+    console.log("=== ADAPTIVE GEOMETRY ===", geometry);
 
-   const modes = LayoutRegistry.getDefaultModes();
-
-   console.log("=== ADAPTIVE RETURN ===");
-   console.log({
-   findings: "adaptive",
-   findingsLayout: geometry
-});
-        
-return [
-    {
-        ...modes,
-        findings: "adaptive",
-        findingsLayout: geometry
-    }
-];
+    return [
+        {
+            ...modes,
+            findings: "adaptive",
+            findingsLayout: geometry
+        }
+    ];
 }
     
   window.LayoutSearchEngine = {
