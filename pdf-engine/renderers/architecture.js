@@ -31,13 +31,22 @@
 
             console.log("Architecture mode:", mode);
 
+
+            if (mode === "compact") {
+    return RenderHelpers.section(
+        architecture.title || "Architecture & Process",
+        sections.map(section => this.renderSection(section, mode)).join(""),
+        "mm-architecture-section mm-architecture-compact-section"
+    );
+}
+            
             return RenderHelpers.section(
 
                 architecture.title || "Architecture & Process",
 
                 sections
                     .map(section => this.renderSection(section, mode))
-                    .join(mode === "compact" ? " • " : ""),
+                    .join("")
 
                 "mm-architecture-section"
 
