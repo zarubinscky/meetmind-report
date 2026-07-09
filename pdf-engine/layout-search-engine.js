@@ -279,7 +279,6 @@ function generateReportCandidates() {
     owners: "inline",
     architecture: "compact"
 }
-        
 ];
 }
 
