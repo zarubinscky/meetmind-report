@@ -158,6 +158,13 @@ renderAdaptive(blocks, layout) {
 
     return layout.rows.map(row => {
         const cells = row.blocks.map(item => {
+        const width =
+          item.id === "decisions"
+            ? "58%"
+            : item.id === "risks"
+                ? "42%"
+                : "50%";
+
             const itemHtml = (item.items || []).map(entry => {
 
                 const title = RenderHelpers.escape(
@@ -188,7 +195,7 @@ renderAdaptive(blocks, layout) {
             }).join("");
 
             return `
-                <div class="mm-findings-adaptive-cell">
+                <div class="mm-findings-adaptive-cell" style="flex-basis:${width};">
                     ${RenderHelpers.card(`
                         <h3>${RenderHelpers.escape(item.title)}</h3>
                         ${itemHtml}
