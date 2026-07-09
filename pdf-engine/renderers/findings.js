@@ -165,17 +165,22 @@ renderAdaptive(blocks, layout) {
 
                 <div class="mm-findings-adaptive-cell">
 
-                    ${RenderHelpers.card(`
+              ${RenderHelpers.card(`
+    <h3>${RenderHelpers.escape(item.title)}</h3>
+    ${item.items.map(entry => `
+        <div class="mm-finding-item">
+            <strong>${RenderHelpers.escape(entry.title || "")}</strong>
+            ${
+                entry.details
+                    ? `<div>${RenderHelpers.escape(entry.details)}</div>`
+                    : ""
+            }
 
-                        <h3>${RenderHelpers.escape(item.title)}</h3>
+        </div>
 
-                        <p>${RenderHelpers.escape(item.details || "")}</p>
+    `).join("")}
 
-                    `)}
-
-                </div>
-
-            `).join("")}
+`)}
 
         </div>
 
