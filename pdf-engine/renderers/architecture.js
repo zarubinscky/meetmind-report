@@ -37,7 +37,7 @@
 
                 sections
                     .map(section => this.renderSection(section, mode))
-                    .join(mode === "compact" ? " • " : "")
+                    .join(mode === "compact" ? " • " : ""),
 
                 "mm-architecture-section"
 
