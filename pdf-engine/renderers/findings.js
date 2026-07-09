@@ -4,7 +4,6 @@
     window.FindingsRenderer = {
 
         render(report, options = {}) {
-
             const mode =
                 options.layoutModes?.findings ??
                 "cards";
