@@ -146,7 +146,6 @@
         },
 
 renderAdaptive(blocks, layout) {
-
     console.log("===== LAYOUT =====");
     console.dir(layout, { depth: null });
     console.log("blocks:", blocks);
@@ -157,35 +156,42 @@ renderAdaptive(blocks, layout) {
         ).join("");
     }
 
-    return layout.rows.map(row => `
+    return layout.rows.map(row => {
+        const cells = row.blocks.map(item => {
+            const itemHtml = (item.items || []).map(entry => {
 
-        <div class="mm-findings-adaptive-row">
-
-            ${row.blocks.map(item => `
-
-                <div class="mm-findings-adaptive-cell">
-
-              ${RenderHelpers.card(`
-    <h3>${RenderHelpers.escape(item.title)}</h3>
-    ${item.items.map(entry => `
-        <div class="mm-finding-item">
-            <strong>${RenderHelpers.escape(entry.title || "")}</strong>
-            ${
-                entry.details
+                const title = RenderHelpers.escape(entry.title || "");
+                const details = entry.details
                     ? `<div>${RenderHelpers.escape(entry.details)}</div>`
-                    : ""
-            }
+                    : "";
 
-        </div>
+                return `
+                    <div class="mm-finding-item">
+                        <strong>${title}</strong>
+                        ${details}
+                    </div>
+                `;
 
-    `).join("")}
+            }).join("");
 
-`)}
+            return `
+                <div class="mm-findings-adaptive-cell">
+                    ${RenderHelpers.card(`
+                        <h3>${RenderHelpers.escape(item.title)}</h3>
+                        ${itemHtml}
+                    `)}
+                </div>
+            `;
 
-        </div>
+        }).join("");
 
-    `).join("");
+        return `
+            <div class="mm-findings-adaptive-row">
+                ${cells}
+            </div>
+        `;
 
+    }).join("");
 },
 
     };
