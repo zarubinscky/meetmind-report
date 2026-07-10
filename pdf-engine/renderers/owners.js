@@ -12,6 +12,10 @@
         options.layoutModes?.owners ??
         "cards";
 
+          if (mode === "hidden") {
+    return "";
+}
+
     console.log("Owners mode:", mode);
 
     if (!owners.length) {
