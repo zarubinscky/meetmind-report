@@ -236,6 +236,12 @@ function generateReportCandidates() {
         statistics: "compact"
     },
 
+        {
+    ...defaults,
+    header: "compact",
+    statistics: "compact"
+    },
+
     {
         ...defaults,
         statistics: "compact",
