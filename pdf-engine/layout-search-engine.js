@@ -312,6 +312,23 @@ function generateReportCandidates() {
     return null;
 }
 
+    function calculatePenalty(layoutModes) {
+    let penalty = 0;
+    for (const blockId of Object.keys(layoutModes)) {
+        const mode =
+            LayoutRegistry.getMode(
+                blockId,
+                layoutModes[blockId]
+
+            );
+
+        if (mode) {
+            penalty += mode.penalty || 0;
+        }
+    }
+    return penalty;
+}
+
     function generateCandidates(baseModes) {
     const candidates = [];
     let current = {
