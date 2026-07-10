@@ -173,14 +173,31 @@ async function findBestPdfCandidate(report) {
     result.measurement.totalHeight
 );
         
+       const fits =
+    result.measurement.totalHeight <=
+    PDF_CONFIG.pageHeight;
 
-        if (
-            !best ||
-            result.measurement.totalHeight <
-            best.measurement.totalHeight
-        ) {
-            best = result;
-        }
+if (!fits) {
+    continue;
+}
+
+if (!best) {
+    best = result;
+    continue;
+}
+
+if (result.penalty < best.penalty) {
+    best = result;
+    continue;
+}
+
+if (
+    result.penalty === best.penalty &&
+    result.measurement.totalHeight <
+    best.measurement.totalHeight
+) {
+    best = result;
+}
 
     }
     return best;
