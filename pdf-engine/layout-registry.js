@@ -12,6 +12,25 @@
 
     const BLOCK_LAYOUT_MODES = {
 
+        header: [
+    {
+        id: "default",
+        label: "Default header",
+        penalty: 0,
+        level: 0,
+        next: "compact",
+        canHide: false
+    },
+    {
+        id: "compact",
+        label: "Compact header",
+        penalty: 1,
+        level: 1,
+        next: null,
+        canHide: false
+    }
+],
+        
         statistics: [
             {
                 id: "default",
