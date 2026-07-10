@@ -146,6 +146,8 @@ async function findBestPdfCandidate(report) {
     "Testing candidate:",
     layoutModes
     );
+
+    console.log("TESTING:", layoutModes.header, layoutModes);
         
         const result = await evaluatePdfCandidate(
             report,
