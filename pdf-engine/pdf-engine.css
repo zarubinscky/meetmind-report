@@ -159,9 +159,15 @@
     gap:8px;
 }
 
-.mm-task-inline{
-    font-size:13px;
-    white-space:nowrap;
+.mm-task-inline {
+    display: inline-block;
+    min-width: 0;
+    font-size: 13px;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .mm-density-ultra .mm-header-section {
