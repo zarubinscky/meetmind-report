@@ -162,7 +162,9 @@ async function findBestPdfCandidate(report) {
         );
 
         result.penalty =
-        calculatePenalty(layoutModes);
+    LayoutSearchEngine.calculatePenalty(
+        layoutModes
+    );
         
         console.log(
     "Candidate",
