@@ -122,8 +122,14 @@ async function evaluatePdfCandidate(report, candidateOptions) {
 
 async function findBestPdfCandidate(report) {
 
-   const candidates =
+   let candidates =
     LayoutSearchEngine.generateAdaptiveCandidates(report);
+
+    candidates.push({
+    ...candidates[candidates.length - 1],
+    owners: "hidden"
+});
+    
     console.log("PDF candidates:", candidates);
 
     console.log("First candidate:", candidates[0]);
