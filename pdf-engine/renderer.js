@@ -64,7 +64,7 @@
 `;
         },
 
-      renderHeader(report){
+      renderHeader(report, options) {
     return HeaderRenderer.render(report, options);
 },
 renderStatistics(report){
