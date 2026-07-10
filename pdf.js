@@ -161,12 +161,18 @@ async function findBestPdfCandidate(report) {
             }
         );
 
+        result.penalty =
+        calculatePenalty(layoutModes);
         
         console.log(
-            "Candidate",
-            layoutModes,
-            result.measurement.totalHeight
-        );
+    "Candidate",
+    layoutModes,
+    "Penalty:",
+    result.penalty,
+    "Height:",
+    result.measurement.totalHeight
+);
+        
 
         if (
             !best ||
