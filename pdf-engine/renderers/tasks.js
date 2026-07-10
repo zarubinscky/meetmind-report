@@ -59,29 +59,43 @@
     break;
             
         case "compact":
+    content = tasks.map(task => {
+        const title =
+            task.title ||
+            task.task ||
+            task.text ||
+            "";
 
-            content = tasks.map(task => `
-                <div class="mm-task-compact">
+        const owner =
+            task.owner ||
+            task.assignee ||
+            task.responsible ||
+            "";
 
-                    <span class="mm-task-compact-title">
-                        ${RenderHelpers.escape(
-                            task.title ||
-                            task.task ||
-                            task.text ||
-                            ""
-                        )}
-                    </span>
+        const deadline =
+            task.deadline ||
+            task.due_date ||
+            task.due ||
+            "";
 
-                    ${
-                        task.deadline
-                            ? RenderHelpers.badge(task.deadline)
-                            : ""
-                    }
+        return `
+            <div class="mm-task-compact">
 
-                </div>
-            `).join("");
+                <span class="mm-task-compact-title">
+                    ${RenderHelpers.escape(title)}
+                </span>
 
-            break;
+                <span class="mm-task-compact-meta">
+                    ${owner ? RenderHelpers.escape(owner) : ""}
+                    ${owner && deadline ? " • " : ""}
+                    ${deadline ? RenderHelpers.escape(deadline) : ""}
+                </span>
+
+            </div>
+        `;
+    }).join("");
+
+    break;
 
         default:
 
