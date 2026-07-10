@@ -24,11 +24,11 @@
         return `
          <div class="mm-report ${densityClass}">
          ${options.header !== false
-         ? this.renderHeader(report)
+         ? this.renderHeader(report, options)
          : ""}
 
     ${options.statistics !== false
-        ? this.renderStatistics(report)
+        ? this.renderStatistics(report, options)
         : ""}
 
     ${options.summary !== false
@@ -67,11 +67,11 @@
       renderHeader(report, options) {
     return HeaderRenderer.render(report, options);
 },
-renderStatistics(report){
-    return StatisticsRenderer.render(report);
+renderStatistics(report, options){
+    return StatisticsRenderer.render(report, options);
 },
-      renderSummary(report){
-    return SummaryRenderer.render(report);
+      renderSummary(report, options){
+    return SummaryRenderer.render(report, options);
 
 },
 
