@@ -125,6 +125,9 @@ async function findBestPdfCandidate(report) {
    let candidates =
     LayoutSearchEngine.generateAdaptiveCandidates(report);
 
+    console.log("Candidates count:", candidates.length);
+    console.dir(candidates, { depth: null });
+
     candidates.push({
     ...candidates[candidates.length - 1],
     owners: "hidden"
