@@ -289,6 +289,29 @@ function generateReportCandidates() {
 ];
 }
 
+    function improveLayout(layoutModes) {
+
+    const order =
+        LayoutRegistry.getDegradationOrder();
+
+    for (const blockId of order) {
+
+        if (
+            LayoutRegistry.canDegrade(
+                blockId,
+                layoutModes[blockId]
+            )
+        ) {
+
+            return LayoutRegistry.degrade(
+                layoutModes,
+                blockId
+            );
+        }
+    }
+    return null;
+}
+
     function generateAdaptiveCandidates(report) {
 
     const modes = LayoutRegistry.getDefaultModes();
