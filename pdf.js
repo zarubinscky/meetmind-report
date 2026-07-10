@@ -140,7 +140,8 @@ async function findBestPdfCandidate(report) {
     console.log("findings layout:", candidates[0]?.findingsLayout);
 
     let best = null;
-
+    let closest = null;
+    
     console.log("Candidates array:", candidates);
     for (const layoutModes of candidates) {
        console.log("Current layoutModes:", layoutModes);
@@ -162,9 +163,14 @@ async function findBestPdfCandidate(report) {
         );
 
         result.penalty =
-    LayoutSearchEngine.calculatePenalty(
-        layoutModes
-    );
+    LayoutSearchEngine.calculatePenalty(layoutModes);
+        if (
+    !closest ||
+    result.measurement.totalHeight <
+    closest.measurement.totalHeight
+    ) {
+    closest = result;
+    }
         
         console.log(
     "Candidate",
@@ -202,7 +208,7 @@ if (
 }
 
     }
-    return best;
+    return best || closest;
 }
 
 async function generateExecutivePdf() {
