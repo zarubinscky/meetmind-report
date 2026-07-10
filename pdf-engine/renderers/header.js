@@ -4,7 +4,7 @@
 
     window.HeaderRenderer = {
 
-        render(report){
+       render(report, options = {}){
 
             const title =
                 report?.title ||
@@ -16,8 +16,32 @@
                 report?.date ||
                 report?.meeting_date ||
                 "";
+           
+           const mode =
+               options.layoutModes?.header ??
+               "default";
+           
+               console.log("Header mode:", mode);
+           
+           if (mode === "compact") {
+              return RenderHelpers.section(
+              "",
+             RenderHelpers.card(`
+                <div class="mm-header mm-header-compact">
+                <div class="mm-logo">
+                    MeetMind AI
+                </div>
+                <h1 class="mm-report-title">
+                    ${RenderHelpers.escape(title)}
+                </h1>
+            </div>
+        `),
+        "mm-header-section"
+    );
 
-            return RenderHelpers.section(
+}
+           
+           return RenderHelpers.section(
              "",
     RenderHelpers.card(`
         <div class="mm-header">
