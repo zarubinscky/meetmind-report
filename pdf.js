@@ -141,6 +141,11 @@ async function findBestPdfCandidate(report) {
     console.log("Candidates array:", candidates);
     for (const layoutModes of candidates) {
        console.log("Current layoutModes:", layoutModes);
+
+        console.log(
+    "Testing candidate:",
+    layoutModes
+    );
         
         const result = await evaluatePdfCandidate(
             report,
