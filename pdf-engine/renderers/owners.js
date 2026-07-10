@@ -41,20 +41,22 @@
 
             break;
 
-        case "compact":
+     case "compact":
 
-            content = owners.map(owner => `
-                <div class="mm-owner-compact">
-                    ${RenderHelpers.escape(
-                        owner.name ||
-                        owner.owner ||
-                        owner.text ||
-                        ""
-                    )}
-                </div>
-            `).join("");
+    content = `
+        <div class="mm-owners-inline">
+            ${owners.map(owner =>
+                RenderHelpers.escape(
+                    owner.name ||
+                    owner.owner ||
+                    owner.text ||
+                    ""
+                )
+            ).join(" • ")}
+        </div>
+    `;
 
-            break;
+    break;
 
         default:
 
