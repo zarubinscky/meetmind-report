@@ -312,10 +312,21 @@ function generateReportCandidates() {
     return null;
 }
 
+    function generateCandidates(baseModes) {
+    const candidates = [];
+    let current = {
+        ...baseModes
+    };
+
+    while (current) {
+        candidates.push(current);
+        current = improveLayout(current);
+    }
+    return candidates;
+}
+
     function generateAdaptiveCandidates(report) {
-
     const modes = LayoutRegistry.getDefaultModes();
-
     const sectionBlocks = [];
 
     if (report.insights?.length) {
@@ -382,7 +393,7 @@ function generateReportCandidates() {
     findingsLayout: geometry
 };
 
-return [
+const manualCandidates = [
 
     // 1. Полный режим
     {
@@ -446,6 +457,23 @@ return [
         architecture: "compact"
     }
 ];
+
+        const generatedCandidates =
+    generateCandidates(base);
+
+console.log(
+    "MANUAL CANDIDATES:",
+    manualCandidates.length,
+    manualCandidates
+);
+
+console.log(
+    "GENERATED CANDIDATES:",
+    generatedCandidates.length,
+    generatedCandidates
+);
+
+return manualCandidates;
         
 }
     
