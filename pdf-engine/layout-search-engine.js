@@ -279,6 +279,7 @@ function generateReportCandidates() {
 
 {
     ...defaults,
+    header: "compact",
     statistics: "compact",
     tasks: "inline",
     findings: "compact",
