@@ -498,6 +498,7 @@ return manualCandidates;
     generateCandidates,
     generateReportCandidates,
     generateAdaptiveCandidates,
+    calculatePenalty,
     scoreCandidate,
     chooseBestCandidate,
     search
