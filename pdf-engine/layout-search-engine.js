@@ -360,41 +360,63 @@ function generateReportCandidates() {
 };
 
 return [
+
+    // 1. Полный режим
     {
         ...base
     },
 
+    // 2. Только компактная шапка
     {
         ...base,
+        header: "compact"
+    },
+
+    // 3. Шапка + компактная статистика
+    {
+        ...base,
+        header: "compact",
+        statistics: "compact"
+    },
+
+    // 4. Шапка + компактная статистика + compact tasks
+    {
+        ...base,
+        header: "compact",
+        statistics: "compact",
         tasks: "compact"
     },
 
+    // 5. Шапка + компактная статистика + inline tasks
     {
         ...base,
+        header: "compact",
+        statistics: "compact",
         tasks: "inline"
     },
 
+    // 6. Добавляем compact owners
     {
         ...base,
+        header: "compact",
+        statistics: "compact",
         tasks: "inline",
         owners: "compact"
     },
 
+    // 7. Добавляем inline owners
     {
         ...base,
+        header: "compact",
+        statistics: "compact",
         tasks: "inline",
         owners: "inline"
     },
 
+    // 8. Максимальная деградация
     {
         ...base,
-        tasks: "inline",
-        owners: "inline",
-        architecture: "compact"
-    },
-
-    {
-        ...base,
+        header: "compact",
         statistics: "compact",
         tasks: "inline",
         owners: "inline",
