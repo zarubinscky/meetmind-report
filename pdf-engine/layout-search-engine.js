@@ -296,6 +296,15 @@ function generateReportCandidates() {
 
     for (const blockId of order) {
 
+    console.log(
+    blockId,
+    layoutModes[blockId],
+    LayoutRegistry.canDegrade(
+        blockId,
+        layoutModes[blockId]
+    )
+);
+        
         if (
             LayoutRegistry.canDegrade(
                 blockId,
