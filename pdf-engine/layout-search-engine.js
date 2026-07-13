@@ -329,15 +329,35 @@ function generateReportCandidates() {
     return penalty;
 }
 
-    function generateCandidates(baseModes) {
+   function generateCandidates(baseModes) {
     const candidates = [];
     let current = {
         ...baseModes
     };
 
-    while (current) {
-        candidates.push(current);
-        current = improveLayout(current);
+    candidates.push({
+        ...current
+    });
+
+    const order =
+        LayoutRegistry.getDegradationOrder();
+    for (const blockId of order) {
+
+        while (
+            LayoutRegistry.canDegrade(
+                blockId,
+                current[blockId]
+            )
+        ) {
+            current =
+                LayoutRegistry.degrade(
+                    current,
+                    blockId
+                );
+            candidates.push({
+                ...current
+            });
+        }
     }
     return candidates;
 }
