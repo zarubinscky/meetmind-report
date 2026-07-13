@@ -31,24 +31,41 @@
     }
 ],
         
-        statistics: [
-            {
-                id: "default",
-                label: "Default statistics",
-                penalty: 0,
-                level: 0,
-                next: "compact",
-                canHide: false
-            },
-            {
-                id: "compact",
-                label: "Compact statistics",
-                penalty: 1,
-                level: 1,
-                next: null,
-                canHide: false
-            }
-        ],
+       statistics: [
+
+{
+    id: "default",
+    label: "Default",
+    penalty: 0,
+    level: 0,
+    next: "compact"
+},
+
+{
+    id: "compact",
+    label: "Compact",
+    penalty: 1,
+    level: 1,
+    next: "dense"
+},
+
+{
+    id: "dense",
+    label: "Dense",
+    penalty: 2,
+    level: 2,
+    next: "inline"
+},
+
+{
+    id: "inline",
+    label: "Inline",
+    penalty: 3,
+    level: 3,
+    next: null
+}
+
+],
 
         findings: [
             {
