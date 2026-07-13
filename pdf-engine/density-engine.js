@@ -21,14 +21,29 @@
         return layout;
     }
 
+    function getDensityLevel(blockId, options) {
+    const modeId =
+        options?.layoutModes?.[blockId];
+
+    if (!modeId) {
+        return 0;
+    }
+
+    const mode =
+        LayoutRegistry.getMode(
+            blockId,
+            modeId
+        );
+
+    return mode?.level ?? 0;
+}
+
+    
     window.DensityEngine = {
-
         version: "1.0.0",
-
         optimize,
-
-        chooseDensity
-
+        chooseDensity,
+        getDensityLevel
     };
 
     console.log("✅ Density Engine loaded.");
