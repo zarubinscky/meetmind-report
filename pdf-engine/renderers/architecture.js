@@ -25,17 +25,33 @@
                 return "";
             }
 
+            const level =
+              DensityEngine.getDensityLevel(
+            "architecture",
+            options
+            );
+
             const mode =
-                options.layoutModes?.architecture ??
-                "cards";
+            options.layoutModes?.architecture ??
+            "cards";
 
-            console.log("Architecture mode:", mode);
+            const effectiveMode =
+                level >= 2
+                  ? "inline"
+                  : level >= 1
+                     ? "compact"
+                     : mode;
+
+            console.log(
+            "Architecture density level:",
+            level
+            );
 
 
-            if (mode === "compact") {
+            if (effectiveMode === "compact") {
     return RenderHelpers.section(
         architecture.title || "Architecture & Process",
-        sections.map(section => this.renderSection(section, mode)).join(""),
+        sections.map(section => this.renderSection(section, effectiveMode)).join(""),
         "mm-architecture-section mm-architecture-compact-section"
     );
 }
@@ -45,7 +61,7 @@
                 architecture.title || "Architecture & Process",
 
                 sections
-                    .map(section => this.renderSection(section, mode))
+                    .map(section => this.renderSection(section, effectiveMode))
                     .join(""),
 
                 "mm-architecture-section"
@@ -87,7 +103,7 @@
 
             }
 
-           if (mode === "compact") {
+           if (effectiveMode === "compact") {
 
     return `
         <div class="mm-architecture-compact">
