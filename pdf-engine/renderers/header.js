@@ -17,13 +17,17 @@
                 report?.meeting_date ||
                 "";
            
-           const mode =
-               options.layoutModes?.header ??
-               "default";
+           const level =
+           DensityEngine.getDensityLevel(
+           "header",
+           options
+           );
+           console.log(
+           "Header density level:",
+           level
+           );
            
-               console.log("Header mode:", mode);
-           
-           if (mode === "compact") {
+           if (level >= 1) {
               return RenderHelpers.section(
               "",
              RenderHelpers.card(`
