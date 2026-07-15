@@ -16,6 +16,9 @@
          "Statistics density level:",
           level
           );
+
+            const densityClass =
+              `mm-density-level-${level}`;
             
             const stats = [
                 {
@@ -79,7 +82,7 @@
                     </div>
                 `,
 
-                "mm-statistics-section"
+                `mm-statistics-section ${densityClass}`
 
             );
 
