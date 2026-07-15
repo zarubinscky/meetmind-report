@@ -439,7 +439,7 @@ function generateReportCandidates() {
     findingsLayout: geometry
 };
 
-const manualCandidates = [
+/* const manualCandidates = [
 
     // 1. Полный режим
     {
@@ -503,9 +503,12 @@ const manualCandidates = [
         architecture: "compact"
     }
 ];
+*/
 
         const generatedCandidates =
     generateCandidates(base);
+        
+console.log(generatedCandidates);
 
 console.log(
     "MANUAL CANDIDATES:",
@@ -519,7 +522,7 @@ console.log(
     generatedCandidates
 );
 
-return manualCandidates;
+return generatedCandidates;
         
 }
     
