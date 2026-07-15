@@ -14,6 +14,7 @@ const PDF_CONFIG = {
 const PDF_BUILDER_DEFAULT = {
     header: true,
     statistics: true,
+    keyMetrics: true,
     summary: true,
     findings: true,
     tasks: true,
@@ -29,6 +30,7 @@ let pdfBuilderOptions = {
 const PDF_OPTION_LABELS = {
     header: "Header",
     statistics: "Meeting Statistics",
+    keyMetrics: "Key Metrics",
     summary: "Executive Summary",
     findings: "Insights",
     tasks: "Tasks",
