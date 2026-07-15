@@ -48,7 +48,7 @@
             );
 
 
-            if (effectiveMode === "compact") {
+            if (mode === "compact") {
     return RenderHelpers.section(
         architecture.title || "Architecture & Process",
         sections.map(section => this.renderSection(section, effectiveMode)).join(""),
@@ -103,7 +103,7 @@
 
             }
 
-           if (effectiveMode === "compact") {
+           if (mode === "compact") {
 
     return `
         <div class="mm-architecture-compact">
