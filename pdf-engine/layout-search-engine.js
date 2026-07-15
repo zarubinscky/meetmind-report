@@ -1,9 +1,22 @@
 (function () {
     "use strict";
 
+function buildBlockWeights(report) {
+
+    return {
+        header: BlockRegistry.getWeight("header", report),
+        statistics: BlockRegistry.getWeight("statistics", report),
+        summary: BlockRegistry.getWeight("summary", report),
+        findings: BlockRegistry.getWeight("findings", report),
+        tasks: BlockRegistry.getWeight("tasks", report),
+        owners: BlockRegistry.getWeight("owners", report),
+        architecture: BlockRegistry.getWeight("architecture", report)
+    };
+
+}
+    
     function generateCandidates(findings) {
         const count = findings.length;
-
 
         // New adaptive geometry
 
@@ -21,6 +34,14 @@ if (
 
     const weights =
         GeometrySolver.calculateContentWeights(report);
+
+    const blockWeights =
+    buildBlockWeights(report);
+
+    console.log(
+     "BLOCK WEIGHTS:",
+     blockWeights
+     );
 
     const stats = {
         insights: findings.length,
