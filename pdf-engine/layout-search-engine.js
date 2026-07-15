@@ -35,14 +35,6 @@ if (
     const weights =
         GeometrySolver.calculateContentWeights(report);
 
-    const blockWeights =
-    buildBlockWeights(report);
-
-    console.log(
-     "BLOCK WEIGHTS:",
-     blockWeights
-     );
-
     const stats = {
         insights: findings.length,
         decisions: 0,
@@ -436,6 +428,14 @@ function generateReportCandidates() {
 
     const weights =
         GeometrySolver.calculateContentWeights(report);
+
+    const blockWeights =
+    buildBlockWeights(report);
+        
+    console.log(
+    "BLOCK WEIGHTS:",
+    blockWeights
+    );
 
     const stats = {
         insights: report.insights?.length || 0,
