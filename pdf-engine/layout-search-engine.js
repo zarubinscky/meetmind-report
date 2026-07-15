@@ -510,11 +510,12 @@ function generateReportCandidates() {
         
 console.log(generatedCandidates);
 
-console.log(
+/*console.log(
     "MANUAL CANDIDATES:",
     manualCandidates.length,
     manualCandidates
 );
+*/
 
 console.log(
     "GENERATED CANDIDATES:",
