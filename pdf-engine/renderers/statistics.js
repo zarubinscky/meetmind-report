@@ -4,10 +4,20 @@
 
     window.StatisticsRenderer = {
 
-        render(report){
+        render(report, options = {}){
 
+        const level =
+          DensityEngine.getDensityLevel(
+          "statistics",
+          options
+         );
+
+         console.log(
+         "Statistics density level:",
+          level
+          );
+            
             const stats = [
-
                 {
                     label: "Duration",
                     value:
