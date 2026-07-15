@@ -8,15 +8,24 @@
 
     const owners = report?.owners ?? [];
 
+    const level =
+     DensityEngine.getDensityLevel(
+        "owners",
+        options
+    );
+
     const mode =
-        options.layoutModes?.owners ??
-        "cards";
+      options.layoutModes?.owners ??
+      "cards";
 
-          if (mode === "hidden") {
-    return "";
-}
+    if (mode === "hidden") {
+      return "";
+    }
 
-    console.log("Owners mode:", mode);
+    console.log(
+    "Owners density level:",
+    level
+    );
 
     if (!owners.length) {
         return "";
@@ -24,9 +33,9 @@
 
     let content = "";
 
-    switch (mode) {
+    switch (level) {
 
-        case "inline":
+        case 2:
 
             content = `
                 <div class="mm-owners-inline">
@@ -45,7 +54,7 @@
 
             break;
 
-     case "compact":
+     case 1:
 
     content = `
         <div class="mm-owners-inline">
