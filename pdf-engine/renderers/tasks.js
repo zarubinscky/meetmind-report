@@ -8,11 +8,16 @@
 
     const tasks = report?.tasks ?? [];
 
-    const mode =
-        options.layoutModes?.tasks ??
-        "cards";
+    const level =
+    DensityEngine.getDensityLevel(
+        "tasks",
+        options
+    );
 
-    console.log("Tasks mode:", mode);
+    console.log(
+    "Tasks density level:",
+    level
+    );
 
     if (!tasks.length) {
         return "";
@@ -20,9 +25,9 @@
 
     let content = "";
 
-    switch (mode) {
+    switch (level) {
 
-        case "inline":
+        case 2:
 
     content = `
         <div class="mm-tasks-inline">
@@ -58,7 +63,7 @@
 
     break;
             
-        case "compact":
+        case 1:
     content = tasks.map(task => {
         const title =
             task.title ||
