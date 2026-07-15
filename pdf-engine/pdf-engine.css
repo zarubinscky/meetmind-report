@@ -225,3 +225,29 @@
     flex:1;
     min-width:0;
 }
+
+/* ===== Statistics Density ===== */
+
+.mm-density-level-1 .mm-stats-grid{
+    gap:6px;
+}
+
+.mm-density-level-1 .mm-stat{
+    padding:10px;
+}
+
+.mm-density-level-2 .mm-stats-grid{
+    gap:4px;
+}
+
+.mm-density-level-2 .mm-stat{
+    padding:8px;
+}
+
+.mm-density-level-2 .mm-stat-value{
+    font-size:22px;
+}
+
+.mm-density-level-2 .mm-stat-label{
+    font-size:11px;
+}
