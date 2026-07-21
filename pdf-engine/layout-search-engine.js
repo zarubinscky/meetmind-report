@@ -2,17 +2,11 @@
     "use strict";
 
 function buildBlockWeights(report) {
-
-    return {
-        header: BlockRegistry.getWeight("header", report),
-        statistics: BlockRegistry.getWeight("statistics", report),
-        summary: BlockRegistry.getWeight("summary", report),
-        findings: BlockRegistry.getWeight("findings", report),
-        tasks: BlockRegistry.getWeight("tasks", report),
-        owners: BlockRegistry.getWeight("owners", report),
-        architecture: BlockRegistry.getWeight("architecture", report)
-    };
-
+    const blocks = BlockRegistry.getBlocks(report);
+    return blocks.reduce((weights, block) => {
+        weights[block.id] = block.visualWeight || 0;
+        return weights;
+    }, {});
 }
     
     function generateCandidates(findings) {
