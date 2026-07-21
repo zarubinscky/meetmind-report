@@ -635,6 +635,25 @@ toggleSection('#detailsSection', hasDetails);
   applyEditMode();
 }
 
+async function loadReportPayload() {
+
+    // ===== LOCAL MODE =====
+    const response = await fetch("./benchmarks/enterprise-cards.json");
+    return await response.json();
+
+    // ===== REMOTE MODE =====
+    /*
+    const response = await fetch(
+        `${REPORT_ENDPOINT}?token=${encodeURIComponent(currentToken)}`
+    );
+
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+    }
+    return await response.json();
+    */
+}
+
 async function loadReport() {
   const params = new URLSearchParams(window.location.search);
   currentToken = params.get('token');
@@ -645,9 +664,7 @@ async function loadReport() {
   }
 
   try {
-    const response = await fetch(`${REPORT_ENDPOINT}?token=${encodeURIComponent(currentToken)}`);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = await response.json();
+    const payload = await loadReportPayload();
 
     if (!payload.success || !payload.meeting) {
       currentLang = payload.language || 'en';
