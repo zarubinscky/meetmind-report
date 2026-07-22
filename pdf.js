@@ -110,7 +110,7 @@ async function evaluatePdfCandidate(report, candidateOptions) {
 
     document.body.appendChild(root);
 
-    const measurement = GeometrySolver.measureReport(
+    const measurement = LayoutEvaluator.measure(
         root.querySelector(".mm-report")
     );
 
