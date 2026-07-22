@@ -30,10 +30,12 @@
      * На следующих шагах заменим уровни 1 и 2
      * на действительно компактные представления.
      */
+    
     const renderStrategies = {
-        0: renderCards,
-        1: renderCards,
-        2: renderCards
+    default: renderDefault,
+    compact: renderCompact,
+    dense: renderDense,
+    inline: renderInline
     };
 
     function getRenderStrategy(level) {
