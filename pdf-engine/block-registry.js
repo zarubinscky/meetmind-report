@@ -310,11 +310,6 @@ keyMetrics.forEach((metric, index) => {
             metric.metric_value ??
             metric.result;
         if (isEmpty(label) || isEmpty(value)) {
-
-         console.log(
-         "KEY METRICS",
-         buildKeyMetrics(report)
-         );
             
             return;
         }
