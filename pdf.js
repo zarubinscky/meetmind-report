@@ -123,94 +123,97 @@ async function evaluatePdfCandidate(report, candidateOptions) {
 }
 
 async function findBestPdfCandidate(report) {
-
-   let candidates =
-    LayoutSearchEngine.generateAdaptiveCandidates(report);
-
-    console.log("Candidates count:", candidates.length);
-    console.dir(candidates, { depth: null });
-
-    candidates.push({
-    ...candidates[candidates.length - 1],
-    owners: "hidden"
-});
-    
-    console.log("PDF candidates:", candidates);
-
-    console.log("First candidate:", candidates[0]);
-    console.log("findings mode:", candidates[0]?.findings);
-    console.log("findings layout:", candidates[0]?.findingsLayout);
-
-    let best = null;
-    let closest = null;
-    
-    console.log("Candidates array:", candidates);
-    for (const layoutModes of candidates) {
-       console.log("Current layoutModes:", layoutModes);
-
-        console.log(
-    "Testing candidate:",
-    layoutModes
-    );
-
-    console.log("TESTING:", layoutModes.header, layoutModes);
-        
-        const result = await evaluatePdfCandidate(
+    const layoutCandidates =
+        LayoutSearchEngine.generateAdaptiveCandidates(
             report,
-            {
-                ...pdfBuilderOptions,
-                densityMode: "ultra",
-                layoutModes
-            }
+            pdfBuilderOptions
         );
 
-        result.penalty =
-    LayoutSearchEngine.calculatePenalty(layoutModes);
-        if (
-    !closest ||
-    result.measurement.totalHeight <
-    closest.measurement.totalHeight
-    ) {
-    closest = result;
+    const densityModes = [
+        "normal",
+        "compact",
+        "ultra"
+    ];
+
+    let bestCandidate = null;
+    let closestCandidate = null;
+
+    for (const layoutModes of layoutCandidates) {
+        for (const densityMode of densityModes) {
+            const candidateOptions = {
+                ...pdfBuilderOptions,
+                densityMode,
+                layoutModes
+            };
+
+            const result = await evaluatePdfCandidate(
+                report,
+                candidateOptions
+            );
+
+            result.penalty =
+                LayoutSearchEngine.calculatePenalty(
+                    layoutModes,
+                    densityMode
+                );
+
+            result.overflow = Math.max(
+                0,
+                result.measurement.totalHeight -
+                    PDF_CONFIG.pageHeight
+            );
+
+            result.fits = result.overflow === 0;
+
+            if (
+                !closestCandidate ||
+                result.overflow <
+                    closestCandidate.overflow ||
+                (
+                    result.overflow ===
+                        closestCandidate.overflow &&
+                    result.penalty <
+                        closestCandidate.penalty
+                )
+            ) {
+                closestCandidate = result;
+            }
+
+            if (!result.fits) {
+                continue;
+            }
+
+            if (
+                !bestCandidate ||
+                result.penalty <
+                    bestCandidate.penalty ||
+                (
+                    result.penalty ===
+                        bestCandidate.penalty &&
+                    result.measurement.totalHeight <
+                        bestCandidate.measurement.totalHeight
+                )
+            ) {
+                bestCandidate = result;
+            }
+        }
     }
-        
-        console.log(
-    "Candidate",
-    layoutModes,
-    "Penalty:",
-    result.penalty,
-    "Height:",
-    result.measurement.totalHeight
-);
-        
-       const fits =
-    result.measurement.totalHeight <=
-    PDF_CONFIG.pageHeight;
 
-if (!fits) {
-    continue;
-}
+    const selected =
+        bestCandidate || closestCandidate;
 
-if (!best) {
-    best = result;
-    continue;
-}
+    console.log("PDF LAYOUT RESULT", {
+        fits: selected?.fits,
+        overflow: selected?.overflow,
+        height: selected?.measurement?.totalHeight,
+        densityMode:
+            selected?.options?.densityMode,
+        layoutModes:
+            selected?.options?.layoutModes,
+        penalty: selected?.penalty
+    });
 
-if (result.penalty < best.penalty) {
-    best = result;
-    continue;
-}
-
-if (
-    result.penalty === best.penalty &&
-    result.measurement.totalHeight <
-    best.measurement.totalHeight
-) {
-    best = result;
-}
-
-    }
-    return best || closest;
+    return selected;
 }
 
 async function generateExecutivePdf() {
