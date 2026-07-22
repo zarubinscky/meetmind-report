@@ -25,26 +25,27 @@
         `;
     }
 
-    /*
-     * Пока все уровни используют старый шаблон.
-     * На следующих шагах заменим уровни 1 и 2
-     * на действительно компактные представления.
-     */
+  function buildStatisticsModel(statisticsBlock) {
+    return {
+        title: statisticsBlock?.title || "",
+        items: statisticsBlock?.data?.items || []
+    };
+}
 
-function renderDefault(stats, options) {
-    return renderCards(stats, options);
+function renderDefault(model) {
+    return renderCards(model.items);
 }
     
-function renderCompact(stats, options) {
-    return renderCards(stats, options);
+function renderCompact(model) {
+    return renderCards(model.items);
 }
 
-function renderDense(stats, options) {
-    return renderCards(stats, options);
+function renderDense(model) {
+    return renderCards(model.items);
 }
 
-function renderInline(stats, options) {
-    return renderCards(stats, options);
+function renderInline(model) {
+    return renderCards(model.items);
 }
     
     const renderStrategies = {
@@ -74,12 +75,16 @@ function renderInline(stats, options) {
                             "statistics"
                     );
 
-            const stats =
-                statisticsBlock?.data?.items || [];
-
-            if (!stats.length) {
-                return "";
-            }
+           const mode =
+            options?.layoutModes?.statistics ??
+           "default";
+            
+           const model =
+            buildStatisticsModel(statisticsBlock);
+          
+            if (!model.items.length) {
+           return "";
+           }
 
             const renderStrategy =
               renderStrategies[mode] ??
@@ -87,7 +92,7 @@ function renderInline(stats, options) {
 
             return RenderHelpers.section(
                 "",
-                renderStrategy(stats, options),
+                renderStrategy(model),
                 "mm-statistics-section"
             );
         }
