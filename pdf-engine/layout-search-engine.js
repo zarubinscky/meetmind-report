@@ -9,101 +9,7 @@ function buildBlockWeights(report) {
     }, {});
 }
     
-    function generateCandidates(findings) {
-        const count = findings.length;
-
-        // New adaptive geometry
-
-if (
-    window.GeometryGenerator &&
-    window.GeometrySolver &&
-    findings.length >= 1
-) {
-
-    const report = {
-        insights: findings,
-        decisions: [],
-        risks: []
-    };
-
-    const weights =
-        GeometrySolver.calculateContentWeights(report);
-
-    const stats = {
-        insights: findings.length,
-        decisions: 0,
-        risks: 0
-    };
-
-    const adaptive =
-        GeometryGenerator.generateAdaptiveGeometry(
-            weights,
-            findings,
-            stats
-        );
-
-    console.log("Adaptive candidate:", adaptive);
-}
-
-        
-        if (count === 1) {
-            return [
-                {
-                    name: "single",
-                    rows: [findings]
-                }
-            ];
-        }
-
-        if (count === 2) {
-            return [
-                {
-                    name: "two-columns",
-                    rows: [findings]
-                },
-                {
-                    name: "stacked",
-                    rows: [
-                        [findings[0]],
-                        [findings[1]]
-                    ]
-                }
-            ];
-        }
-
-        if (count === 3) {
-            return [
-                {
-                    name: "three-equal-row",
-                    rows: [findings]
-                },
-                {
-                    name: "dominant-first",
-                    rows: [
-                        [findings[0]],
-                        [findings[1], findings[2]]
-                    ]
-                },
-                {
-                    name: "first-two-then-third",
-                    rows: [
-                        [findings[0], findings[1]],
-                        [findings[2]]
-                    ]
-                },
-                {
-                    name: "stacked",
-                    rows: [
-                        [findings[0]],
-                        [findings[1]],
-                        [findings[2]]
-                    ]
-                }
-            ];
-        }
-
-        return [];
-    }
+   
 
     function estimateCandidateHeight(candidate) {
         return candidate.rows.reduce((total, row) => {
@@ -171,129 +77,6 @@ if (
         },
         score
     };
-}
-    function chooseBestCandidate(candidates) {
-        if (!candidates.length) return null;
-
-        return candidates
-            .map(scoreCandidate)
-            .sort((a, b) => b.score - a.score)[0];
-    }
-
-    function search(layout) {
-        console.log("SEARCH ENGINE START");
-        const findingsGroup = layout.layout.findings;
-
-        if (!findingsGroup || !findingsGroup.rows) {
-            return layout;
-        }
-
-        const findings = findingsGroup.rows.flatMap((row) => row.blocks);
-        const report = {
-    insights: findings.filter(b => b.type === "insight"),
-    decisions: findings.filter(b => b.type === "decision"),
-    risks: findings.filter(b => b.type === "risk")
-};
-
-const weights =
-    GeometrySolver.calculateContentWeights(report);
-
-const stats = {
-    insights: report.insights.length,
-    decisions: report.decisions.length,
-    risks: report.risks.length
-};
-
-const adaptive =
-
-    GeometryGenerator.generateAdaptiveGeometry(
-        weights,
-        findings,
-        stats
-    );
-
-const candidates = [adaptive];
-
-        
-        const evaluatedCandidates = candidates
-            .map(scoreCandidate)
-            .sort((a, b) => b.score - a.score);
-
-        const bestCandidate = evaluatedCandidates[0] || null;
-
-        findingsGroup.candidates = candidates;
-        findingsGroup.evaluatedCandidates = evaluatedCandidates;
-        findingsGroup.bestCandidate = bestCandidate;
-
-        if (bestCandidate) {
-            findingsGroup.selectedStrategy = bestCandidate.name;
-        }
-
-        return layout;
-    }
-
-function generateReportCandidates() {
-    const defaults = LayoutRegistry.getDefaultModes();
-
-    return [
-    defaults,
-
-    {
-        ...defaults,
-        statistics: "compact"
-    },
-
-        {
-    ...defaults,
-    header: "compact",
-    statistics: "compact"
-    },
-
-    {
-        ...defaults,
-        statistics: "compact",
-        tasks: "compact"
-    },
-
-    {
-        ...defaults,
-        statistics: "compact",
-        tasks: "inline"
-    },
-
-    {
-        ...defaults,
-        statistics: "compact",
-        tasks: "inline",
-        findings: "compact"
-    },
-
-    {
-        ...defaults,
-        statistics: "compact",
-        tasks: "inline",
-        findings: "compact",
-        owners: "compact"
-    },
-
-    {
-        ...defaults,
-        statistics: "compact",
-        tasks: "inline",
-        findings: "compact",
-        owners: "inline"
-    },
-
-{
-    ...defaults,
-    header: "compact",
-    statistics: "compact",
-    tasks: "inline",
-    findings: "compact",
-    owners: "inline",
-    architecture: "compact"
-}
-];
 }
 
     function improveLayout(layoutModes) {
@@ -659,13 +442,9 @@ return generatedCandidates;
 }
     
   window.LayoutSearchEngine = {
-    generateCandidates,
-    generateReportCandidates,
     generateAdaptiveCandidates,
     calculatePenalty,
-    scoreCandidate,
-    chooseBestCandidate,
-    search
+    scoreCandidate
 };
 
     console.log("✅ Layout Search Engine loaded.");
