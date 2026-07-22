@@ -30,6 +30,22 @@
      * На следующих шагах заменим уровни 1 и 2
      * на действительно компактные представления.
      */
+
+function renderDefault(stats, options) {
+    return renderCards(stats, options);
+}
+    
+function renderCompact(stats, options) {
+    return renderCards(stats, options);
+}
+
+function renderDense(stats, options) {
+    return renderCards(stats, options);
+}
+
+function renderInline(stats, options) {
+    return renderCards(stats, options);
+}
     
     const renderStrategies = {
     default: renderDefault,
