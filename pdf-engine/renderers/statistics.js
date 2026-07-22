@@ -1,75 +1,85 @@
 (function () {
-
     "use strict";
 
-    window.StatisticsRenderer = {
+    function renderCards(stats) {
+        return `
+            <div class="mm-stats-grid">
+                ${stats.map((stat) =>
+                    RenderHelpers.card(`
+                        <div class="mm-stat">
+                            <div class="mm-stat-value">
+                                ${RenderHelpers.escape(
+                                    String(stat.value)
+                                )}
+                            </div>
 
-        render(report, options = {}){
+                            <div class="mm-stat-label">
+                                ${RenderHelpers.escape(
+                                    stat.label
+                                )}
+                            </div>
+                        </div>
+                    `)
+                ).join("")}
+            </div>
+        `;
+    }
 
-        const level =
-          DensityEngine.getDensityLevel(
-          "statistics",
-          options
-         );
-
-         console.log(
-         "Statistics density level:",
-          level
-          );
-
-            const densityClass =
-              `mm-density-level-${level}`;
-            
-           const statisticsBlock =
-           BlockRegistry
-           .getBlocks(report)
-           .find((block) =>
-           block.type === "statistics"
-           );
-
-          const stats =
-          statisticsBlock?.data?.items || [];
-
-          if (!stats.length) {
-          return "";
-          }
-
-            return RenderHelpers.section(
-
-                "",
-
-                `
-                    <div class="mm-stats-grid">
-
-                        ${stats.map(stat =>
-
-                            RenderHelpers.card(`
-
-                                <div class="mm-stat">
-
-                                    <div class="mm-stat-value">
-                                        ${RenderHelpers.escape(String(stat.value))}
-                                    </div>
-
-                                    <div class="mm-stat-label">
-                                        ${RenderHelpers.escape(stat.label)}
-                                    </div>
-
-                                </div>
-
-                            `)
-
-                        ).join("")}
-
-                    </div>
-                `,
-
-                `mm-statistics-section ${densityClass}`
-
-            );
-
-        }
-
+    /*
+     * Пока все уровни используют старый шаблон.
+     * На следующих шагах заменим уровни 1 и 2
+     * на действительно компактные представления.
+     */
+    const renderStrategies = {
+        0: renderCards,
+        1: renderCards,
+        2: renderCards
     };
 
+    function getRenderStrategy(level) {
+        return (
+            renderStrategies[level] ||
+            renderStrategies[0]
+        );
+    }
+
+    window.StatisticsRenderer = {
+        render(report, options = {}) {
+            const level =
+                DensityEngine.getDensityLevel(
+                    "statistics",
+                    options
+                );
+
+            console.log(
+                "Statistics density level:",
+                level
+            );
+
+            const statisticsBlock =
+                BlockRegistry
+                    .getBlocks(report)
+                    .find(
+                        (block) =>
+                            block.type ===
+                            "statistics"
+                    );
+
+            const stats =
+                statisticsBlock?.data?.items || [];
+
+            if (!stats.length) {
+                return "";
+            }
+
+            const renderStrategy =
+                getRenderStrategy(level);
+
+            return RenderHelpers.section(
+                "",
+                renderStrategy(stats),
+                `mm-statistics-section mm-density-level-${level}`
+            );
+        }
+    };
 })();
