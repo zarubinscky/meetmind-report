@@ -74,10 +74,6 @@ function renderInline(model) {
                             block.type ===
                             "statistics"
                     );
-
-           const mode =
-            options?.layoutModes?.statistics ??
-           "default";
             
            const model =
             buildStatisticsModel(statisticsBlock);
