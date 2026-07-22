@@ -287,6 +287,53 @@ keyMetrics.forEach((metric, index) => {
         return stats;
     }
 
+    function buildKeyMetrics(report) {
+
+    const metrics = [];
+    const keyMetrics = Array.isArray(report.keyMetrics)
+        ? report.keyMetrics
+        : [];
+
+    keyMetrics.forEach((metric, index) => {
+
+        if (!metric) {
+            return;
+        }
+
+        const label =
+            metric.label ||
+            metric.title ||
+            metric.name;
+
+        const value =
+            metric.value ??
+            metric.metric_value ??
+            metric.result;
+        if (isEmpty(label) || isEmpty(value)) {
+
+         console.log(
+         "KEY METRICS",
+         buildKeyMetrics(report)
+         );
+            
+            return;
+        }
+        metrics.push({
+            key:
+                metric.key ||
+                `key-metric-${index}`,
+            label,
+            value,
+            icon:
+                metric.icon ||
+                "metric"
+        });
+    });
+    return metrics;
+}
+
+    
+
     function hasArchitecture(architecture) {
         if (!architecture) return false;
         if (Array.isArray(architecture)) return architecture.length > 0;
