@@ -215,7 +215,7 @@ if (
 
 async function generateExecutivePdf() {
     
-    const report = currentMeeting.report;
+    const report = buildReportJson();
 
     const bestCandidate = await findBestPdfCandidate(report);
 
