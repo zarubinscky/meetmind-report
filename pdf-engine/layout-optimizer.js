@@ -20,6 +20,11 @@
             );
         }
 
+        const startedAt = performance.now();
+        
+        let evaluatedCount = 0;
+        let fittingCount = 0;
+
         const layoutCandidates =
             LayoutSearchEngine.generateAdaptiveCandidates(
                 report,
@@ -42,6 +47,7 @@
                         report,
                         candidateOptions
                     );
+                evaluatedCount += 1;
 
                 result.penalty =
                     LayoutSearchEngine.calculatePenalty(
@@ -54,9 +60,13 @@
                     result.measurement.totalHeight -
                         pageHeight
                 );
-
+                
                 result.fits =
-                    result.overflow === 0;
+                result.overflow === 0;
+                
+                if (result.fits) {
+                fittingCount += 1;
+                }
 
                 if (
                     !closestCandidate ||
@@ -92,7 +102,28 @@
             }
         }
 
-        return bestCandidate || closestCandidate;
+        const selected =
+    bestCandidate || closestCandidate;
+const durationMs = Math.round(
+    performance.now() - startedAt
+
+);
+
+selected.searchStats = {
+    layoutCandidateCount:
+        layoutCandidates.length,
+    densityModeCount:
+        densityModes.length,
+    evaluatedCount,
+    fittingCount,
+    durationMs
+};
+
+console.log(
+    "LAYOUT OPTIMIZER STATS",
+    selected.searchStats
+);
+return selected;
     }
 
     window.LayoutOptimizer = {
