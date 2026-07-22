@@ -54,25 +54,16 @@ function renderInline(stats, options) {
     inline: renderInline
     };
 
-    function getRenderStrategy(level) {
-        return (
-            renderStrategies[level] ||
-            renderStrategies[0]
-        );
-    }
-
     window.StatisticsRenderer = {
         render(report, options = {}) {
-            const level =
-                DensityEngine.getDensityLevel(
-                    "statistics",
-                    options
-                );
+         const mode =
+         options?.layoutModes?.statistics ??
+         "default";
 
-            console.log(
-                "Statistics density level:",
-                level
-            );
+           console.log(
+           "Statistics mode:",
+           mode
+           );
 
             const statisticsBlock =
                 BlockRegistry
@@ -91,12 +82,13 @@ function renderInline(stats, options) {
             }
 
             const renderStrategy =
-                getRenderStrategy(level);
+              renderStrategies[mode] ??
+              renderStrategies.default;
 
             return RenderHelpers.section(
                 "",
-                renderStrategy(stats),
-                `mm-statistics-section mm-density-level-${level}`
+                renderStrategy(stats, options),
+                "mm-statistics-section"
             );
         }
     };
