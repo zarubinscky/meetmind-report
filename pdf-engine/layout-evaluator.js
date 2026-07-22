@@ -10,6 +10,7 @@ const DEFAULT_PAGE = {
     marginLeft: 48,
     marginRight: 48,
     gap: 1
+    };
     
 function measure(reportElement) {
 
