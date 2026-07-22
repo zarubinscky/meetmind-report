@@ -1,7 +1,5 @@
 (function () {
-
 "use strict";
-
 function optimize({
 
     layout,
