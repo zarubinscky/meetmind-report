@@ -20,37 +20,19 @@
             const densityClass =
               `mm-density-level-${level}`;
             
-            const stats = [
-                {
-                    label: "Duration",
-                    value:
-                        report?.duration ||
-                        report?.meeting_duration ||
-                        "-"
-                },
+           const statisticsBlock =
+           BlockRegistry
+           .getBlocks(report)
+           .find((block) =>
+           block.type === "statistics"
+           );
 
-                {
-                    label: "Participants",
-                    value:
-                        report?.participants?.length ??
-                        report?.participants ??
-                        report?.participant_count ??
-                        "-"
-                },
+          const stats =
+          statisticsBlock?.data?.items || [];
 
-                {
-                    label: "Tasks",
-                    value:
-                        report?.tasks?.length ?? 0
-                },
-
-                {
-                    label: "Decisions",
-                    value:
-                        report?.decisions?.length ?? 0
-                }
-
-            ];
+          if (!stats.length) {
+          return "";
+          }
 
             return RenderHelpers.section(
 
