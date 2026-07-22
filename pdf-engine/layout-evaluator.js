@@ -4,7 +4,6 @@
 
 function measure(reportElement) {
 
-function measureReport(reportElement) {
     if (!reportElement) {
         return {
             totalHeight: 0,
