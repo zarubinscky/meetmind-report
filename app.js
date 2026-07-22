@@ -638,7 +638,7 @@ toggleSection('#detailsSection', hasDetails);
 async function loadReportPayload() {
 
     // ===== LOCAL MODE =====
-    const response = await fetch("./benchmarks/enterprise-cards.json");
+    const response = await fetch("./pdf-engine/benchmarks/enterprise-cards.json");
     return await response.json();
 
     // ===== REMOTE MODE =====
