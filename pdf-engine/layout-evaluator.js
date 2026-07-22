@@ -2,6 +2,15 @@
 
 "use strict";
 
+const DEFAULT_PAGE = {
+    width: 794,
+    height: 1123,
+    marginTop: 48,
+    marginBottom: 48,
+    marginLeft: 48,
+    marginRight: 48,
+    gap: 1
+    
 function measure(reportElement) {
 
     if (!reportElement) {
