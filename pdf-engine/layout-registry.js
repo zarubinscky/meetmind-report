@@ -68,35 +68,43 @@
 ],
 
         findings: [
-            {
-                id: "cards",
-                label: "Cards",
-                penalty: 0,
-                level: 0,
-                next: "compact",
-                canHide: false,
-                preserveReadingOrder: true
-            },
-            {
-                id: "compact",
-                label: "Compact findings",
-                penalty: 1,
-                level: 1,
-                next: "inline",
-                canHide: false,
-                preserveReadingOrder: true
-            },
-            {
-                id: "inline",
-                label: "Inline findings",
-                penalty: 2,
-                level: 2,
-                next: null,
-                canHide: false,
-                preserveReadingOrder: true
-            }
-        ],
-
+    {
+        id: "adaptive",
+        label: "Adaptive findings",
+        penalty: 0,
+        level: 0,
+        next: "cards",
+        canHide: false,
+        preserveReadingOrder: true
+    },
+    {
+        id: "cards",
+        label: "Finding cards",
+        penalty: 1,
+        level: 1,
+        next: "compact",
+        canHide: false,
+        preserveReadingOrder: true
+    },
+    {
+        id: "compact",
+        label: "Compact findings",
+        penalty: 2,
+        level: 2,
+        next: "inline",
+        canHide: false,
+        preserveReadingOrder: true
+    },
+    {
+        id: "inline",
+        label: "Inline findings",
+        penalty: 3,
+        level: 3,
+        next: null,
+        canHide: false,
+        preserveReadingOrder: true
+    }
+],
         tasks: [
             {
                 id: "cards",
