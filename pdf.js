@@ -123,94 +123,27 @@ async function evaluatePdfCandidate(report, candidateOptions) {
 }
 
 async function findBestPdfCandidate(report) {
-    const layoutCandidates =
-        LayoutSearchEngine.generateAdaptiveCandidates(
-            report,
-            pdfBuilderOptions
-        );
-
-    const densityModes = [
-        "normal",
-        "compact",
-        "ultra"
-    ];
-
-    let bestCandidate = null;
-    let closestCandidate = null;
-
-    for (const layoutModes of layoutCandidates) {
-        for (const densityMode of densityModes) {
-            const candidateOptions = {
-                ...pdfBuilderOptions,
-                densityMode,
-                layoutModes
-            };
-
-            const result = await evaluatePdfCandidate(
-                report,
-                candidateOptions
-            );
-
-            result.penalty =
-                LayoutSearchEngine.calculatePenalty(
-                    layoutModes,
-                    densityMode
-                );
-
-            result.overflow = Math.max(
-                0,
-                result.measurement.totalHeight -
-                    PDF_CONFIG.pageHeight
-            );
-
-            result.fits = result.overflow === 0;
-
-            if (
-                !closestCandidate ||
-                result.overflow <
-                    closestCandidate.overflow ||
-                (
-                    result.overflow ===
-                        closestCandidate.overflow &&
-                    result.penalty <
-                        closestCandidate.penalty
-                )
-            ) {
-                closestCandidate = result;
-            }
-
-            if (!result.fits) {
-                continue;
-            }
-
-            if (
-                !bestCandidate ||
-                result.penalty <
-                    bestCandidate.penalty ||
-                (
-                    result.penalty ===
-                        bestCandidate.penalty &&
-                    result.measurement.totalHeight <
-                        bestCandidate.measurement.totalHeight
-                )
-            ) {
-                bestCandidate = result;
-            }
-        }
-    }
-
     const selected =
-        bestCandidate || closestCandidate;
+        await LayoutOptimizer.optimize({
+            report,
+            builderOptions: pdfBuilderOptions,
+            evaluateCandidate:
+                evaluatePdfCandidate,
+            pageHeight:
+                PDF_CONFIG.pageHeight
+        });
 
     console.log("PDF LAYOUT RESULT", {
         fits: selected?.fits,
         overflow: selected?.overflow,
-        height: selected?.measurement?.totalHeight,
+        height:
+            selected?.measurement?.totalHeight,
         densityMode:
             selected?.options?.densityMode,
         layoutModes:
             selected?.options?.layoutModes,
-        penalty: selected?.penalty
+        penalty:
+            selected?.penalty
     });
 
     return selected;
