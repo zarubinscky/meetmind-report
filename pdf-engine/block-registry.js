@@ -127,6 +127,11 @@
 
             architecture: report.architecture || null,
             dependencies: toList(report.dependencies),
+            keyMetrics: Array.isArray(report.key_metrics)
+           ? report.key_metrics
+           : Array.isArray(report.metrics)
+           ? report.metrics
+           : [],
 
             transcript:
                 meeting.transcript ||
@@ -198,6 +203,41 @@
 
     function buildStatistics(report) {
         const stats = [];
+        const keyMetrics = Array.isArray(report.keyMetrics)
+    ? report.keyMetrics
+    : [];
+
+keyMetrics.forEach((metric, index) => {
+    if (!metric) return;
+
+    const label =
+        metric.label ||
+        metric.title ||
+        metric.name ||
+        `Metric ${index + 1}`;
+
+    const value =
+        metric.value ??
+        metric.metric_value ??
+        metric.result ??
+        "";
+
+    if (isEmpty(label) || isEmpty(value)) {
+        return;
+    }
+
+    stats.push({
+        key:
+            metric.key ||
+            `key-metric-${index}`,
+        label,
+        value,
+        icon:
+            metric.icon ||
+            "metric",
+        source: "key_metric"
+    });
+});
 
         if (report.participants.length > 0) {
             stats.push({
