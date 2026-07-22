@@ -1,35 +1,104 @@
 (function () {
-"use strict";
-function optimize({
+    "use strict";
 
-    layout,
+    async function optimize({
+        report,
+        builderOptions,
+        evaluateCandidate,
+        pageHeight,
+        densityModes = [
+            "normal",
+            "compact",
+            "ultra"
+        ]
+    }) {
+        if (
+            typeof evaluateCandidate !== "function"
+        ) {
+            throw new Error(
+                "LayoutOptimizer: evaluateCandidate is required"
+            );
+        }
 
-    measurement,
+        const layoutCandidates =
+            LayoutSearchEngine.generateAdaptiveCandidates(
+                report,
+                builderOptions
+            );
 
-    layoutModes
+        let bestCandidate = null;
+        let closestCandidate = null;
 
-}) {
+        for (const layoutModes of layoutCandidates) {
+            for (const densityMode of densityModes) {
+                const candidateOptions = {
+                    ...builderOptions,
+                    densityMode,
+                    layoutModes
+                };
 
-    return {
+                const result =
+                    await evaluateCandidate(
+                        report,
+                        candidateOptions
+                    );
 
-        changed: false,
+                result.penalty =
+                    LayoutSearchEngine.calculatePenalty(
+                        layoutModes,
+                        densityMode
+                    );
 
-        layoutModes,
+                result.overflow = Math.max(
+                    0,
+                    result.measurement.totalHeight -
+                        pageHeight
+                );
 
-        reason: "no-op"
+                result.fits =
+                    result.overflow === 0;
 
+                if (
+                    !closestCandidate ||
+                    result.overflow <
+                        closestCandidate.overflow ||
+                    (
+                        result.overflow ===
+                            closestCandidate.overflow &&
+                        result.penalty <
+                            closestCandidate.penalty
+                    )
+                ) {
+                    closestCandidate = result;
+                }
+
+                if (!result.fits) {
+                    continue;
+                }
+
+                if (
+                    !bestCandidate ||
+                    result.penalty <
+                        bestCandidate.penalty ||
+                    (
+                        result.penalty ===
+                            bestCandidate.penalty &&
+                        result.measurement.totalHeight <
+                            bestCandidate.measurement.totalHeight
+                    )
+                ) {
+                    bestCandidate = result;
+                }
+            }
+        }
+
+        return bestCandidate || closestCandidate;
+    }
+
+    window.LayoutOptimizer = {
+        version: "2.0.0",
+        optimize
     };
 
-}
-
-window.LayoutOptimizer = {
-
-    version: "2.0.0",
-
-    optimize
-
-};
-
-console.log("✅ Layout Optimizer loaded.");
-
+    console.log("✅ Layout Optimizer loaded.");
 })();
