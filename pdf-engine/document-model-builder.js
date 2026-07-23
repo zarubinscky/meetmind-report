@@ -27,13 +27,24 @@
             });
         }
 
-        if (report.insights?.length) {
-            sections.push({
-                id: "insights",
-                title: "Insights",
-                items: report.insights
-            });
-        }
+       if (report.insights?.length) {
+    sections.push({
+        id: "insights",
+        title: "Insights",
+        items: report.insights.map(item => ({
+            title:
+                item.title ??
+                item.item ??
+                item.name ??
+                "",
+            details:
+                item.details ??
+                item.description ??
+                item.text ??
+                ""
+        }))
+    });
+}
 
         if (report.dependencies?.length) {
             sections.push({
