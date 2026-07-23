@@ -74,20 +74,21 @@
 }
 
 function renderDefault(model) {
-    return renderCards(model.items, "default");
+    return renderCards(model.documentItems, "default");
 }
 
 function renderCompact(model) {
-    return renderCompactCards(model.items);
+    return renderCompactCards(model.documentItems);
 }
 
 function renderDense(model) {
-    return renderCards(model.items, "dense");
+    return renderCards(model.documentItems, "dense");
 }
 
 function renderInline(model) {
-    return renderCards(model.items, "inline");
+    return renderCards(model.documentItems, "inline");
 }
+    
     const renderStrategies = {
     default: renderDefault,
     compact: renderCompact,
