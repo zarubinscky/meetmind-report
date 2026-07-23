@@ -143,13 +143,40 @@
 
     function buildStatisticsModel(report) {
 
-        return {
-            id: "statistics",
-            title: "Meeting Statistics",
-            items: report.statistics || []
-        };
+    return {
 
-    }
+        id: "statistics",
+
+        title: "Meeting Statistics",
+
+        items: (report.statistics || []).map(item => ({
+
+            label:
+                item.label ??
+                item.name ??
+                item.title ??
+                "",
+
+            value:
+                item.value ??
+                item.metric ??
+                item.count ??
+                "",
+
+            unit:
+                item.unit ??
+                "",
+
+            trend:
+                item.trend ??
+                "",
+
+            type:
+                item.type ??
+                ""
+        }))
+    };
+}
 
     function buildArchitectureModel(report) {
 
