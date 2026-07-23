@@ -32,23 +32,10 @@
     content = `
         <div class="mm-tasks-inline">
             ${tasks.map(task => {
-                const title =
-                    task.title ||
-                    task.task ||
-                    task.text ||
-                    "";
-
-                const owner =
-                    task.owner ||
-                    task.assignee ||
-                    task.responsible ||
-                    "";
-
-                const deadline =
-                    task.deadline ||
-                    task.due_date ||
-                    task.due ||
-                    "";
+                
+                const title = task.title;
+                const owner = task.owner;
+                const deadline = task.deadline;
 
                 return `
                     <span class="mm-task-inline">
@@ -65,23 +52,12 @@
             
         case 1:
     content = tasks.map(task => {
-        const title =
-            task.title ||
-            task.task ||
-            task.text ||
-            "";
+       
+        const title = task.title;
 
-        const owner =
-            task.owner ||
-            task.assignee ||
-            task.responsible ||
-            "";
+        const owner = task.owner;
 
-        const deadline =
-            task.deadline ||
-            task.due_date ||
-            task.due ||
-            "";
+        const deadline = task.deadline;
 
         return `
             <div class="mm-task-compact">
@@ -112,12 +88,7 @@
 
                         <div class="mm-task-title">
 
-                            ${RenderHelpers.escape(
-                                task.title ||
-                                task.task ||
-                                task.text ||
-                                ""
-                            )}
+                           ${RenderHelpers.escape(task.title)}
 
                         </div>
 
