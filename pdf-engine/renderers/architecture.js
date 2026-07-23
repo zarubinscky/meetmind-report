@@ -23,12 +23,7 @@
 
             const mode = "flow";
 
-            const effectiveMode =
-                level >= 2
-                  ? "inline"
-                  : level >= 1
-                     ? "compact"
-                     : mode;
+            const effectiveMode = mode;
 
             console.log(
             "Architecture density level:",
