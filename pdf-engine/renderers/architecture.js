@@ -21,9 +21,16 @@
             options
             );
 
-            const mode = "flow";
+            const mode =
+    options.layoutModes?.architecture ??
+    "cards";
 
-            const effectiveMode = mode;
+            const effectiveMode =
+    level >= 2
+        ? "inline"
+        : level >= 1
+            ? "compact"
+            : mode;
 
             console.log(
             "Architecture density level:",
