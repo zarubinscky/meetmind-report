@@ -2,36 +2,50 @@
 
     "use strict";
 
-    window.SummaryRenderer = {
+    function buildSummaryModel(report) {
 
-        render(report){
-
-            const summary =
+        return {
+            summary:
                 report?.summary ||
                 report?.meeting_summary ||
-                "";
+                ""
+        };
 
-            if(!summary){
-                return "";
-            }
+    }
 
-            return RenderHelpers.section(
+    function renderSummaryModel(model) {
 
-                "Executive Summary",
+        if (!model.summary) {
+            return "";
+        }
 
-                RenderHelpers.card(`
+        return RenderHelpers.section(
 
-                    <div class="mm-summary">
+            "Executive Summary",
 
-                        ${RenderHelpers.escape(summary)}
+            RenderHelpers.card(
 
-                    </div>
+                `
+                <div class="mm-summary">
+                    ${RenderHelpers.escape(model.summary)}
+                </div>
+                `
 
-                `),
+            ),
 
-                "mm-summary-section"
+            "mm-summary-section"
 
-            );
+        );
+
+    }
+
+    window.SummaryRenderer = {
+
+        render(report) {
+
+            const model = buildSummaryModel(report);
+
+            return renderSummaryModel(model);
 
         }
 
