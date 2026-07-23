@@ -56,6 +56,41 @@
     `;
 }
 
+    function renderMeetingMetrics(items) {
+
+    if (!items.length) {
+        return "";
+    }
+
+    return `
+        <div class="mm-section">
+
+            <div class="mm-section-title">
+                Key Metrics
+            </div>
+
+            <div class="mm-key-metrics">
+
+                ${items.map(item => `
+                    <div class="mm-key-metric">
+
+                        <span class="mm-key-metric-label">
+                            ${RenderHelpers.escape(item.label)}
+                        </span>
+
+                        <span class="mm-key-metric-value">
+                            ${RenderHelpers.escape(String(item.value))}
+                        </span>
+
+                    </div>
+                `).join("")}
+
+            </div>
+
+        </div>
+    `;
+}
+
   function buildStatisticsModel(statisticsBlock) {
     const items = statisticsBlock?.data?.items || [];
     return {
@@ -74,7 +109,10 @@
 }
 
 function renderDefault(model) {
-    return renderCards(model.documentItems, "default");
+    return `
+    ${renderCards(model.documentItems, "default")}
+    ${renderMeetingMetrics(model.meetingItems)}
+`;
 }
 
 function renderCompact(model) {
