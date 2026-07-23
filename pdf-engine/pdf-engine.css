@@ -285,3 +285,19 @@
 .mm-density-level-2 .mm-stat-label{
     font-size:11px;
 }
+
+.mm-stat--compact{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    min-height:auto;
+}
+
+.mm-stat--compact .mm-stat-value{
+    margin-bottom:0;
+}
+
+.mm-stat--compact .mm-stat-label{
+    white-space:nowrap;
+}
