@@ -83,11 +83,7 @@
                     <div class="mm-findings-inline">
                         <strong>${RenderHelpers.escape(block.title)}</strong>:
                         ${block.items
-                            .map(item => RenderHelpers.escape(
-                                typeof item === "string"
-                                    ? item
-                                    : item.title || item.text || JSON.stringify(item)
-                            ))
+                            .map(item => RenderHelpers.escape(item))
                             .join(" • ")}
                     </div>
                 `;
@@ -104,11 +100,7 @@
                         <div class="mm-findings-inline">
 
                             ${block.items
-                                .map(item => RenderHelpers.escape(
-                                    typeof item === "string"
-                                        ? item
-                                        : item.title || item.text || JSON.stringify(item)
-                                ))
+                                .map(item => RenderHelpers.escape(item))
                                 .join(" • ")}
 
                         </div>
@@ -128,11 +120,7 @@
 
                         ${block.items.map(item => `
                             <li>
-                                ${RenderHelpers.escape(
-                                    typeof item === "string"
-                                        ? item
-                                        : item.title || item.text || JSON.stringify(item)
-                                )}
+                                ${RenderHelpers.escape(item)}
                             </li>
                         `).join("")}
 
