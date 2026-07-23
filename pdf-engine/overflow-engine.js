@@ -13,11 +13,27 @@
                 report
             );
 
-    const modes =
-        candidates[0];
-    if (measurement.overflow <= 0) {
-        return modes;
-    }
+    let modes =
+    candidates[0];
+
+if (measurement.overflow <= 0) {
+    return modes;
+}
+
+const betterCandidate =
+    candidates.find(candidate => {
+
+        const penalty =
+            LayoutSearchEngine.calculatePenalty(candidate);
+
+        return penalty >
+            LayoutSearchEngine.calculatePenalty(modes);
+
+    });
+
+if (betterCandidate) {
+    modes = betterCandidate;
+}
 
         if (measurement.overflow > 200) {
             modes.statistics = "compact";
