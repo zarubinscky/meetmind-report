@@ -23,8 +23,21 @@ function buildBlockWeights(report) {
 
     function scoreCandidate(candidate) {
 
-    const height = estimateCandidateHeight(candidate);
-    const rowCount = candidate.rows.length;
+   const height =
+    estimateCandidateHeight(candidate);
+
+  const availableHeight =
+    candidate.pageHeight ??
+    780;
+
+  const overflow =
+    Math.max(
+        0,
+        height - availableHeight
+    );
+
+  const rowCount =
+    candidate.rows.length;
 
     // 1. Height (меньше = лучше)
     const heightScore = Math.max(0, 1 - (height / 600));
@@ -58,16 +71,30 @@ function buildBlockWeights(report) {
             : 0.8;
 
     // Общая оценка
+
+
+    const overflowPenalty =
+    overflow > 0
+        ? Math.min(
+            overflow / 500,
+            1
+        )
+        : 0;
+        
     const score =
-        heightScore * 0.30 +
-        densityScore * 0.20 +
-        balanceScore * 0.25 +
-        whitespaceScore * 0.15 +
-        readingScore * 0.10;
+    heightScore * 0.30 +
+    densityScore * 0.20 +
+    balanceScore * 0.25 +
+    whitespaceScore * 0.15 +
+    readingScore * 0.10 -
+    overflowPenalty;
+        
     return {
         ...candidate,
         metrics: {
             height,
+            overflow,
+            overflowPenalty,
             rowCount,
             heightScore,
             densityScore,
