@@ -223,36 +223,31 @@
 }
 
     function buildArchitectureModel(report) {
+
+    const architecture =
+        report?.architecture ||
+        report?.layout?.architecture ||
+        null;
+
+    if (!architecture) {
+        return null;
+    }
+
     return {
         id: "architecture",
 
-        title: "Architecture",
+        title:
+            architecture.title ||
+            "Architecture & Process",
 
-        items: (report.architecture || []).map(item => ({
-
-            title:
-                item.title ??
-                item.name ??
-                item.component ??
-                "",
-
-            description:
-                item.description ??
-                item.text ??
-                item.summary ??
-                "",
-
-            type:
-                item.type ??
-                "",
-
-            status:
-                item.status ??
-                ""
-        }))
+        sections:
+            architecture.sections ||
+            architecture.blocks ||
+            architecture.items ||
+            []
     };
 }
-
+    
     window.DocumentModelBuilder = {
 
         buildSummaryModel,
