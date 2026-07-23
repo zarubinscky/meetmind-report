@@ -50,6 +50,40 @@
     gap:var(--mm-section-gap);
 }
 
+/* ===== Statistics Layout Modes ===== */
+
+.mm-stats-grid--compact{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.mm-stats-grid--dense{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.mm-stats-grid--inline{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.mm-stats-grid--inline .mm-pdf-card{
+    padding:8px 12px;
+}
+
+.mm-stats-grid--inline .mm-stat{
+    min-height:auto;
+}
+
+.mm-stats-grid--inline .mm-stat-value{
+    font-size:18px;
+    margin-bottom:2px;
+}
+
+.mm-stats-grid--inline .mm-stat-label{
+    font-size:11px;
+}
+
 .mm-stat{
     display:flex;
     flex-direction:column;
