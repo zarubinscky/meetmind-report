@@ -41,12 +41,7 @@
                 <div class="mm-owners-inline">
                     ${owners.map(owner =>
                         `<span class="mm-owner-inline">
-                            ${RenderHelpers.escape(
-                                owner.name ||
-                                owner.owner ||
-                                owner.text ||
-                                ""
-                            )}
+                            ${RenderHelpers.escape(owner.name)}
                         </span>`
                     ).join(", ")}
                 </div>
@@ -59,12 +54,7 @@
     content = `
         <div class="mm-owners-inline">
             ${owners.map(owner =>
-                RenderHelpers.escape(
-                    owner.name ||
-                    owner.owner ||
-                    owner.text ||
-                    ""
-                )
+                RenderHelpers.escape(owner.name)
             ).join(" • ")}
         </div>
     `;
@@ -76,12 +66,7 @@
             content = owners.map(owner =>
                 RenderHelpers.card(`
                     <div class="mm-owner">
-                        ${RenderHelpers.escape(
-                            owner.name ||
-                            owner.owner ||
-                            owner.text ||
-                            ""
-                        )}
+                       ${RenderHelpers.escape(owner.name)}
                     </div>
                 `)
             ).join("");
