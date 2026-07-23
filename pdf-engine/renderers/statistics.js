@@ -57,10 +57,19 @@
 }
 
   function buildStatisticsModel(statisticsBlock) {
-  console.log("Statistics Block:", statisticsBlock);
+    const items = statisticsBlock?.data?.items || [];
     return {
         title: statisticsBlock?.title || "",
-        items: statisticsBlock?.data?.items || []
+
+        items,
+
+        documentItems: items.filter(
+            item => item.source === "key_metric"
+        ),
+
+        meetingItems: items.filter(
+            item => item.source !== "key_metric"
+        )
     };
 }
 
