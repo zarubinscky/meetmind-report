@@ -21,9 +21,7 @@
             options
             );
 
-            const mode =
-            options.layoutModes?.architecture ??
-            "cards";
+            const mode = "flow";
 
             const effectiveMode =
                 level >= 2
@@ -64,7 +62,7 @@
 
            const cards = section.cards;
 
-            if (mode === "inline") {
+            if (mode === "flow") {
 
                 return `
                     <div class="mm-architecture-inline">
@@ -81,6 +79,24 @@
                 `;
 
             }
+
+            if (mode === "inline") {
+
+    return `
+        <div class="mm-architecture-inline">
+
+            <strong>
+                ${RenderHelpers.escape(section.title)}
+            </strong>
+
+            : ${cards.map(card =>
+                RenderHelpers.escape(card.title)
+            ).join(" • ")}
+
+        </div>
+    `;
+
+}
 
            if (mode === "compact") {
 
