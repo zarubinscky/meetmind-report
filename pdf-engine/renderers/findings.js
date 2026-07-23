@@ -5,9 +5,8 @@
     window.FindingsRenderer = {
 
         render(report, options = {}) {
-            const mode =
-        options.layoutModes?.findings ??
-        "cards";
+            
+          const mode = "flow";
 
             console.log("Findings mode:", mode);
 
@@ -55,8 +54,27 @@
                 `;
             }
 
+            if (mode === "flow") {
+               return `
+              <div class="mm-findings-flow">
 
+            <strong>${RenderHelpers.escape(block.title)}</strong>
+
+            <div class="mm-findings-inline">
+
+                ${block.items
+                    .map(item =>
+                        RenderHelpers.escape(item.title || item.details)
+                    )
+                    .join(" • ")}
+
+            </div>
+
+        </div>
+    `;
+}
             if (mode === "compact") {
+                
                 return `
                     <div class="mm-findings-compact">
 
