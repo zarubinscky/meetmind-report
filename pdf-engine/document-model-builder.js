@@ -108,12 +108,36 @@
 }
 
     function buildOwnersModel(report) {
+        function buildOwnersModel(report) {
 
-        return {
-            id: "owners",
-            title: "Owners",
-            items: report.owners || []
-        };
+    return {
+        id: "owners",
+        title: "Owners",
+        items: (report.owners || []).map(owner => ({
+
+            name:
+                owner.name ??
+                owner.owner ??
+                owner.person ??
+                owner.text ??
+                "",
+
+            responsibility:
+                owner.responsibility ??
+                owner.role ??
+                owner.description ??
+                "",
+
+            department:
+                owner.department ??
+                "",
+
+            status:
+                owner.status ??
+                ""
+        }))
+    };
+}
 
     }
 
