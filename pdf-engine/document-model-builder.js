@@ -108,7 +108,6 @@
 }
 
     function buildOwnersModel(report) {
-        function buildOwnersModel(report) {
 
     return {
         id: "owners",
