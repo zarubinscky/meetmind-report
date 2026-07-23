@@ -7,23 +7,13 @@
         render(report, options = {}) {
 
             const architecture =
-                report?.architecture ||
-                report?.layout?.architecture ||
-                null;
+            DocumentModelBuilder.buildArchitectureModel(report);
 
-            if (!architecture) {
-                return "";
-            }
+           if (!architecture?.sections?.length) {
+           return "";
+           }
 
-            const sections =
-                architecture.sections ||
-                architecture.blocks ||
-                architecture.items ||
-                [];
-
-            if (!sections.length) {
-                return "";
-            }
+            const sections = architecture.sections;
 
             const level =
               DensityEngine.getDensityLevel(
