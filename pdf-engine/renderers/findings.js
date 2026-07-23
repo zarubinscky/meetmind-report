@@ -11,46 +11,9 @@
 
             console.log("Findings mode:", mode);
 
-            const blocks = [];
-
-            if (
-               report.executive_brief &&
-               !options.hideExecutiveBrief
-            ) {
-                blocks.push({
-               title: "Executive Brief",
-              items: [report.executive_brief]
-             });
-             }
-
-            if (report.insights?.length) {
-                blocks.push({
-                    title: "Insights",
-                    items: report.insights
-                });
-            }
-
-            if (report.dependencies?.length) {
-                blocks.push({
-                    title: "Dependencies",
-                    items: report.dependencies
-                });
-            }
-
-            if (report.decisions?.length) {
-                blocks.push({
-                    title: "Decisions",
-                    items: report.decisions
-                });
-            }
-
-            if (report.risks?.length) {
-                blocks.push({
-                    title: "Risks",
-                    items: report.risks
-                });
-            }
-
+            const findings = DocumentModelBuilder.buildFindingsModel(report);
+            const blocks = findings.sections;
+            
             if (!blocks.length) {
                 return "";
             }
