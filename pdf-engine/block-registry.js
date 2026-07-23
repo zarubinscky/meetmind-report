@@ -296,6 +296,17 @@ keyMetrics.forEach((metric, index) => {
 
     function getBlocks(input) {
         const report = normalizeReport(input);
+        
+          console.log("=== BLOCK REGISTRY REPORT ===");
+          console.log(JSON.stringify({
+        tasks: report.tasks,
+        keyMetrics: report.keyMetrics,
+        participants: report.participants,
+        decisions: report.decisions,
+        risks: report.risks,
+        durationSeconds: report.durationSeconds
+    }, null, 2));
+        
         const blocks = [];
 
         blocks.push(createBlock({
