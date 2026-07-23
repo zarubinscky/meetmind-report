@@ -39,14 +39,16 @@
         <div class="mm-stats-grid mm-stats-grid--compact">
             ${stats.map((stat) =>
                 RenderHelpers.card(`
-                    <div class="mm-stat">
-                        <div class="mm-stat-value">
-                            ${RenderHelpers.escape(String(stat.value))}
-                        </div>
+                    <div class="mm-stat mm-stat--compact">
 
-                        <div class="mm-stat-label">
+                        <span class="mm-stat-value">
+                            ${RenderHelpers.escape(String(stat.value))}
+                        </span>
+
+                        <span class="mm-stat-label">
                             ${RenderHelpers.escape(stat.label)}
-                        </div>
+                        </span>
+
                     </div>
                 `)
             ).join("")}
