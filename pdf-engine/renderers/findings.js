@@ -108,6 +108,10 @@ renderAdaptive(blocks, layout) {
     console.dir(layout, { depth: null });
     console.log("blocks:", blocks);
 
+    const blocksMap = new Map(
+    blocks.map(block => [block.id, block])
+);
+
     if (!layout?.rows?.length) {
         return blocks.map(block =>
             this.renderBlock(block, "cards")
@@ -116,6 +120,12 @@ renderAdaptive(blocks, layout) {
 
     return layout.rows.map(row => {
         const cells = row.blocks.map(item => {
+        const block = blocksMap.get(item.id);
+
+    if (!block) {
+        return "";
+    }
+            
         const width =
           item.id === "decisions"
             ? "58%"
@@ -123,7 +133,7 @@ renderAdaptive(blocks, layout) {
                 ? "42%"
                 : "50%";
 
-            const itemHtml = (item.items || []).map(entry => {
+            const itemHtml = block.items.map(entry => {
 
                 const title = RenderHelpers.escape(
                   entry.title ||
@@ -155,7 +165,7 @@ renderAdaptive(blocks, layout) {
             return `
                 <div class="mm-findings-adaptive-cell" style="flex-basis:${width};">
                     ${RenderHelpers.card(`
-                        <h3>${RenderHelpers.escape(item.title)}</h3>
+                        <h3>${RenderHelpers.escape(block.title)}</h3>
                         ${itemHtml}
                     `)}
                 </div>
