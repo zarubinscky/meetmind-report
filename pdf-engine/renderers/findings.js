@@ -5,7 +5,9 @@
     window.FindingsRenderer = {
 
         render(report, options = {}) {
-            const mode = "adaptive";
+            const mode =
+        options.layoutModes?.findings ??
+        "cards";
 
             console.log("Findings mode:", mode);
 
@@ -124,12 +126,17 @@ renderAdaptive(blocks, layout) {
         return "";
     }
             
-        const width =
-          item.id === "decisions"
-            ? "58%"
-            : item.id === "risks"
-                ? "42%"
-                : "50%";
+        const totalTextLength = block.items.reduce(
+    (sum, entry) =>
+        sum +
+        (entry.title?.length ?? 0) +
+        (entry.details?.length ?? 0),
+    0
+);
+
+const width = totalTextLength > 450
+    ? "62%"
+    : "38%";
 
             const itemHtml = block.items.map(entry => {
 
