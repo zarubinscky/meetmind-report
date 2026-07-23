@@ -57,6 +57,7 @@
 }
 
   function buildStatisticsModel(statisticsBlock) {
+  console.log("Statistics Block:", statisticsBlock);
     return {
         title: statisticsBlock?.title || "",
         items: statisticsBlock?.data?.items || []
