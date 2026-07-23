@@ -2,13 +2,22 @@
 
     "use strict";
 
-    function chooseLayout(measurement) {
+   function chooseLayout(
+    measurement,
+    report
+) {
 
-        const modes = LayoutRegistry.getDefaultModes();
+    const candidates =
+        LayoutSearchEngine
+            .generateAdaptiveCandidates(
+                report
+            );
 
-        if (measurement.overflow <= 0) {
-            return modes;
-        }
+    const modes =
+        candidates[0];
+    if (measurement.overflow <= 0) {
+        return modes;
+    }
 
         if (measurement.overflow > 200) {
             modes.statistics = "compact";
