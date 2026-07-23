@@ -86,25 +86,33 @@
 
                     <div class="mm-task">
 
-                        <div class="mm-task-title">
+    <div class="mm-task-title">
+        ${RenderHelpers.escape(task.title)}
+    </div>
 
-                           ${RenderHelpers.escape(task.title)}
+    ${
+        task.owner
+            ? `
+                <div class="mm-task-owner">
+                    ${RenderHelpers.escape(task.owner)}
+                </div>
+            `
+            : ""
+    }
 
-                        </div>
+    ${
+        task.deadline
+            ? `
+                <div class="mm-task-deadline">
+                    ${RenderHelpers.badge(task.deadline)}
+                </div>
+            `
+            : ""
+    }
 
-                        ${
-                            task.deadline
-                                ? `
-                                    <div class="mm-task-deadline">
-                                        ${RenderHelpers.badge(task.deadline)}
-                                    </div>
-                                `
-                                : ""
-                        }
+</div>
 
-                    </div>
-
-                `)
+            `)
 
             ).join("");
 
