@@ -167,14 +167,12 @@ const width = totalTextLength > 450
 
             }).join("");
 
-            return `
-                <div class="mm-findings-adaptive-cell" style="flex-basis:${width};">
-                    ${RenderHelpers.card(`
-                        <h3>${RenderHelpers.escape(block.title)}</h3>
-                        ${itemHtml}
-                    `)}
-                </div>
-            `;
+           return `
+    <div class="mm-findings-adaptive-cell" style="flex-basis:${width};">
+        <h3>${RenderHelpers.escape(block.title)}</h3>
+        ${itemHtml}
+    </div>
+`;
 
         }).join("");
 
