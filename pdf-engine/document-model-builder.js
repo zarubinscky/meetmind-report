@@ -46,29 +46,64 @@
     });
 }
 
-        if (report.dependencies?.length) {
-            sections.push({
-                id: "dependencies",
-                title: "Dependencies",
-                items: report.dependencies
-            });
-        }
+       if (report.dependencies?.length) {
+    sections.push({
+        id: "dependencies",
+        title: "Dependencies",
+        items: report.dependencies.map(item => ({
+            title:
+                item.title ??
+                item.item ??
+                item.name ??
+                "",
+
+            details:
+                item.depends_on ??
+                item.details ??
+                item.description ??
+                item.text ??
+                ""
+        }))
+    });
+}
 
         if (report.decisions?.length) {
-            sections.push({
-                id: "decisions",
-                title: "Decisions",
-                items: report.decisions
-            });
-        }
+    sections.push({
+        id: "decisions",
+        title: "Decisions",
+        items: report.decisions.map(item => ({
+            title:
+                item.title ??
+                item.item ??
+                "",
+
+            details:
+                item.details ??
+                item.description ??
+                item.text ??
+                ""
+        }))
+    });
+}
 
         if (report.risks?.length) {
-            sections.push({
-                id: "risks",
-                title: "Risks",
-                items: report.risks
-            });
-        }
+    sections.push({
+        id: "risks",
+        title: "Risks",
+        items: report.risks.map(item => ({
+            title:
+                item.title ??
+                item.item ??
+                "",
+
+            details:
+                item.details ??
+                item.description ??
+                item.text ??
+                ""
+        }))
+    });
+}
 
         return {
             id: "findings",
