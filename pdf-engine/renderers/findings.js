@@ -5,9 +5,7 @@
     window.FindingsRenderer = {
 
         render(report, options = {}) {
-            const mode =
-                options.layoutModes?.findings ??
-                "cards";
+            const mode = "adaptive";
 
             console.log("Findings mode:", mode);
 
