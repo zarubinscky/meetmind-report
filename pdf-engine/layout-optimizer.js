@@ -47,6 +47,8 @@
                         report,
                         candidateOptions
                     );
+                console.log("EVALUATE RESULT", result);
+                
                 evaluatedCount += 1;
 
                 result.penalty =
