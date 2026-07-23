@@ -105,7 +105,6 @@ function renderInline(model) {
            "Statistics mode:",
            mode
            );
-
             const statisticsBlock =
                 BlockRegistry
                     .getBlocks(report)
