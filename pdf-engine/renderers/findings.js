@@ -45,12 +45,14 @@
                 return `
                     <div class="mm-findings-inline">
                         <strong>${RenderHelpers.escape(block.title)}</strong>:
-                        ${block.items
-                            .map(item => RenderHelpers.escape(item))
-                            .join(" • ")}
+                       ${block.items
+                         .map(item =>
+                             RenderHelpers.escape(item.title || item.details)
+                         )
+                         .join(" • ")}
+                        
                     </div>
                 `;
-
             }
 
 
@@ -63,9 +65,10 @@
                         <div class="mm-findings-inline">
 
                             ${block.items
-                                .map(item => RenderHelpers.escape(item))
+                               .map(item =>
+                                   RenderHelpers.escape(item.title || item.details)
+                                 )
                                 .join(" • ")}
-
                         </div>
 
                     </div>
@@ -81,11 +84,16 @@
 
                     <ul>
 
-                        ${block.items.map(item => `
-                            <li>
-                                ${RenderHelpers.escape(item)}
-                            </li>
-                        `).join("")}
+                       ${block.items.map(item => `
+                    <li>
+                   <strong>${RenderHelpers.escape(item.title)}</strong>
+                      ${
+                         item.details
+                         ? `<div>${RenderHelpers.escape(item.details)}</div>`
+                         : ""
+                   }
+                     </li>
+         `).join("")}
 
                     </ul>
 
