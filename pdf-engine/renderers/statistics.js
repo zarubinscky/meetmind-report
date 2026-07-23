@@ -79,7 +79,6 @@ function renderDense(model) {
 function renderInline(model) {
     return renderCards(model.items, "inline");
 }
-    
     const renderStrategies = {
     default: renderDefault,
     compact: renderCompact,
