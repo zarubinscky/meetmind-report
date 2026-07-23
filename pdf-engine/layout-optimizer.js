@@ -49,11 +49,17 @@
                     );
                 evaluatedCount += 1;
 
-                result.penalty =
-                    LayoutSearchEngine.calculatePenalty(
-                        layoutModes,
-                        densityMode
-                    );
+                const densityPenalty = {
+    normal: 0,
+    compact: 1,
+    ultra: 2
+}[densityMode] ?? 0;
+
+result.penalty =
+    LayoutSearchEngine.calculatePenalty(
+        layoutModes
+    ) +
+    densityPenalty;
 
                 result.overflow = Math.max(
                     0,
