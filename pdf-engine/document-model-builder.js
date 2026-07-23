@@ -69,13 +69,43 @@
 
     function buildTasksModel(report) {
 
-        return {
-            id: "tasks",
-            title: "Tasks",
-            items: report.tasks || []
-        };
+    return {
 
-    }
+        id: "tasks",
+
+        title: "Tasks",
+
+        items: (report.tasks || []).map(task => ({
+
+            title:
+                task.title ??
+                task.task ??
+                task.text ??
+                "",
+
+            owner:
+                task.owner ??
+                task.assignee ??
+                task.responsible ??
+                "",
+
+            deadline:
+                task.deadline ??
+                task.due_date ??
+                task.due ??
+                "",
+
+            priority:
+                task.priority ??
+                task.business_priority ??
+                "",
+
+            status:
+                task.status ??
+                ""
+        }))
+    };
+}
 
     function buildOwnersModel(report) {
 
