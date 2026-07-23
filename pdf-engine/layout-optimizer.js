@@ -93,8 +93,8 @@
                     (
                         result.penalty ===
                             bestCandidate.penalty &&
-                        result.measurement.totalHeight <
-                            bestCandidate.measurement.totalHeight
+                        result.measurement.totalHeight >
+                        bestCandidate.measurement.totalHeight
                     )
                 ) {
                     bestCandidate = result;
