@@ -50,16 +50,10 @@
                 evaluatedCount += 1;
 
                 result.penalty =
-    LayoutSearchEngine.calculatePenalty(
-        layoutModes,
-        densityMode
-    );
-
-result.score =
-    LayoutSearchEngine.scoreCandidate({
-        rows: result.layout.rows,
-        pageHeight
-    }).score;
+                    LayoutSearchEngine.calculatePenalty(
+                        layoutModes,
+                        densityMode
+                    );
 
                 result.overflow = Math.max(
                     0,
@@ -92,19 +86,19 @@ result.score =
                     continue;
                 }
 
-if (
-    !bestCandidate ||
-    result.score >
-        bestCandidate.score ||
-    (
-        result.score ===
-            bestCandidate.score &&
-        result.penalty <
-            bestCandidate.penalty
-    )
-) {
-    bestCandidate = result;
-}
+                if (
+                    !bestCandidate ||
+                    result.penalty <
+                        bestCandidate.penalty ||
+                    (
+                        result.penalty ===
+                            bestCandidate.penalty &&
+                        result.measurement.totalHeight <
+                            bestCandidate.measurement.totalHeight
+                    )
+                ) {
+                    bestCandidate = result;
+                }
             }
         }
 
