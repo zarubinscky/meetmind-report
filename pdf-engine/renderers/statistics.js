@@ -34,6 +34,26 @@
     `;
 }
 
+    function renderCompactCards(stats) {
+    return `
+        <div class="mm-stats-grid mm-stats-grid--compact">
+            ${stats.map((stat) =>
+                RenderHelpers.card(`
+                    <div class="mm-stat">
+                        <div class="mm-stat-value">
+                            ${RenderHelpers.escape(String(stat.value))}
+                        </div>
+
+                        <div class="mm-stat-label">
+                            ${RenderHelpers.escape(stat.label)}
+                        </div>
+                    </div>
+                `)
+            ).join("")}
+        </div>
+    `;
+}
+
   function buildStatisticsModel(statisticsBlock) {
     return {
         title: statisticsBlock?.title || "",
@@ -46,7 +66,7 @@ function renderDefault(model) {
 }
 
 function renderCompact(model) {
-    return renderCards(model.items, "compact");
+    return renderCompactCards(model.items);
 }
 
 function renderDense(model) {
