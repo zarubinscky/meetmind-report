@@ -107,7 +107,7 @@
 
     }
 
-    window.SectionModelBuilder = {
+    window.DocumentModelBuilder = {
 
         buildSummaryModel,
 
