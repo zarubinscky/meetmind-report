@@ -1,29 +1,38 @@
 (function () {
     "use strict";
 
-    function renderCards(stats) {
-        return `
-            <div class="mm-stats-grid">
-                ${stats.map((stat) =>
-                    RenderHelpers.card(`
-                        <div class="mm-stat">
-                            <div class="mm-stat-value">
-                                ${RenderHelpers.escape(
-                                    String(stat.value)
-                                )}
-                            </div>
+    function renderCards(stats, mode = "default") {
+    const safeMode = [
+        "default",
+        "compact",
+        "dense",
+        "inline"
+    ].includes(mode)
+        ? mode
+        : "default";
 
-                            <div class="mm-stat-label">
-                                ${RenderHelpers.escape(
-                                    stat.label
-                                )}
-                            </div>
+    return `
+        <div class="mm-stats-grid mm-stats-grid--${safeMode}">
+            ${stats.map((stat) =>
+                RenderHelpers.card(`
+                    <div class="mm-stat">
+                        <div class="mm-stat-value">
+                            ${RenderHelpers.escape(
+                                String(stat.value)
+                            )}
                         </div>
-                    `)
-                ).join("")}
-            </div>
-        `;
-    }
+
+                        <div class="mm-stat-label">
+                            ${RenderHelpers.escape(
+                                stat.label
+                            )}
+                        </div>
+                    </div>
+                `)
+            ).join("")}
+        </div>
+    `;
+}
 
   function buildStatisticsModel(statisticsBlock) {
     return {
@@ -33,19 +42,19 @@
 }
 
 function renderDefault(model) {
-    return renderCards(model.items);
+    return renderCards(model.items, "default");
 }
-    
+
 function renderCompact(model) {
-    return renderCards(model.items);
+    return renderCards(model.items, "compact");
 }
 
 function renderDense(model) {
-    return renderCards(model.items);
+    return renderCards(model.items, "dense");
 }
 
 function renderInline(model) {
-    return renderCards(model.items);
+    return renderCards(model.items, "inline");
 }
     
     const renderStrategies = {
