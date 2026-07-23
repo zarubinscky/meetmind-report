@@ -32,7 +32,8 @@
     content = `
         <div class="mm-tasks-inline">
             ${tasks.map(task => {
-                
+
+                console.log("TASK RENDERER TASK:", task);
                 const title = task.title;
                 const owner = task.owner;
                 const deadline = task.deadline;
