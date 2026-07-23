@@ -167,10 +167,12 @@ const width = totalTextLength > 450
 
             }).join("");
 
-           return `
+        return `
     <div class="mm-findings-adaptive-cell" style="flex-basis:${width};">
-        <h3>${RenderHelpers.escape(block.title)}</h3>
-        ${itemHtml}
+        ${RenderHelpers.card(`
+            <h3>${RenderHelpers.escape(block.title)}</h3>
+            ${itemHtml}
+        `)}
     </div>
 `;
 
