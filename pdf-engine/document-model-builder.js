@@ -107,11 +107,12 @@
     };
 }
 
-    function buildOwnersModel(report) {
+   function buildOwnersModel(report) {
 
     return {
         id: "owners",
         title: "Owners",
+
         items: (report.owners || []).map(owner => ({
 
             name:
@@ -137,8 +138,6 @@
         }))
     };
 }
-
-    }
 
     function buildStatisticsModel(report) {
 
