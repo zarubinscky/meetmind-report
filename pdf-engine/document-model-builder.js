@@ -240,12 +240,46 @@
             architecture.title ||
             "Architecture & Process",
 
-        sections:
-            architecture.sections ||
-            architecture.blocks ||
-            architecture.items ||
-            []
-    };
+        sections: (
+    architecture.sections ||
+    architecture.blocks ||
+    architecture.items ||
+    []
+).map(section => ({
+
+    title:
+        section.title ??
+        section.name ??
+        "",
+
+    cards: (
+        section.cards ||
+        section.items ||
+        []
+    ).map(card => ({
+
+        title:
+            card.title ??
+            card.name ??
+            card.component ??
+            "",
+
+        description:
+            card.description ??
+            card.text ??
+            card.summary ??
+            "",
+
+        type:
+            card.type ??
+            "",
+
+        status:
+            card.status ??
+            ""
+    }))
+}))
+};
 }
     
     window.DocumentModelBuilder = {
