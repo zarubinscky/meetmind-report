@@ -62,10 +62,7 @@
 
         renderSection(section, mode) {
 
-            const cards =
-                section.cards ||
-                section.items ||
-                [];
+           const cards = section.cards;
 
             if (mode === "inline") {
 
@@ -73,19 +70,11 @@
                     <div class="mm-architecture-inline">
 
                         <strong>
-                            ${RenderHelpers.escape(
-                                section.title ||
-                                section.name ||
-                                ""
-                            )}
+                            ${RenderHelpers.escape(section.title)}
                         </strong>
 
                         : ${cards.map(card =>
-                            RenderHelpers.escape(
-                                card.title ||
-                                card.name ||
-                                ""
-                            )
+                            RenderHelpers.escape(card.title)
                         ).join(" • ")}
 
                     </div>
@@ -98,20 +87,12 @@
     return `
         <div class="mm-architecture-compact">
             <strong>
-                ${RenderHelpers.escape(
-                    section.title ||
-                    section.name ||
-                    ""
-                )}
+                ${RenderHelpers.escape(section.title)}
             </strong>
             <span class="mm-architecture-inline-items">
                 ${cards
                     .map(card =>
-                        RenderHelpers.escape(
-                            card.title ||
-                            card.name ||
-                            ""
-                        )
+                        RenderHelpers.escape(card.title)
                     )
                     .join(" • ")}
             </span>
@@ -125,11 +106,7 @@
 
                     <h3 class="mm-architecture-title">
 
-                        ${RenderHelpers.escape(
-                            section.title ||
-                            section.name ||
-                            "Architecture Section"
-                        )}
+                        ${RenderHelpers.escape(section.title)}
 
                     </h3>
 
@@ -141,22 +118,15 @@
 
                                 <div class="mm-architecture-card-title">
 
-                                    ${RenderHelpers.escape(
-                                        card.title ||
-                                        card.name ||
-                                        ""
-                                    )}
+                                    ${RenderHelpers.escape(card.title)}
 
                                 </div>
 
-                                ${card.description || card.text
+                                ${card.description
                                     ? `
                                         <div class="mm-architecture-card-text">
 
-                                            ${RenderHelpers.escape(
-                                                card.description ||
-                                                card.text
-                                            )}
+                                            ${RenderHelpers.escape(card.description)}
 
                                         </div>
                                     `
