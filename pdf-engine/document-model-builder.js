@@ -179,14 +179,35 @@
 }
 
     function buildArchitectureModel(report) {
+    return {
+        id: "architecture",
 
-        return {
-            id: "architecture",
-            title: "Architecture",
-            items: report.architecture || []
-        };
+        title: "Architecture",
 
-    }
+        items: (report.architecture || []).map(item => ({
+
+            title:
+                item.title ??
+                item.name ??
+                item.component ??
+                "",
+
+            description:
+                item.description ??
+                item.text ??
+                item.summary ??
+                "",
+
+            type:
+                item.type ??
+                "",
+
+            status:
+                item.status ??
+                ""
+        }))
+    };
+}
 
     window.DocumentModelBuilder = {
 
