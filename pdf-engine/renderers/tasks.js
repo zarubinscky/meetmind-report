@@ -34,9 +34,13 @@
             ${tasks.map(task => {
 
                 console.log("TASK RENDERER TASK:", task);
-                const title = task.title;
+                
+                const title = task.title ?? task.task;
                 const owner = task.owner;
-                const deadline = task.deadline;
+                const deadline =
+                   task.deadline ??
+                   task.dueDate ??
+                   task.due_date;
 
                 return `
                     <span class="mm-task-inline">
