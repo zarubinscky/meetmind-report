@@ -14,6 +14,8 @@
            }
 
             const sections = architecture.sections;
+            console.log("ARCHITECTURE MODEL");
+            console.dir(sections, { depth: null });
 
             const level =
               DensityEngine.getDensityLevel(
