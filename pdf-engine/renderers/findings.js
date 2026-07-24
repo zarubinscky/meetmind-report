@@ -11,6 +11,9 @@
             console.log("Findings mode:", mode);
 
             const findings = DocumentModelBuilder.buildFindingsModel(report);
+            console.log("=== FINDINGS MODEL ===");
+            console.dir(findings, { depth: null });
+            
             const blocks = findings.sections;
             
             if (!blocks.length) {
