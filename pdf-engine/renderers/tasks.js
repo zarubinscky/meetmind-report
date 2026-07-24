@@ -92,7 +92,7 @@
                     <div class="mm-task">
 
     <div class="mm-task-title">
-        ${RenderHelpers.escape(task.title)}
+        ${RenderHelpers.escape(task.title ?? task.task)}
     </div>
 
     ${
