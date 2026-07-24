@@ -20,6 +20,28 @@
                 return "";
             }
 
+
+            const html = RenderHelpers.section(
+    "Strategic Findings",
+    mode === "adaptive"
+        ? this.renderAdaptive(
+            blocks,
+            options.layoutModes?.findingsLayout
+        )
+        : blocks.map(block =>
+            this.renderBlock(
+                block,
+                mode,
+                options.layoutModes?.findingsLayout
+            )
+        ).join(""),
+    "mm-strategic-findings"
+);
+
+console.log("===== FINDINGS HTML =====");
+console.log(html);
+return html;
+            
             return RenderHelpers.section(
 
     "Strategic Findings",
