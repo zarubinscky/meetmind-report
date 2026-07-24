@@ -7,7 +7,12 @@
        render(report, options = {}) {
             console.log("Renderer started");
             console.log("Renderer options:", options);
+           
             const html = this.renderPage(report, options);
+           
+           console.log("===== FINAL HTML START =====");
+           console.log(html);
+           console.log("===== FINAL HTML END =====");
     
             return html;
         },
