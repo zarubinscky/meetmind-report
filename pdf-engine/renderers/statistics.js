@@ -136,6 +136,14 @@ function renderInline(model) {
 
     window.StatisticsRenderer = {
         render(report, options = {}) {
+        console.log("=== STATISTICS OPTIONS ===");
+        console.log(options);
+console.log("=== STATISTICS LAYOUT MODES ===");
+console.log(options?.layoutModes);
+
+console.log("=== STATISTICS MODE VALUE ===");
+console.log(options?.layoutModes?.statistics);   
+            
          const mode =
          options?.layoutModes?.statistics ??
          "default";
