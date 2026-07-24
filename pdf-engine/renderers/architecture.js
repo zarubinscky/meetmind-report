@@ -24,6 +24,8 @@
             const mode =
     options.layoutModes?.architecture ??
     "cards";
+            console.log("ARCHITECTURE MODE:", mode);
+console.log("LAYOUT MODES:", options.layoutModes);
 
            const effectiveMode = mode;
 
