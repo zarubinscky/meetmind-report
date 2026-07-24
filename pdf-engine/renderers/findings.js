@@ -88,10 +88,21 @@ return html;
             <div class="mm-findings-inline">
 
                 ${block.items
-                    .map(item =>
-                        RenderHelpers.escape(item.title || item.details)
-                    )
-                    .join(" • ")}
+    .map(item => `
+        <div class="mm-finding-item">
+            <strong>${RenderHelpers.escape(item.title)}</strong>
+            ${
+
+                item.details
+                    ? `<div>${RenderHelpers.escape(item.details)}</div>`
+                    : ""
+            }
+
+        </div>
+
+    `)
+
+    .join("")}
 
             </div>
 
