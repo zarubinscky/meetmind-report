@@ -155,6 +155,7 @@ function renderInline(model) {
             
            const model =
             buildStatisticsModel(statisticsBlock);
+            console.log("STATISTICS MODEL:", model);
           
             if (!model.items.length) {
            return "";
