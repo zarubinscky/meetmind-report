@@ -85,7 +85,7 @@
 
         default:
 
-            content = tasks.map(task =>
+            content = tasks.map(task => {
                 const title = task.title ?? task.task;
                 const owner = task.owner;
                 const deadline =
@@ -123,9 +123,9 @@ ${
 
 </div>
 
-            `)
+            `);
 
-            ).join("");
+             }).join("");
 
     }
 
